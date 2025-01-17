@@ -53,8 +53,10 @@
             </div>
             <div nz-row>
               <div nz-col [nzSpan]="24" class="search-area text-center" style="text-align: center;">
-                <button nz-button [nzType]="'primary'">Tìm Kiếm</button>
-                <button nz-button (click)="resetForm()">Làm Mới</button>
+                <button nz-button [nzType]="'primary'">
+                  <nz-icon nzType="search" nzTheme="outline" />Tìm Kiếm</button>
+                <button nz-button (click)="resetForm()">
+                  <nz-icon nzType="reload" nzTheme="outline" />Làm Mới</button>
                 <a class="collapse" (click)="toggleCollapse()">
                   Collapse
                   <nz-icon [nzType]="isCollapse ? 'down' : 'up'" />
@@ -67,8 +69,10 @@
 
 <div class="search-result-list" style="margin-top: 0px; padding-top: 30px;">
   <div style="text-align: right;">
-    <button nz-button [nzType]="'primary'" (click)="handlerOpenDialog()">Thêm Mới</button>
-    <button nz-button [nzType]="'primary'">Xuất File</button>
+    <button nz-button [nzType]="'primary'" (click)="handlerOpenDialog()">
+      <nz-icon nzType="user-add" nzTheme="outline" /> Thêm Mới</button>
+    <button nz-button class="bg-green-500 text-white">
+      <nz-icon nzType="download" nzTheme="outline" /> Xuất File</button>
   </div>
     <nz-table #editRowTable nzBordered [nzData]="listOfData">
       <thead>
