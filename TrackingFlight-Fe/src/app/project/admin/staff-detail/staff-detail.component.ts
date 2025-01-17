@@ -1,17 +1,20 @@
 import { Component } from '@angular/core';
 import {
-   FormBuilder, 
-   FormGroup, 
-   NonNullableFormBuilder, 
-   ReactiveFormsModule, 
-   Validators,
-   AbstractControl,
-   ValidationErrors,
+  FormBuilder,
+  FormGroup,
+  NonNullableFormBuilder,
+  ReactiveFormsModule,
+  Validators,
+  AbstractControl,
+  ValidationErrors,
 
 } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
+import { DialogMode, } from '../../../../common/enums/dialog-mode';
+import { DialogService ,DialogSize} from '../../../../common/service/dialog.service';
+import { StaffDetailAddComponent } from './staff-detail-add/staff-detail-add.component';
 interface ItemData {
   id: string;
   name: string;
@@ -23,7 +26,7 @@ interface ItemData {
   standalone: false,
   templateUrl: './staff-detail.component.html',
   styleUrls: ['./staff-detail.component.scss'] // Fix: đổi `styleUrl` thành `styleUrls`
-  
+
 })
 export class StaffDetailComponent {
   isPanelOpen = true;
@@ -34,9 +37,12 @@ export class StaffDetailComponent {
   editId: string | null = null;
   listOfData: ItemData[] = [];
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private dialogService: DialogService,
+  ) {
     this.validateForm = this.fb.group({
-  
+
     });
   }
   toggleCollapse(): void {
@@ -81,5 +87,28 @@ export class StaffDetailComponent {
     this.addRow();
   }
 
-  
+
+  handlerOpenDialog(mode: string = DialogMode.add, item: any = null) {
+    const dialog = this.dialogService.openDialog(
+      async (option) => {
+        option.title = mode === 'view' ? 'Xem thông tin cơ sở lưu trú' : 'Thêm mới cơ sở lưu trú';
+        option.size = DialogSize.tab;
+        option.component = StaffDetailAddComponent;
+        option.inputs = {
+          id: item?.uuid,
+          item: item,
+          mode: mode,
+        };
+      },
+      (eventName, eventValue) => {
+        if (eventName === 'onClose') {
+          this.dialogService.closeDialogById(dialog.id);
+          // if (eventValue) {
+          //   this.getData({ ...this.paging });
+          // }
+        }
+      }
+    );
+  }
+
 }

@@ -6,3 +6,15 @@
 html {
     font-family: "Nunito Sans";
   }
+
+
+  .dialog-tab {
+    width: 100% !important;
+    top: 64px;
+    right: 1px;
+    position: absolute;
+    background-color: #fbfbfb;
+    padding: 20px;
+    min-height: calc(100vh - 64px);
+    padding: 0;
+  }

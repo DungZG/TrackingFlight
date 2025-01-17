@@ -93,3 +93,31 @@ export class DialogService {
         }
     }
 }
+
+export enum DialogSize {
+    small = 'dialog-ms',
+    medium = 'dialog-md',
+    large = 'dialog-lg',
+    xlarge = 'dialog-max-lg',
+    xxl_large = 'dialog-max-xxl-lg',
+    full = 'dialog-full',
+    tab = 'dialog-tab',
+  }
+
+  export enum DialogMode {
+    view = 'view',
+    add = 'add',
+    edit = 'edit',
+    modify = 'modify',
+    apply = 'apply',
+    confirm = 'dialog-full',
+    next = 'next',
+    accept = 'accept',
+    cancel = 'cancel',
+    delete = 'delete',
+    destroy = 'destroy',
+    print = 'print',
+    dowload = 'dowload',
+    viewHistory = 'viewHistory',
+    quickAdd = 'quickAdd',
+  }

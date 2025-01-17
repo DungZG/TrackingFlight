@@ -6,9 +6,9 @@ import { Component } from '@angular/core';
   styleUrl: './admin.component.scss'
 })
 export class AdminComponent {
-  isCollapsed = false;
+  isCollapsed = true;
   menuShow = false;
-  toggleNavbar(){
+  toggleNavbar() {
     this.menuShow = !this.menuShow;
   }
 }

@@ -1,6 +1,8 @@
 <nz-layout>
     <nz-sider class="shadow-2xl"  nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null" [nzWidth]="250" style="height: auto;" nzTheme="light" >
-      <div class="logo"></div>
+      <div class="logo">
+        <span class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" (click)="isCollapsed = !isCollapsed"></span>
+      </div>
       <ul nz-menu nzTheme="light" nzMode="inline">
         <li nz-submenu nzTitle="Quản Lý Nhân Viên" nzIcon="user">
           <ul>
@@ -37,7 +39,6 @@
     </nz-sider>
     <nz-layout>
       <nz-header class="flex">
-        <span class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" (click)="isCollapsed = !isCollapsed"></span>
         <nav class="relative flex flex-wrap items-center justify-between px-2 navbar-expand-lg bg-sky-500 w-[100%]">
           <div class="container px-4 mx-auto flex flex-wrap items-center justify-between">
             <div class="w-full relative flex justify-between lg:w-auto  px-4 lg:static lg:block lg:justify-start">

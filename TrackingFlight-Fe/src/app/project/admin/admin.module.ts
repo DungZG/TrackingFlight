@@ -16,11 +16,14 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { ChartDetailComponent } from './chart-detail/chart-detail.component';
+import { StaffDetailAddComponent } from './staff-detail/staff-detail-add/staff-detail-add.component';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 @NgModule({
   declarations: [
     AdminComponent,
     StaffDetailComponent,
     ChartDetailComponent,
+    StaffDetailAddComponent,
   ],
   imports: [
     CommonModule,
@@ -37,6 +40,7 @@ import { ChartDetailComponent } from './chart-detail/chart-detail.component';
     NzCheckboxModule,
     NzSelectModule,
     NzTableModule,
+    NzModalModule,
   ]
 })
 export class AdminModule { }
