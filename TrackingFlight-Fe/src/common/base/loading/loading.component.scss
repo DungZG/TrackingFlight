@@ -1,0 +1,16 @@
+.fullscreen-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7); // Màu trắng mờ
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; // Đảm bảo lớp phủ hiển thị phía trên mọi thành phần khác
+
+    .nz-spin {
+        z-index: 1001;
+    }
+}

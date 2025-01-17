@@ -3,11 +3,18 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "TrackingFlight-Fe": {
+    "FlightsBooking-FE": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "style": "scss",
+          "standalone": false
+        },
+        "@schematics/angular:directive": {
+          "standalone": false
+        },
+        "@schematics/angular:pipe": {
+          "standalone": false
         }
       },
       "root": "",
@@ -17,7 +24,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/tracking-flight-fe",
+            "outputPath": "dist/flights-booking-fe",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -29,9 +36,15 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
+                "output": "/assets/"
               }
             ],
             "styles": [
+              "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -64,10 +77,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "TrackingFlight-Fe:build:production"
+              "buildTarget": "FlightsBooking-FE:build:production"
             },
             "development": {
-              "buildTarget": "TrackingFlight-Fe:build:development"
+              "buildTarget": "FlightsBooking-FE:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -91,6 +104,7 @@
               }
             ],
             "styles": [
+              "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -98,5 +112,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "118e0431-524c-48a9-aab3-bd2025da9a7d"
   }
 }

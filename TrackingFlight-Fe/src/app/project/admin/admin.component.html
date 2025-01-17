@@ -1,0 +1,82 @@
+<nz-layout>
+    <nz-sider class="shadow-2xl"  nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null" [nzWidth]="250" style="height: auto;" nzTheme="light" >
+      <div class="logo"></div>
+      <ul nz-menu nzTheme="light" nzMode="inline">
+        <li nz-submenu nzTitle="Quản Lý Nhân Viên" nzIcon="user">
+          <ul>
+            <li nz-menu-item>Danh Sách Nhân Viên</li>
+            <li nz-menu-item>Danh Sách Nhân Viên</li>
+            <li nz-menu-item>Danh Sách Nhân Viên</li>
+          </ul>
+        </li>
+        <li nz-submenu nzTitle="Quản Lý Vé Máy Bay" nzIcon="send">
+          <ul>
+            <li nz-menu-item>Danh Sách Vé</li>
+            <li nz-menu-item>Danh Sách Địa Điểm</li>
+          </ul>
+        </li>
+        <li nz-submenu nzTitle="Quản Lý Chuyến Bay" nzIcon="send">
+            <ul>
+              <li nz-menu-item>Danh Sách Chuyến Bay</li>
+              <li nz-menu-item>Danh Sách Địa Điểm</li>
+            </ul>
+          </li>
+        <li nz-submenu nzTitle="Quản Lý Máy Bay" nzIcon="cloud">
+            <ul>
+              <li nz-menu-item>Danh Sách Máy Bay</li>
+              <li nz-menu-item>Danh Sách Hãng Máy Bay</li>
+            </ul>
+        </li>
+        <li nz-submenu nzTitle="Báo Cáo & Thống Kê" nzIcon="pie-chart">
+            <ul>
+              <li nz-menu-item></li>
+              <li nz-menu-item></li>
+            </ul>
+        </li>
+      </ul>
+    </nz-sider>
+    <nz-layout>
+      <nz-header class="flex">
+        <span class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" (click)="isCollapsed = !isCollapsed"></span>
+        <nav class="relative flex flex-wrap items-center justify-between px-2 navbar-expand-lg bg-sky-500 w-[100%]">
+          <div class="container px-4 mx-auto flex flex-wrap items-center justify-between">
+            <div class="w-full relative flex justify-between lg:w-auto  px-4 lg:static lg:block lg:justify-start">
+              <a class="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-no-wrap uppercase text-white" href="#pablo">
+                lightBlue Color
+              </a>
+              <button class="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none" type="button">
+                <span class="block relative w-6 h-px rounded-sm bg-white"></span>
+                <span class="block relative w-6 h-px rounded-sm bg-white mt-1"></span>
+                <span class="block relative w-6 h-px rounded-sm bg-white mt-1"></span>
+              </button>
+            </div>
+            <div class="lg:flex flex-grow items-center">
+              <ul class="flex flex-col lg:flex-row list-none ml-auto">
+                  <li class="nav-item">
+                    <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75" href="#pablo">
+                      Discover
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75" href="#pablo">
+                      Profile
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75" href="#pablo">
+                      Setting
+                    </a>
+                  </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </nz-header>
+      <nz-content>
+        <div class="inner-content" >
+          <router-outlet></router-outlet>
+        </div>
+      </nz-content>
+      <nz-footer>Ant Design ©2020 Implement By Angular</nz-footer>
+    </nz-layout>
+  </nz-layout>

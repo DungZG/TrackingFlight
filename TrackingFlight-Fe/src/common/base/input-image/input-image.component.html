@@ -1,0 +1,23 @@
+<div class="row list-image">
+    <div class="col-3" *ngFor="let item of listPreviewImages">
+        <div class="image-upload">
+            <img class="previewImage" [src]="item" alt="Preview">
+            <a class="image-options list-icons-item action-delete" (click)="handleDeletePreviewImage(item)">
+                <span nz-tooltip nzTooltipTitle="Xóa">
+                    <i nz-icon nzType="close-circle" nzTheme="fill"></i>
+                </span>
+            </a>
+        </div>
+    </div>
+    <div class="col-3" *ngIf="listPreviewImages.length < 1">
+        <div class="image-upload">
+            <input type="file" id="fileInput1" accept="image/*" style="display: none;"
+                (change)="handlePreviewImage($event)">
+            <label for="fileInput1" class="plus-icon">
+                <nz-icon nzType="plus-circle" nzTheme="outline" />
+            </label>
+        </div>
+    </div>
+</div>
+
+

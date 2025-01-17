@@ -1,0 +1,38 @@
+@charset "utf-8";
+/* CSS Document */
+:root{
+    --background-color: #fff;
+    --theme-color: #007aff;
+    --text-color: #333;
+    --title-color: #264a9b;
+    --navbar-text-color: #fff;
+}
+*{
+    box-sizing: inherit;
+    width: 100%;
+}
+html{
+    font-family: 'Gill Sans', Helvetica, Arial;
+    font-size: 62.5%;
+    line-height: 1.6rem;
+    box-sizing: border-box;
+}
+.grid{
+    width: 1200px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+.grid_full-width{
+    width: 100%;
+}
+.grid_row{
+    display: flex;
+    flex-wrap: wrap;
+}
+.hover-icon:hover{
+    color: #f5d709;
+    cursor: pointer;
+}
+.hover-region:hover{
+    background-color: rgba(0,0,0,0.1);
+}

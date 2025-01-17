@@ -1,0 +1,8 @@
+<nz-input-group [nzSuffix]="inputClearTpl">
+    <input type="text" nz-input [placeholder]="!disabled ? placeholder : ''" [disabled]="disabled" [readOnly]="readOnly" 
+    [hidden]="hidden" [(ngModel)]="controlValue" [maxlength]="maxlength" (input)="onInputChange($event)">
+</nz-input-group>
+<ng-template #inputClearTpl>
+    <i nz-icon class="ant-input-clear-icon" nzTheme="fill" nzType="close-circle" *ngIf="controlValue && !disabled"
+        (click)="onClear()"></i>
+</ng-template>

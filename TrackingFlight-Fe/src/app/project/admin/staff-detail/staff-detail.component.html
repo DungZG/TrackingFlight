@@ -1,0 +1,97 @@
+<nz-collapse>
+    <nz-collapse-panel [nzHeader]="'Thông tin tìm kiếm'" [nzActive]="isPanelOpen" [nzShowArrow]="true">
+        <form nz-form [formGroup]="validateForm" class="ant-advanced-search-form"style="border: none;">
+            <div nz-row [nzGutter]="24" >
+                <div nz-col [nzSpan]="8">
+                  <nz-form-item>
+                    <nz-form-label [nzFor]="'field'">Tên nhân Viên</nz-form-label>
+                    <nz-form-control>
+                      <input nz-input
+                        placeholder="Tên nhân Viên"
+                        [formControlName]="'staffname'"
+                      />
+                    </nz-form-control>
+                  </nz-form-item>
+                </div>
+
+                <div nz-col [nzSpan]="8">
+                  <nz-form-item>
+                    <nz-form-label [nzFor]="'field'">Mã Nhân Viên</nz-form-label>
+                    <nz-form-control>
+                      <input nz-input
+                        placeholder="Mã Nhân Viên"
+                        [formControlName]="'staffcode'"
+                      />
+                    </nz-form-control>
+                  </nz-form-item>
+                </div>
+
+                <div nz-col [nzSpan]="8">
+                  <nz-form-item>
+                    <nz-form-label [nzFor]="'field'">Điện Thoại</nz-form-label>
+                    <nz-form-control>
+                      <input nz-input
+                        placeholder="Điện Thoại"
+                        [formControlName]="'staffphone'"
+                      />
+                    </nz-form-control>
+                  </nz-form-item>
+                </div>
+
+                <div nz-col [nzSpan]="8">
+                  <nz-form-item>
+                    <nz-form-label [nzFor]="'field'">Địa Chỉ</nz-form-label>
+                    <nz-form-control>
+                      <input nz-input
+                        placeholder="Nhập Địa Chỉ"
+                        [formControlName]="'address'"
+                      />
+                    </nz-form-control>
+                  </nz-form-item>
+                </div>
+                
+            </div>
+            <div nz-row>
+              <div nz-col [nzSpan]="24" class="search-area text-center" style="text-align: center;">
+                <button nz-button [nzType]="'primary'">Tìm Kiếm</button>
+                <button nz-button (click)="resetForm()">Làm Mới</button>
+                <a class="collapse" (click)="toggleCollapse()">
+                  Collapse
+                  <nz-icon [nzType]="isCollapse ? 'down' : 'up'" />
+                </a>
+              </div>
+            </div>
+          </form>
+    </nz-collapse-panel>
+</nz-collapse>
+
+<div class="search-result-list" style="margin-top: 0px; padding-top: 30px;">
+  <div style="text-align: right;">
+    <button nz-button [nzType]="'primary'">Thêm Mới</button>
+    <button nz-button [nzType]="'primary'">Xuất File</button>
+  </div>
+    <nz-table #editRowTable nzBordered [nzData]="listOfData">
+      <thead>
+        <tr>
+          <th nzWidth="30%">Name</th>
+          <th>Age</th>
+          <th>Address</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (data of editRowTable.data; track data) {
+          <tr class="editable-row">
+            <td>{{ data.name }}</td>
+            <td>{{ data.age }}</td>
+            <td>{{ data.address }}</td>
+            <td>
+              <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" >View</a>
+              <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" >Edit</a>
+              <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" >Delete</a>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </nz-table>
+</div>

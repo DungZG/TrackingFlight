@@ -1,0 +1,67 @@
+.image-item {
+    margin-bottom: 13px;
+
+    img {
+        border-radius: 8px;
+    }
+}
+
+.image-options {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 0px;
+    background: rgba(0, 0, 0, 0.65);
+    padding: 5px;
+    border-radius: 20%;
+    cursor: pointer;
+    i {
+        color: white;
+        padding: 5px;
+        transition: color 0.3s ease;
+
+        &:hover {
+            color: red;
+        }
+    }
+}
+
+.list-image {
+    margin-bottom: 40px;
+    width: 100%;
+}
+
+.image-upload {
+    height: 200px;
+    border: 2px dashed #ccc;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+
+    .plus-icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 48px;
+        color: #ccc;
+        cursor: pointer;
+        transition: color 0.3s ease;
+
+        &:hover {
+            color: #1890ff;
+        }
+    }
+}
+
+
+.previewImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
