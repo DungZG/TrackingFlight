@@ -15,6 +15,7 @@ import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
 import { DialogMode, } from '../../../../common/enums/dialog-mode';
 import { DialogService ,DialogSize} from '../../../../common/service/dialog.service';
 import { StaffDetailAddComponent } from './staff-detail-add/staff-detail-add.component';
+import { EventEmitter, Injectable } from '@angular/core';
 interface ItemData {
   id: string;
   name: string;
@@ -30,6 +31,7 @@ interface ItemData {
 })
 export class StaffDetailComponent {
   isPanelOpen = true;
+  
   controlArray: Array<{ index: number; show: boolean }> = [];
   isCollapse = true;
   public validateForm: FormGroup;
@@ -95,9 +97,6 @@ export class StaffDetailComponent {
         option.size = DialogSize.tab;
         option.component = StaffDetailAddComponent;
         option.inputs = {
-          id: item?.uuid,
-          item: item,
-          mode: mode,
         };
       },
       (eventName, eventValue) => {
