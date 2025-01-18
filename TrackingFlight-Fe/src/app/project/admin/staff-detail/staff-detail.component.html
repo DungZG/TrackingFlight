@@ -38,7 +38,7 @@
                   </nz-form-item>
                 </div>
 
-                <div nz-col [nzSpan]="8">
+                <div nz-col [nzSpan]="24">
                   <nz-form-item>
                     <nz-form-label [nzFor]="'field'">Địa Chỉ</nz-form-label>
                     <nz-form-control>
@@ -90,9 +90,9 @@
             <td>{{ data.age }}</td>
             <td>{{ data.address }}</td>
             <td>
-              <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" >View</a>
-              <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" >Edit</a>
-              <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" >Delete</a>
+              <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" class="text-green-600 mr-3"><nz-icon nzType="eye" nzTheme="outline" /></a>
+              <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" class="text-sky-600 mr-3"><nz-icon nzType="edit" nzTheme="outline" /></a>
+              <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" class="text-red-600"><nz-icon nzType="delete" nzTheme="outline" /></a>
             </td>
           </tr>
         }
