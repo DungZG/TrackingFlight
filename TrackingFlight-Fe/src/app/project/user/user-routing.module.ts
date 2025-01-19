@@ -1,13 +1,18 @@
 import { UserComponent } from './user.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { FlightTicketComponent } from './flight-ticket/flight-ticket.component';
+import { LocationComponent } from './location/location.component';
 
 const routes: Routes = [
   {
     path: '',
     component: UserComponent,
     children: [
-      { path: '', redirectTo: 'user', pathMatch: 'full' } 
+      { path: 'location', component: LocationComponent },
+      { path: 'flight-ticket', component: FlightTicketComponent },
+
+      { path: '', redirectTo: 'user/location', pathMatch: 'full' }
     ],
   },
 ];
@@ -16,4 +21,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class UserRoutingModule {}
+export class UserRoutingModule { }

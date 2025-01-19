@@ -13,7 +13,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
 import { DialogMode, } from '../../../../common/enums/dialog-mode';
-import { DialogService ,DialogSize} from '../../../../common/service/dialog.service';
+import { DialogService, DialogSize } from '../../../../common/service/dialog.service';
 import { StaffDetailAddComponent } from './staff-detail-add/staff-detail-add.component';
 import { EventEmitter, Injectable } from '@angular/core';
 interface ItemData {
@@ -31,7 +31,7 @@ interface ItemData {
 })
 export class StaffDetailComponent {
   isPanelOpen = true;
-  
+
   controlArray: Array<{ index: number; show: boolean }> = [];
   isCollapse = true;
   public validateForm: FormGroup;
@@ -93,7 +93,7 @@ export class StaffDetailComponent {
   handlerOpenDialog(mode: string = DialogMode.add, item: any = null) {
     const dialog = this.dialogService.openDialog(
       async (option) => {
-        option.title = mode === 'view' ? 'Xem thông tin cơ sở lưu trú' : 'Thêm mới cơ sở lưu trú';
+        option.title = mode === 'view' ? 'Xem thông tin Nhân Viên' : 'Thêm Thông Tin Nhân Viên';
         option.size = DialogSize.tab;
         option.component = StaffDetailAddComponent;
         option.inputs = {
