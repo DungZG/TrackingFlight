@@ -21,6 +21,7 @@ interface ItemData {
   name: string;
   age: string;
   address: string;
+  phone: string;
 }
 @Component({
   selector: 'app-staff-detail',
@@ -74,7 +75,8 @@ export class StaffDetailComponent {
         id: `${this.i}`,
         name: `Edward King ${this.i}`,
         age: '32',
-        address: `London, Park Lane no. ${this.i}`
+        address: `London, Park Lane no. ${this.i}`,
+        phone: '',
       }
     ];
     this.i++;

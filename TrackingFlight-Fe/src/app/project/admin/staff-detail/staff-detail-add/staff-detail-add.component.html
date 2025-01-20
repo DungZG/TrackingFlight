@@ -3,3 +3,67 @@
       <i nz-icon nzType="close" nzTheme="outline" class="anticon ant-modal-close-icon anticon-close"></i>
     </span>
 </button>
+
+
+<form nz-form [formGroup]="myForm" class="ant-advanced-search-form"style="border: none;">
+  <div nz-row [nzGutter]="24" >
+      <div nz-col [nzSpan]="8">
+        <nz-form-item>
+          <nz-form-label [nzFor]="'field'">Tên nhân Viên</nz-form-label>
+          <nz-form-control>
+            <input nz-input
+              placeholder="Tên nhân Viên"
+              [formControlName]="'staffname'"
+            />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-col [nzSpan]="8">
+        <nz-form-item>
+          <nz-form-label [nzFor]="'field'">Mã Nhân Viên</nz-form-label>
+          <nz-form-control>
+            <input nz-input
+              placeholder="Mã Nhân Viên"
+              [formControlName]="'staffcode'"
+            />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-col [nzSpan]="8">
+        <nz-form-item>
+          <nz-form-label [nzFor]="'field'">Điện Thoại</nz-form-label>
+          <nz-form-control>
+            <input nz-input
+              placeholder="Điện Thoại"
+              [formControlName]="'staffphone'"
+            />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-col [nzSpan]="24">
+        <nz-form-item>
+          <nz-form-label [nzFor]="'field'">Địa Chỉ</nz-form-label>
+          <nz-form-control>
+            <input nz-input
+              placeholder="Nhập Địa Chỉ"
+              [formControlName]="'address'"
+            />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+  </div>
+</form>
+
+<div class="flex justify-center mt-[350px]">
+  <button nz-button type="button" class="btn btn-default mr-5" (click)="closeDialog()">
+    <i nz-icon nzType="close" nzTheme="outline"></i>Đóng
+  </button>
+  <!-- lưu và đóng -->
+  <button nz-button type="button" class="btn btn-primary" (click)="saveData()">
+    <i class="icon-plus-circle2 mr-2"></i>
+    Lưu và đóng
+  </button>
+</div>

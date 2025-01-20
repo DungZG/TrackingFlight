@@ -18,12 +18,14 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { ChartDetailComponent } from './chart-detail/chart-detail.component';
 import { StaffDetailAddComponent } from './staff-detail/staff-detail-add/staff-detail-add.component';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { TicketComponent } from './ticket/ticket.component';
 @NgModule({
   declarations: [
     AdminComponent,
     StaffDetailComponent,
     ChartDetailComponent,
     StaffDetailAddComponent,
+    TicketComponent,
   ],
   imports: [
     CommonModule,
