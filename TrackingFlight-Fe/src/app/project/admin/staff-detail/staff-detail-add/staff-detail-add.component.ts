@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class StaffDetailAddComponent {
   onClose = new EventEmitter<any | null>();
+  selectedValue = null;
   public myForm: FormGroup;
   constructor(
     private fb: FormBuilder
