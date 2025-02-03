@@ -4,36 +4,35 @@
         <span class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" (click)="isCollapsed = !isCollapsed"></span>
       </div>
       <ul nz-menu nzTheme="light" nzMode="inline">
-        <li nz-submenu nzTitle="Quản Lý Nhân Viên" nzIcon="user">
-          <ul>
-            <li nz-menu-item>Danh Sách Nhân Viên</li>
-            <li nz-menu-item>Danh Sách Nhân Viên</li>
-            <li nz-menu-item>Danh Sách Nhân Viên</li>
-          </ul>
+        <li nz-menu-item *ngIf="this.isCollapsed == true" [routerLink]="['/', 'admin','staff']">
+            <nz-icon nzType="user" nzTheme="outline" />
         </li>
-        <li nz-submenu nzTitle="Quản Lý Vé Máy Bay" nzIcon="send">
-          <ul>
-            <li nz-menu-item>Danh Sách Vé</li>
-            <li nz-menu-item>Danh Sách Địa Điểm</li>
-          </ul>
+        <li nz-menu-item *ngIf="this.isCollapsed == true" [routerLink]="['/', 'admin', 'customer']">
+          <nz-icon nzType="user" nzTheme="outline" />
         </li>
-        <li nz-submenu nzTitle="Quản Lý Chuyến Bay" nzIcon="send">
-            <ul>
-              <li nz-menu-item>Danh Sách Chuyến Bay</li>
-              <li nz-menu-item>Danh Sách Địa Điểm</li>
-            </ul>
-          </li>
-        <li nz-submenu nzTitle="Quản Lý Máy Bay" nzIcon="cloud">
-            <ul>
-              <li nz-menu-item>Danh Sách Máy Bay</li>
-              <li nz-menu-item>Danh Sách Hãng Máy Bay</li>
-            </ul>
+        <li nz-menu-item *ngIf="this.isCollapsed == true" [routerLink]="['/', 'admin', 'ticket']">
+          <nz-icon nzType="cloud" nzTheme="outline" />
         </li>
-        <li nz-submenu nzTitle="Báo Cáo & Thống Kê" nzIcon="pie-chart">
-            <ul>
-              <li nz-menu-item></li>
-              <li nz-menu-item></li>
-            </ul>
+        <li nz-menu-item *ngIf="this.isCollapsed == true" [routerLink]="['/', 'admin', 'flight']">
+          <nz-icon nzType="send" nzTheme="outline" />
+        </li>
+        <li nz-menu-item *ngIf="this.isCollapsed == true" [routerLink]="['/', 'admin', 'charts']">
+          <nz-icon nzType="area-chart" nzTheme="outline" />
+        </li>
+        <li nz-menu-item *ngIf="this.isCollapsed != true" [routerLink]="['/', 'admin', 'staff']">
+          <nz-icon nzType="user" nzTheme="outline" class="mr-2"/> Quản Lý Nhân Viên
+        </li>
+        <li nz-menu-item *ngIf="this.isCollapsed != true" [routerLink]="['/', 'admin', 'customer']">
+          <nz-icon nzType="user" nzTheme="outline" class="mr-2"/> Quản Lý Khách Hàng
+        </li>
+        <li nz-menu-item *ngIf="this.isCollapsed != true" [routerLink]="['/', 'admin', 'ticket']">
+          <nz-icon nzType="cloud" nzTheme="outline" class="mr-2"/> Quản Lý Vé Máy Bay
+        </li>
+        <li nz-menu-item *ngIf="this.isCollapsed != true" [routerLink]="['/', 'admin', 'flight']">
+          <nz-icon nzType="send" nzTheme="outline" class="mr-2"/> Quản Lý Chuyến Bay
+        </li>
+        <li nz-menu-item *ngIf="this.isCollapsed != true" [routerLink]="['/', 'admin', 'charts']">
+          <nz-icon nzType="area-chart" nzTheme="outline" class="mr-2"/> Báo Cáo & Thống Kê
         </li>
       </ul>
     </nz-sider>

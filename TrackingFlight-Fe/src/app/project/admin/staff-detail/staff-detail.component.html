@@ -71,33 +71,22 @@
   <div style="text-align: right;">
     <button nz-button [nzType]="'primary'" (click)="handlerOpenDialog()">
       <nz-icon nzType="user-add" nzTheme="outline" /> Thêm Mới</button>
-    <button nz-button class="bg-green-500 text-white">
+    <button nz-button class="bg-green-500 text-white ml-2">
       <nz-icon nzType="download" nzTheme="outline" /> Xuất File</button>
   </div>
-    <nz-table #editRowTable nzBordered [nzData]="listOfData">
+    <nz-table nzBordered>
       <thead>
         <tr>
-          <th nzWidth="30%">Tên</th>
-          <th>Tuổi</th>
+          <th>Mã Nhân Viên</th>
+          <th>Tên Nhân Viên</th>
           <th>Địa Chỉ</th>
           <th>Số Điện Thoại</th>
+          <th>Chức Vụ</th>
           <th>Thao Tác</th>
         </tr>
       </thead>
       <tbody>
-        @for (data of editRowTable.data; track data) {
-          <tr class="editable-row">
-            <td>{{ data.name }}</td>
-            <td>{{ data.age }}</td>
-            <td>{{ data.address }}</td>
-            <td>{{ data.phone }}</td>
-            <td>
-              <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" class="text-green-600 mr-3"><nz-icon nzType="eye" nzTheme="outline" /></a>
-              <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" class="text-sky-600 mr-3"><nz-icon nzType="edit" nzTheme="outline" /></a>
-              <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" class="text-red-600"><nz-icon nzType="delete" nzTheme="outline" /></a>
-            </td>
-          </tr>
-        }
+
       </tbody>
     </nz-table>
 </div>

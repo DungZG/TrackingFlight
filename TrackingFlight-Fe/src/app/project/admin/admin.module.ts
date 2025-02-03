@@ -19,6 +19,8 @@ import { ChartDetailComponent } from './chart-detail/chart-detail.component';
 import { StaffDetailAddComponent } from './staff-detail/staff-detail-add/staff-detail-add.component';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { TicketComponent } from './ticket/ticket.component';
+import { FlightComponent } from './flight/flight.component';
+import { CustomerComponent } from './customer/customer.component';
 @NgModule({
   declarations: [
     AdminComponent,
@@ -26,6 +28,8 @@ import { TicketComponent } from './ticket/ticket.component';
     ChartDetailComponent,
     StaffDetailAddComponent,
     TicketComponent,
+    FlightComponent,
+    CustomerComponent,
   ],
   imports: [
     CommonModule,
