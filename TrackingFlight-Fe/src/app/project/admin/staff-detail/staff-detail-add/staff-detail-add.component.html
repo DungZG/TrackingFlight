@@ -11,10 +11,10 @@
         <nz-form-item>
           <nz-form-label [nzFor]="'field'">Tên nhân Viên</nz-form-label>
           <nz-form-control>
-            <input nz-input
+            <app-input-text nz-input
               placeholder="Tên nhân Viên"
               [formControlName]="'staffname'"
-            />
+            ></app-input-text>
           </nz-form-control>
         </nz-form-item>
       </div>
@@ -23,10 +23,10 @@
         <nz-form-item>
           <nz-form-label [nzFor]="'field'">Mã Nhân Viên</nz-form-label>
           <nz-form-control>
-            <input nz-input
+            <app-input-text nz-input
               placeholder="Mã Nhân Viên"
               [formControlName]="'staffcode'"
-            />
+            ></app-input-text>
           </nz-form-control>
         </nz-form-item>
       </div>
@@ -35,10 +35,10 @@
         <nz-form-item>
           <nz-form-label [nzFor]="'field'">Điện Thoại</nz-form-label>
           <nz-form-control>
-            <input nz-input
+            <app-input-text nz-input
               placeholder="Điện Thoại"
               [formControlName]="'staffphone'"
-            />
+            ></app-input-text>
           </nz-form-control>
         </nz-form-item>
       </div>
@@ -47,44 +47,69 @@
         <nz-form-item>
           <nz-form-label [nzFor]="'field'">Địa Chỉ</nz-form-label>
           <nz-form-control>
-            <input nz-input
+            <app-input-text nz-input
               placeholder="Nhập Địa Chỉ"
               [formControlName]="'address'"
-            />
+            ></app-input-text>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label [nzFor]="'field'">Email</nz-form-label>
+          <nz-form-control>
+            <app-input-text nz-input
+              placeholder="Nhập Email"
+              [formControlName]="'email'"
+            ></app-input-text>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label [nzFor]="'field'">CCCD/CMND</nz-form-label>
+          <nz-form-control>
+            <app-input-text nz-input
+              placeholder="Nhập Căng Cước Công Dân"
+              [formControlName]="'identity'"
+            ></app-input-text>
           </nz-form-control>
         </nz-form-item>
       </div>
 
 
       <div nz-col [nzSpan]="12">
-        <app-input-image></app-input-image>
+        <app-input-image> </app-input-image>
       </div>
 
-      <div nz-col [nzSpan]="12">
+      <div nz-col [nzSpan]="8">
         <nz-form-item>
           <nz-form-label [nzFor]="'field'">Chức vụ</nz-form-label>
-          <nz-select ngModel="lucy">
-            <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
-            <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
+          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Chọn chức vụ" [(ngModel)]="selectedValue">
+            <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+            <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+            <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
           </nz-select>
         </nz-form-item>
         <nz-form-item>
           <nz-form-label [nzFor]="'field'">Giới Tính</nz-form-label>
-          <nz-select ngModel="lucy">
-            <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
-            <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
+          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Chọn giới tính" [(ngModel)]="selectedValue">
+            <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+            <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+            <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
           </nz-select>
         </nz-form-item>
         <nz-form-item>
           <nz-form-label [nzFor]="'field'">Cơ Sở</nz-form-label>
-          <nz-select ngModel="lucy">
-            <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
-            <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
+          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Chọn Cơ Sở" [(ngModel)]="selectedValue">
+            <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+            <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+            <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
           </nz-select>
         </nz-form-item>
       </div>
-
-      
   </div>
 </form>
 

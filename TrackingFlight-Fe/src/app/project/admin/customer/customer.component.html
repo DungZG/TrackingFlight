@@ -69,8 +69,8 @@
 
 <div class="search-result-list" style="margin-top: 0px; padding-top: 30px;">
 <div style="text-align: right;">
-  <button nz-button [nzType]="'primary'" >
-    <nz-icon nzType="user-add" nzTheme="outline" /> Thêm Mới</button>
+  <button nz-button [nzType]="'primary'" (click)="handlerOpenDialog()">
+    <nz-icon nzType="user-add" nzTheme="outline"  /> Thêm Mới</button>
   <button nz-button class="bg-green-500 text-white ml-2">
     <nz-icon nzType="download" nzTheme="outline" /> Xuất File</button>
 </div>

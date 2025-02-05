@@ -32,7 +32,9 @@ export class TicketComponent {
       private dialogService: DialogService,
     ) {
       this.validateForm = this.fb.group({
-  
+        ticketname: [null, [Validators.required]],
+        ticketcode: [null, [Validators.required]],
+        ticketstatus: [null, [Validators.required]],
       });
     }
     toggleCollapse(): void {

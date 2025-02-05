@@ -29,7 +29,9 @@ export class FlightComponent{
         private dialogService: DialogService,
       ) {
         this.validateForm = this.fb.group({
-    
+          ticketname: [null, [Validators.required]],
+          flightcode: [null, [Validators.required]],
+          flighttype: [null, [Validators.required]],
         });
       }
 

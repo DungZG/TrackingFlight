@@ -21,12 +21,14 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { TicketComponent } from './ticket/ticket.component';
 import { FlightComponent } from './flight/flight.component';
 import { CustomerComponent } from './customer/customer.component';
+import { CustomerDetailComponent } from './customer/customer-detail/customer-detail.component';
 @NgModule({
   declarations: [
     AdminComponent,
-    StaffDetailComponent,
     ChartDetailComponent,
+    StaffDetailComponent,
     StaffDetailAddComponent,
+    CustomerDetailComponent,
     TicketComponent,
     FlightComponent,
     CustomerComponent,

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DialogService, DialogSize } from '../../../../common/service/dialog.service';
+import { CustomerDetailComponent } from './customer-detail/customer-detail.component';
 import {
   FormBuilder,
   FormGroup,
@@ -30,7 +31,10 @@ export class CustomerComponent {
     private dialogService: DialogService,
   ) {
     this.validateForm = this.fb.group({
-
+      customername: [null, [Validators.required]],
+      customercode: [null, [Validators.required]],
+      customerphone: [null, [Validators.required]],
+      address: [null, [Validators.required]],
     });
   }
   toggleCollapse(): void {
@@ -57,4 +61,19 @@ export class CustomerComponent {
 
   }
 
-}
+  handlerOpenDialog(mode: string = 'add', item: any = null) {
+      const dialog = this.dialogService.openDialog(
+        async (option) => {
+          option.title = mode === 'view' ? 'Xem thông tin Khách Hàng' : 'Thêm Thông Tin Khách Hàng';
+          option.size = DialogSize.tab;
+          option.component = CustomerDetailComponent;
+          option.inputs = {};
+        },
+        (eventName, eventValue) => {
+          if (eventName === 'onClose') {
+            this.dialogService.closeDialogById(dialog.id);
+          }
+        }
+      );
+    }
+} 

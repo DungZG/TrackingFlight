@@ -7,15 +7,10 @@ import {
   Validators,
   AbstractControl,
   ValidationErrors,
-
 } from '@angular/forms';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
-import { DialogMode, } from '../../../../common/enums/dialog-mode';
 import { DialogService, DialogSize } from '../../../../common/service/dialog.service';
 import { StaffDetailAddComponent } from './staff-detail-add/staff-detail-add.component';
-import { EventEmitter, Injectable } from '@angular/core';
+
 interface ItemData {
   id: string;
   name: string;
@@ -23,26 +18,24 @@ interface ItemData {
   address: string;
   phone: string;
 }
+
 @Component({
   selector: 'app-staff-detail',
   standalone: false,
   templateUrl: './staff-detail.component.html',
-  styleUrls: ['./staff-detail.component.scss'] // Fix: đổi `styleUrl` thành `styleUrls`
-
+  styleUrls: ['./staff-detail.component.scss']
 })
 export class StaffDetailComponent {
   isPanelOpen = true;
-
-  controlArray: Array<{ index: number; show: boolean }> = [];
-  isCollapse = true;
   public validateForm: FormGroup;
+  listOfData: ItemData[] = [];
   i = 0;
   editId: string | null = null;
-  listOfData: ItemData[] = [];
+  isCollapse = true; // Property to track collapse state
 
   constructor(
     private fb: FormBuilder,
-    private dialogService: DialogService,
+    private dialogService: DialogService, // Inject MatSnackBar
   ) {
     this.validateForm = this.fb.group({
       staffname: [null, [Validators.required]],
@@ -51,68 +44,28 @@ export class StaffDetailComponent {
       address: [null, [Validators.required]],
     });
   }
-  toggleCollapse(): void {
-    this.isCollapse = !this.isCollapse;
-    this.controlArray.forEach((c, index) => {
-      c.show = this.isCollapse ? index < 6 : true;
-    });
-  }
 
   resetForm(): void {
     this.validateForm.reset();
   }
 
-
-  startEdit(id: string): void {
-    this.editId = id;
+  toggleCollapse(): void {
+    this.isCollapse = !this.isCollapse;
   }
 
-  stopEdit(): void {
-    this.editId = null;
-  }
-
-  addRow(): void {
-    this.listOfData = [
-      ...this.listOfData,
-      {
-        id: `${this.i}`,
-        name: `Edward King ${this.i}`,
-        age: '32',
-        address: `London, Park Lane no. ${this.i}`,
-        phone: '',
-      }
-    ];
-    this.i++;
-  }
-
-  deleteRow(id: string): void {
-    this.listOfData = this.listOfData.filter(d => d.id !== id);
-  }
-
-  ngOnInit(): void {
-    this.addRow();
-    this.addRow();
-  }
-
-
-  handlerOpenDialog(mode: string = DialogMode.add, item: any = null) {
+  handlerOpenDialog(mode: string = 'add', item: any = null) {
     const dialog = this.dialogService.openDialog(
       async (option) => {
         option.title = mode === 'view' ? 'Xem thông tin Nhân Viên' : 'Thêm Thông Tin Nhân Viên';
         option.size = DialogSize.tab;
         option.component = StaffDetailAddComponent;
-        option.inputs = {
-        };
+        option.inputs = {};
       },
       (eventName, eventValue) => {
         if (eventName === 'onClose') {
           this.dialogService.closeDialogById(dialog.id);
-          // if (eventValue) {
-          //   this.getData({ ...this.paging });
-          // }
         }
       }
     );
   }
-
 }

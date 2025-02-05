@@ -15,6 +15,12 @@ export class StaffDetailAddComponent {
     private fb: FormBuilder
   ) {
     this.myForm = this.fb.group({
+      staffname: [null],
+      staffcode: [null],
+      staffphone: [null],
+      address: [null],
+      email:  [null],
+      identity: [null],
 
     })
   }
