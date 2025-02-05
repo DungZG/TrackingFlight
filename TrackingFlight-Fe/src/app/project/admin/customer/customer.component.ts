@@ -17,8 +17,7 @@ import {
   styleUrl: './customer.component.scss'
 })
 export class CustomerComponent {
-isPanelOpen = true;
-
+  isPanelOpen = true;
   controlArray: Array<{ index: number; show: boolean }> = [];
   isCollapse = true;
   public validateForm: FormGroup;

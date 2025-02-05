@@ -45,7 +45,10 @@ export class StaffDetailComponent {
     private dialogService: DialogService,
   ) {
     this.validateForm = this.fb.group({
-
+      staffname: [null, [Validators.required]],
+      staffcode: [null, [Validators.required]],
+      staffphone: [null, [Validators.required]],
+      address: [null, [Validators.required]],
     });
   }
   toggleCollapse(): void {
