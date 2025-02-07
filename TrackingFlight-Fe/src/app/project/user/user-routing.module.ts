@@ -11,8 +11,8 @@ const routes: Routes = [
     children: [
       { path: 'location', component: LocationComponent },
       { path: 'flight-ticket', component: FlightTicketComponent },
-
-      { path: '', redirectTo: 'user/location', pathMatch: 'full' }
+      
+      { path: 'location', redirectTo: 'user', pathMatch: 'full' }
     ],
   },
 ];
