@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
 import {
   FormBuilder,
   FormGroup,
@@ -10,7 +11,7 @@ import {
 } from '@angular/forms';
 import { DialogService, DialogSize } from '../../../../common/service/dialog.service';
 import { StaffDetailAddComponent } from './staff-detail-add/staff-detail-add.component';
-
+import {StaffService} from '../../../services/staff.service';
 interface ItemData {
   id: string;
   name: string;
@@ -25,17 +26,18 @@ interface ItemData {
   templateUrl: './staff-detail.component.html',
   styleUrls: ['./staff-detail.component.scss']
 })
-export class StaffDetailComponent {
+export class StaffDetailComponent implements OnInit {
   isPanelOpen = true;
   public validateForm: FormGroup;
-  listOfData: ItemData[] = [];
+  public listOfData: any[] = [];
   i = 0;
   editId: string | null = null;
   isCollapse = true; // Property to track collapse state
 
   constructor(
     private fb: FormBuilder,
-    private dialogService: DialogService, // Inject MatSnackBar
+    private dialogService: DialogService, 
+    private staffService: StaffService
   ) {
     this.validateForm = this.fb.group({
       staffname: [null, [Validators.required]],
@@ -43,6 +45,16 @@ export class StaffDetailComponent {
       staffphone: [null, [Validators.required]],
       address: [null, [Validators.required]],
     });
+  }
+
+  ngOnInit(): void {
+    this.getDate()
+  }
+
+  async getDate(){
+    debugger
+    const resStaff = await firstValueFrom(this.staffService.getAllItems());
+    this.listOfData = resStaff;
   }
 
   resetForm(): void {

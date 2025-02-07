@@ -86,7 +86,14 @@
         </tr>
       </thead>
       <tbody>
-
+        <tr *ngFor="let item of listOfData; let i = index">
+          <td class="text-left">{{ item.staffCode }}</td>
+          <td class="text-left">{{ item.staffName }}</td>
+          <td class="text-left">{{ item.staffAddress}}</td>
+          <td class="text-left">{{ item.staffPhoneNumber }}</td>
+          <td class="text-left">{{ item.staffRole }}</td>
+          <td class="text-left">{{ item.staffCode }}</td>
+        </tr>
       </tbody>
     </nz-table>
 </div>

@@ -1,0 +1,64 @@
+package com.example.TrackingFlight_Be.v1.services;
+
+import com.example.TrackingFlight_Be.v1.dto.request.StaffCreationRequest;
+import com.example.TrackingFlight_Be.v1.dto.response.StaffResponse;
+import com.example.TrackingFlight_Be.v1.entity.Staff;
+import com.example.TrackingFlight_Be.v1.mapper.StaffMapper;
+import com.example.TrackingFlight_Be.v1.repositories.StaffRepository;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.io.IOException;
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+public class StaffService {
+    StaffRepository staffRepository;
+    StaffMapper staffMapper;
+
+    public Staff createStaff(StaffCreationRequest request) {
+        Staff staff = new Staff();
+        staff.setStaffCode(request.getStaffCode());
+        staff.setStaffName(request.getStaffName());
+        staff.setStaffEmail(request.getStaffEmail());
+        staff.setStaffPhoneNumber(request.getStaffPhoneNumber());
+        staff.setStaffPassword(request.getStaffPassword());
+        staff.setStaffAddress(request.getStaffAddress());
+        staff.setStaffRole(request.getStaffRole());
+        staff.setStaffFacility(request.getStaffFacility());
+        staff.setStaffGender(request.getStaffGender());
+
+        try {
+            if (request.getStaffPicture() != null && !request.getStaffPicture().isEmpty()) {
+                staff.setStaffPicture(request.getStaffPicture().getBytes());
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to process staff picture", e);
+        }
+
+        return staffRepository.save(staff);
+    }
+    public List<Staff> getStaffs(){
+        return staffRepository.findAll();
+    }
+    public StaffResponse updateUser(String staffCode, StaffCreationRequest request){
+        Staff staff = staffRepository.findById(staffCode)
+                .orElseThrow(() ->new RuntimeException("Couldn't find user"));
+        staffMapper.updateStaff(staff,request);
+
+        return staffMapper.toStaffResponse(staffRepository.save(staff));
+    }
+
+    public void deleteStaff(String userId){
+        staffRepository.deleteById(userId);
+    }
+
+    public StaffResponse getStaff(String staffCode){
+        return staffMapper.toStaffResponse(staffRepository.findById(staffCode).orElseThrow(() ->new RuntimeException("Couldn't find user")));
+    }
+}
