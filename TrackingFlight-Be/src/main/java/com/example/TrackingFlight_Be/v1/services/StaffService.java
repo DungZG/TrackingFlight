@@ -28,6 +28,7 @@ public class StaffService {
         staff.setStaffPhoneNumber(request.getStaffPhoneNumber());
         staff.setStaffPassword(request.getStaffPassword());
         staff.setStaffAddress(request.getStaffAddress());
+        staff.setStaffIdentity(request.getStaffIdentity());
         staff.setStaffRole(request.getStaffRole());
         staff.setStaffFacility(request.getStaffFacility());
         staff.setStaffGender(request.getStaffGender());

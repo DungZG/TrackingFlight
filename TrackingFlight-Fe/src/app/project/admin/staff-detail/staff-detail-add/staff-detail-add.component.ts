@@ -12,19 +12,35 @@ export class StaffDetailAddComponent {
   public listRole: any[] = [
     {
       value: 0,
-      label: 'Tất cả'
+      label: 'Nhân Viên'
     },
     {
       value: 1,
-      label: 'Đang hoạt động'
+      label: 'Quản Lý'
     },
     {
       value: 2,
-      label: 'Ngừng hoạt động'
+      label: 'Admin'
+    },
+  ];
+  public listGender: any[] = [
+    {
+      value: 0,
+      label: 'Nam'
     },
     {
-      value: 3,
-      label: 'Tạm ngừng hoạt động'
+      value: 1,
+      label: 'Nữ'
+    },
+  ];
+  public listFacility: any[] = [
+    {
+      value: 0,
+      label: 'Hà Nội'
+    },
+    {
+      value: 1,
+      label: 'Hồ Chí Minh'
     },
   ];
   selectedFacility= null;
@@ -48,6 +64,6 @@ export class StaffDetailAddComponent {
   }
 
   saveData() {
-
+    
   }
 }

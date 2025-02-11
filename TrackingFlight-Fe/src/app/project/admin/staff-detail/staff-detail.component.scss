@@ -43,3 +43,20 @@
     padding: 4px 11px;
   }
 
+  .list-icons-item {
+    &.action-add {
+      color: #044e12 !important;
+    }
+  
+    &.action-view {
+      color: #000000 !important;
+    }
+  
+    &.action-edit {
+      color: #073288 !important;
+    }
+  
+    &.action-delete {
+      color: #b30303 !important;
+    }
+  }

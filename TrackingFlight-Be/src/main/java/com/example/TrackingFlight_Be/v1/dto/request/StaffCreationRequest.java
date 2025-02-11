@@ -16,6 +16,7 @@ public class StaffCreationRequest {
     String staffPhoneNumber;
     String staffPassword;
     String staffAddress;
+    String staffIdentity;
     Long staffRole;
     Long staffFacility;
     Long staffGender;

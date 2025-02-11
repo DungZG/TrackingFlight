@@ -31,6 +31,7 @@ public class StaffController {
             @RequestParam("staffPhoneNumber") String staffPhoneNumber,
             @RequestParam("staffPassword") String staffPassword,
             @RequestParam("staffAddress") String staffAddress,
+            @RequestParam("staffIdentity") String staffIdentity,
             @RequestParam("staffRole") Long staffRole,
             @RequestParam("staffFacility") Long staffFacility,
             @RequestParam("staffGender") Long staffGender,
@@ -43,6 +44,7 @@ public class StaffController {
         request.setStaffPhoneNumber(staffPhoneNumber);
         request.setStaffPassword(staffPassword);
         request.setStaffAddress(staffAddress);
+        request.setStaffIdentity(staffIdentity);
         request.setStaffRole(staffRole);
         request.setStaffGender(staffGender);
         request.setStaffFacility(staffFacility);

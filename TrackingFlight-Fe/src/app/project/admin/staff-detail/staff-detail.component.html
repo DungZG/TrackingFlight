@@ -81,6 +81,7 @@
           <th>Tên Nhân Viên</th>
           <th>Địa Chỉ</th>
           <th>Số Điện Thoại</th>
+          <th>CCCD/CMND</th>
           <th>Chức Vụ</th>
           <th>Thao Tác</th>
         </tr>
@@ -91,8 +92,21 @@
           <td class="text-left">{{ item.staffName }}</td>
           <td class="text-left">{{ item.staffAddress}}</td>
           <td class="text-left">{{ item.staffPhoneNumber }}</td>
-          <td class="text-left">{{ item.staffRole }}</td>
-          <td class="text-left">{{ item.staffCode }}</td>
+          <td class="text-left">{{ item.staffIdentity }}</td>
+          <td class="text-left">{{ item.staffRole | labelValue: listRole }}</td>
+          <td class="text-center" nzRight>
+            <div class="list-icons list-icons-extended text-center">
+              <a class="list-icons-item action-view" (click)="handlerOpenDialog('view', item)">
+                <nz-icon nzType="eye" nzTheme="outline" nz-tooltip nzTooltipTitle="Xem" class="isax-eye1"/>
+              </a>
+              <a class="list-icons-item action-edit ml-2 mr-2" (click)="handlerOpenDialog('edit', item)" >
+                <nz-icon nzType="edit" nzTheme="outline" nz-tooltip nzTooltipTitle="Sửa" class="isax-eye1"/>
+              </a>
+              <a class="list-icons-item action-delete">
+                <nz-icon nzType="delete" nzTheme="outline" nz-tooltip nzTooltipTitle="Xóa" class="isax-eye1"/>
+              </a>
+            </div>
+          </td>
         </tr>
       </tbody>
     </nz-table>

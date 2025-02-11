@@ -12,13 +12,6 @@ import {
 import { DialogService, DialogSize } from '../../../../common/service/dialog.service';
 import { StaffDetailAddComponent } from './staff-detail-add/staff-detail-add.component';
 import {StaffService} from '../../../services/staff.service';
-interface ItemData {
-  id: string;
-  name: string;
-  age: string;
-  address: string;
-  phone: string;
-}
 
 @Component({
   selector: 'app-staff-detail',
@@ -30,10 +23,41 @@ export class StaffDetailComponent implements OnInit {
   isPanelOpen = true;
   public validateForm: FormGroup;
   public listOfData: any[] = [];
-  i = 0;
-  editId: string | null = null;
-  isCollapse = true; // Property to track collapse state
-
+  isCollapse = true; 
+  public listRole: any[] = [
+    {
+      value: 0,
+      label: 'Nhân Viên'
+    },
+    {
+      value: 1,
+      label: 'Quản Lý'
+    },
+    {
+      value: 2,
+      label: 'Admin'
+    },
+  ];
+  public listGender: any[] = [
+    {
+      value: 0,
+      label: 'Nam'
+    },
+    {
+      value: 1,
+      label: 'Nữ'
+    },
+  ];
+  public listFacility: any[] = [
+    {
+      value: 0,
+      label: 'Hà Nội'
+    },
+    {
+      value: 1,
+      label: 'Hồ Chí Minh'
+    },
+  ];
   constructor(
     private fb: FormBuilder,
     private dialogService: DialogService, 
@@ -52,7 +76,6 @@ export class StaffDetailComponent implements OnInit {
   }
 
   async getDate(){
-    debugger
     const resStaff = await firstValueFrom(this.staffService.getAllItems());
     this.listOfData = resStaff;
   }
@@ -69,9 +92,15 @@ export class StaffDetailComponent implements OnInit {
     const dialog = this.dialogService.openDialog(
       async (option) => {
         option.title = mode === 'view' ? 'Xem thông tin Nhân Viên' : 'Thêm Thông Tin Nhân Viên';
+        if (mode === 'edit') {
+          option.title = 'Cập nhật thông tin Nhân Viên';
+        }
         option.size = DialogSize.tab;
         option.component = StaffDetailAddComponent;
-        option.inputs = {};
+        option.inputs = {
+          id: item.id,
+          item: this.listOfData,
+        };
       },
       (eventName, eventValue) => {
         if (eventName === 'onClose') {

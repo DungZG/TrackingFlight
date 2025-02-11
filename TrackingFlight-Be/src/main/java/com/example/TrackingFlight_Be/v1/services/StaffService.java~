@@ -23,7 +23,6 @@ public class StaffService {
 
     public Staff createStaff(StaffCreationRequest request) {
         Staff staff = new Staff();
-        staff.setStaffCode(request.getStaffCode());
         staff.setStaffName(request.getStaffName());
         staff.setStaffEmail(request.getStaffEmail());
         staff.setStaffPhoneNumber(request.getStaffPhoneNumber());

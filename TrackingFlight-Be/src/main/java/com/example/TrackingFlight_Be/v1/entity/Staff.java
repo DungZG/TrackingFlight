@@ -25,6 +25,7 @@ public class Staff {
     String staffPhoneNumber;
     String staffPassword;
     String staffAddress;
+    String staffIdentity;
 
     @Lob
     byte[] staffPicture;
