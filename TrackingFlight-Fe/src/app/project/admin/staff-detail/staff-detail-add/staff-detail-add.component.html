@@ -25,7 +25,7 @@
           <nz-form-control>
             <app-input-text nz-input
               placeholder="Điện Thoại"
-              [formControlName]="'staffPhone'"
+              [formControlName]="'staffPhoneNumber'"
             ></app-input-text>
           </nz-form-control>
         </nz-form-item>
@@ -69,21 +69,22 @@
 
 
       <div nz-col [nzSpan]="12">
-        <app-input-image [formControlName]="'staffPicture'"> </app-input-image>
+        <img *ngIf="staffPicture" [src]="'data:image/png;base64,' + staffPicture" alt="Staff Picture">
+        <app-input-image [formControlName]="'staffPicture'"></app-input-image>
       </div>
 
       <div nz-col [nzSpan]="8">
         <nz-form-item>
           <nz-form-label [nzFor]="'field'">Chức vụ</nz-form-label>
-          <app-input-select [items]="listRole" formControlName="status"></app-input-select>
+          <app-input-select [items]="listRole" formControlName="staffRole"></app-input-select>
         </nz-form-item>
         <nz-form-item>
           <nz-form-label [nzFor]="'field'">Giới Tính</nz-form-label>
-          <app-input-select [items]="listGender" formControlName="status"></app-input-select>
+          <app-input-select [items]="listGender" formControlName="staffGender"></app-input-select>
         </nz-form-item>
         <nz-form-item>
           <nz-form-label [nzFor]="'field'">Cơ Sở</nz-form-label>
-          <app-input-select [items]="listFacility" formControlName="status"></app-input-select>
+          <app-input-select [items]="listFacility" formControlName="staffFacility"></app-input-select>
         </nz-form-item>
       </div>
   </div>
