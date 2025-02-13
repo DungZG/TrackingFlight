@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import { Component,OnInit,Inject } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import {
   FormBuilder,
@@ -65,7 +65,7 @@ export class StaffDetailComponent implements OnInit {
     private dialogService: DialogService, 
     private staffService: StaffService,
     private shareData: StaffDetailService,
-    private messageService: MessageService
+    private messageService: MessageService,
   ) {
     this.validateForm = this.fb.group({
       staffname: [null, [Validators.required]],
@@ -102,7 +102,7 @@ export class StaffDetailComponent implements OnInit {
         if (mode === DialogMode.edit) {
           option.title = 'Cập nhật thông tin Nhân Viên';
         }
-        option.size = DialogSize.tab;
+        option.size = DialogSize.xlarge;
         option.component = StaffDetailAddComponent;
         option.inputs = {
           mode: mode,
@@ -115,7 +115,7 @@ export class StaffDetailComponent implements OnInit {
           this.dialogService.closeDialogById(dialog.id);
         }
         if (eventValue) {
-          
+          this.getData();
         }
       }
     );

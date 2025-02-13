@@ -1,0 +1,28 @@
+<div class="icon-close mt-[-20px] mr-3" (click)="cancel()">
+  <nz-icon class="text-red-600" nzType="close-circle" nzTheme="outline"  />
+</div>
+
+<div class="icon justify-center mb-5">
+  <img src="/assets/images/confirm-{{mode}}.png" />
+</div>
+
+<div class="content text-[#f3a127]">{{ data.content }}</div>
+
+<div class="list-action">
+  <button nz-button 
+    class="btn btn-default mr-2 hover:text-red-500 text-red-300"
+    (click)="cancel()"
+    [hidden]="!cancelText"
+  >
+  <nz-icon class="mr-2 text-red-300 hover:text-red-500" nzType="close-circle" nzTheme="outline" />{{ data.cancelText }}
+  </button>
+  <button
+    nz-button
+    type="button"
+    class="btn btn-primary hover:text-sky-500 text-sky-300"
+    (click)="ok()"
+    [hidden]="!okText"
+  >
+  <nz-icon class="mr-2 text-sky-300 hover:text-sky-500" nzType="check-circle" nzTheme="outline" />{{ data.okText }}
+  </button>
+</div>
