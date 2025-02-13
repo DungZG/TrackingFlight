@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EventEmitter, Injectable } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { CustomerDetailService } from '../customer-detail.service';
 @Component({
   selector: 'app-customer-detail',
   standalone: false,
@@ -8,22 +9,17 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./customer-detail.component.scss']
 })
 export class CustomerDetailComponent  {
-
- onClose = new EventEmitter<any | null>();
+  public listType: any[] = [
+    
+  ];
+  onClose = new EventEmitter<any | null>();
    selectedValue = null;
    public myForm: FormGroup;
    constructor(
-     private fb: FormBuilder
+     private fb: FormBuilder,
+     private shareData: CustomerDetailService
    ) {
-     this.myForm = this.fb.group({
-       staffname: [null],
-       staffcode: [null],
-       staffphone: [null],
-       address: [null],
-       email:  [null],
-       identity: [null],
- 
-     })
+     this.myForm = shareData.myForm;
    }
    async closeDialog() {
      this.onClose.emit(null);

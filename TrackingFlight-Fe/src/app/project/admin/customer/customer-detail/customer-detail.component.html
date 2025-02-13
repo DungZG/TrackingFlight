@@ -7,37 +7,25 @@
 
 <form nz-form [formGroup]="myForm" class="ant-advanced-search-form"style="border: none;">
 <div nz-row [nzGutter]="24" >
-    <div nz-col [nzSpan]="8">
+    <div nz-col [nzSpan]="12">
       <nz-form-item>
         <nz-form-label [nzFor]="'field'">Tên khách hàng</nz-form-label>
         <nz-form-control>
           <app-input-text nz-input
             placeholder="Tên khách hàng"
-            [formControlName]="'customername'"
+            [formControlName]="'customerName'"
           ></app-input-text>
         </nz-form-control>
       </nz-form-item>
     </div>
 
-    <div nz-col [nzSpan]="8">
-      <nz-form-item>
-        <nz-form-label [nzFor]="'field'">Mã khách hàng</nz-form-label>
-        <nz-form-control>
-          <app-input-text nz-input
-            placeholder="Mã khách hàng"
-            [formControlName]="'customercode'"
-          ></app-input-text>
-        </nz-form-control>
-      </nz-form-item>
-    </div>
-
-    <div nz-col [nzSpan]="8">
+    <div nz-col [nzSpan]="12">
       <nz-form-item>
         <nz-form-label [nzFor]="'field'">Điện Thoại</nz-form-label>
         <nz-form-control>
           <app-input-text nz-input
             placeholder="Điện Thoại"
-            [formControlName]="'customerphone'"
+            [formControlName]="'customerPhoneNumber'"
           ></app-input-text>
         </nz-form-control>
       </nz-form-item>
@@ -49,7 +37,7 @@
         <nz-form-control>
           <app-input-text nz-input
             placeholder="Nhập Địa Chỉ"
-            [formControlName]="'address'"
+            [formControlName]="'customerAddress'"
           ></app-input-text>
         </nz-form-control>
       </nz-form-item>
@@ -61,7 +49,7 @@
         <nz-form-control>
           <app-input-text nz-input
             placeholder="Nhập Email"
-            [formControlName]="'email'"
+            [formControlName]="'customerEmail'"
           ></app-input-text>
         </nz-form-control>
       </nz-form-item>
@@ -73,43 +61,18 @@
         <nz-form-control>
           <app-input-text nz-input
             placeholder="Nhập Căng Cước Công Dân"
-            [formControlName]="'identity'"
+            [formControlName]="'customerIdentity'"
           ></app-input-text>
         </nz-form-control>
       </nz-form-item>
     </div>
 
-
-    <div nz-col [nzSpan]="12">
-      <app-input-image> </app-input-image>
-    </div>
-
-    <div nz-col [nzSpan]="8">
+    <!-- <div nz-col [nzSpan]="8">
       <nz-form-item>
-        <nz-form-label [nzFor]="'field'">Chức vụ</nz-form-label>
-        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Chọn chức vụ" [(ngModel)]="selectedValue">
-          <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-          <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-          <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
-        </nz-select>
+        <nz-form-label [nzFor]="'field'">Loại</nz-form-label>
+        <app-input-select [items]="listType" formControlName="customerType"></app-input-select>
       </nz-form-item>
-      <nz-form-item>
-        <nz-form-label [nzFor]="'field'">Giới Tính</nz-form-label>
-        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Chọn giới tính" [(ngModel)]="selectedValue">
-          <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-          <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-          <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
-        </nz-select>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-label [nzFor]="'field'">Cơ Sở</nz-form-label>
-        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Chọn Cơ Sở" [(ngModel)]="selectedValue">
-          <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-          <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-          <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
-        </nz-select>
-      </nz-form-item>
-    </div>
+    </div> -->
 </div>
 </form>
 

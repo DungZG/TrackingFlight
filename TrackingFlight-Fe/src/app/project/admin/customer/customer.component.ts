@@ -65,7 +65,7 @@ export class CustomerComponent {
       const dialog = this.dialogService.openDialog(
         async (option) => {
           option.title = mode === 'view' ? 'Xem thông tin Khách Hàng' : 'Thêm Thông Tin Khách Hàng';
-          option.size = DialogSize.tab;
+          option.size = DialogSize.medium;
           option.component = CustomerDetailComponent;
           option.inputs = {};
         },
