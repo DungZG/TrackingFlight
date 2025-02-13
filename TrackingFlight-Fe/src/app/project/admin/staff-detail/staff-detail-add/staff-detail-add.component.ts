@@ -19,6 +19,7 @@ export class StaffDetailAddComponent implements OnInit, OnDestroy {
   @Input() listItem: any;
   onClose = new EventEmitter<any | null>();
   staffPicture: any;
+  loading = false;
   public listRole: any[] = [
     {
       value: 0,
@@ -64,6 +65,7 @@ export class StaffDetailAddComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private shareData: StaffDetailService,
     private staffService: StaffService,
+    private dialogService: DialogService,
     @Inject(NZ_MODAL_DATA) public data: any,
   ) {
     this.myForm = shareData.myForm;
@@ -91,11 +93,8 @@ export class StaffDetailAddComponent implements OnInit, OnDestroy {
   }
 
   async getData() {
-    debugger
     const s =  await firstValueFrom(this.staffService.getItem(this.data.id));
-    
     this.myForm.patchValue(s);
-    this.staffPicture = s.staffPicture;
   }
 
   ngOnDestroy(): void {
@@ -103,7 +102,27 @@ export class StaffDetailAddComponent implements OnInit, OnDestroy {
     this.myForm.enable();
   }
 
-  saveData() {
-    
+  async saveData() {
+    if(this.data.mode === 'add'){
+      this.loading = true;
+      let shareData = this.myForm.getRawValue();
+      const body = shareData;
+      const staffadd = await firstValueFrom(this.staffService.saveWithImage(body));
+      this.dialogService.closeLoading();
+      this.loading = false;
+      this.shareData.hasSaveData = staffadd;
+      this.closeDialog();
+    }
+    if(this.data.mode === 'edit'){
+      this.loading = true;
+      let shareData = this.myForm.getRawValue();
+      const body = shareData;
+      const staffedit = await firstValueFrom(this.staffService.updateWithImage(this.data.id,body));
+      this.dialogService.closeLoading();
+      this.loading = false;
+      this.shareData.hasSaveData = staffedit;
+      this.closeDialog();
+    }
   }
+  
 }

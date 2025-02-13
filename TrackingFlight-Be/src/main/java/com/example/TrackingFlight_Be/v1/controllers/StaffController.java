@@ -69,11 +69,18 @@ public class StaffController {
     }
 
     // Cập nhật thông tin Staff
-    @PutMapping(value = "/{staffCode}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/{staffCode}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public StaffResponse updateStaff(
             @PathVariable String staffCode,
-            @RequestBody @Valid StaffCreationRequest request) {
-        return staffService.updateUser(staffCode, request);
+            @RequestBody @Valid  StaffCreationRequest request,
+            @RequestPart(value = "staffPicture", required = false) MultipartFile staffPicture) {
+
+        // Nếu có ảnh mới, cập nhật ảnh
+        if (staffPicture != null && !staffPicture.isEmpty()) {
+            request.setStaffPicture(staffPicture);
+        }
+
+        return staffService.updateStaff(staffCode, request);
     }
 
     // Xóa Staff theo mã code

@@ -2,7 +2,7 @@ import { EventEmitter, Injectable } from "@angular/core";
 import { NzModalRef, NzModalService } from "ng-zorro-antd/modal";
 import { DialogConfigModal } from "../model/dialog-model";
 import { DialogModal } from "../enums/dialog-mode";
-
+import { BehaviorSubject } from 'rxjs';
 declare let $: any;
 
 @Injectable({
@@ -11,11 +11,13 @@ declare let $: any;
 export class DialogService {
 
     public listDialog: DialogModal<any>[] = [];
-
+    public loadingChange = new BehaviorSubject<number | null>(null);
     constructor(
         private modalService: NzModalService,
 
     ) { }
+
+    
 
     public openDialog(
         options: (options: DialogConfigModal) => void,
@@ -92,6 +94,20 @@ export class DialogService {
             this.listDialog.splice(index, 1);
         }
     }
+
+    public openLoading(cancel: any = null) {
+        let valueCurent = this.loadingChange.value;
+        if (valueCurent === null) valueCurent = 0;
+        valueCurent++;
+        this.loadingChange.next(valueCurent);
+      }
+    
+      public closeLoading() {
+        let valueCurent = this.loadingChange.value;
+        if (!valueCurent) return;
+        valueCurent--;
+        this.loadingChange.next(valueCurent);
+      }
 }
 
 export enum DialogSize {
@@ -120,4 +136,9 @@ export enum DialogSize {
     dowload = 'dowload',
     viewHistory = 'viewHistory',
     quickAdd = 'quickAdd',
+  }
+
+  export enum DialogConfirmMode {
+    alert = 'alert',
+    delete = 'delete',
   }

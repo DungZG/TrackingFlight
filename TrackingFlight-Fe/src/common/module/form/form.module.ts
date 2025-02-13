@@ -18,8 +18,8 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { LoadingComponent } from '../../base/loading/loading.component';
 import { InputDateRangeComponent } from '../../base/input-date-range/input-date-range.component';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
-
-
+import { RenderErrorsComponent } from '../render-errors/render-errors.component';
+import { FormControlComponent } from '../form-control/form-control.component';
 @NgModule({
   declarations: [
     InputTextSearchComponent,
@@ -28,6 +28,8 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
     InputImageComponent,
     InputDateRangeComponent,
     LoadingComponent,
+    FormControlComponent,
+    RenderErrorsComponent
   ],
   imports: [
     CommonModule,
@@ -42,7 +44,7 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
     ReactiveFormsModule,
     PipeModule,
     NzSpinModule,
-    NzDatePickerModule
+    NzDatePickerModule,
     // NzButtonModule,
   ],
   exports: [
@@ -61,7 +63,9 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
     NzSpinModule,
     LoadingComponent,
     // NzButtonModule,
-    FormsModule
+    FormsModule,
+    FormControlComponent,
+    RenderErrorsComponent
   ]
 })
 export class FormModule { }

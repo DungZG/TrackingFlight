@@ -102,7 +102,7 @@
               <a class="list-icons-item action-edit ml-2 mr-2" (click)="handlerOpenDialog('edit', item)" >
                 <nz-icon nzType="edit" nzTheme="outline" nz-tooltip nzTooltipTitle="Sửa" class="isax-eye1"/>
               </a>
-              <a class="list-icons-item action-delete">
+              <a class="list-icons-item action-delete" (click)="handlerDelete(item)">
                 <nz-icon nzType="delete" nzTheme="outline" nz-tooltip nzTooltipTitle="Xóa" class="isax-eye1"/>
               </a>
             </div>

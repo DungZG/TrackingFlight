@@ -13,6 +13,7 @@ import { DialogMode,DialogService, DialogSize } from '../../../../common/service
 import { StaffDetailAddComponent } from './staff-detail-add/staff-detail-add.component';
 import {StaffService} from '../../../services/staff.service';
 import {StaffDetailService} from './staff-detail.service';
+import { MessageService } from '../../../../common/service/message.service';
 @Component({
   selector: 'app-staff-detail',
   standalone: false,
@@ -64,6 +65,7 @@ export class StaffDetailComponent implements OnInit {
     private dialogService: DialogService, 
     private staffService: StaffService,
     private shareData: StaffDetailService,
+    private messageService: MessageService
   ) {
     this.validateForm = this.fb.group({
       staffname: [null, [Validators.required]],
@@ -74,10 +76,10 @@ export class StaffDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getDate()
+    this.getData()
   }
 
-  async getDate(){
+  async getData(){
     this.isLoading = true;
     const resStaff = await firstValueFrom(this.staffService.getAllItems());
     
@@ -118,4 +120,17 @@ export class StaffDetailComponent implements OnInit {
       }
     );
   }
+
+  async handlerDelete(item: any) {
+    const confirm = await this.messageService.confirm(
+      'Bạn có chắc chắn muốn xóa dữ liệu này không?'
+    );
+    if (!confirm) return;
+    this.dialogService.openLoading();
+    await firstValueFrom(this.staffService.deleteItem(item.staffCode));
+    this.dialogService.closeLoading();
+    this.messageService.notiMessageSuccess('Xóa dữ liệu thành công');
+    this.getData();
+  }
+  
 }

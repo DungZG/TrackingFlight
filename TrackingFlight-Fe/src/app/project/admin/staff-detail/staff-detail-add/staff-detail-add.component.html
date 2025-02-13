@@ -69,7 +69,6 @@
 
 
       <div nz-col [nzSpan]="12">
-        <img *ngIf="staffPicture" [src]="'data:image/png;base64,' + staffPicture" alt="Staff Picture">
         <app-input-image [formControlName]="'staffPicture'"></app-input-image>
       </div>
 
@@ -95,7 +94,7 @@
     <i nz-icon nzType="close" nzTheme="outline"></i>Đóng
   </button>
   <!-- lưu và đóng -->
-  <button nz-button type="button" class="btn btn-primary" (click)="saveData()">
+  <button *ngIf="data.mode !== 'view'" nz-button type="button" class="btn btn-primary" (click)="saveData()">
     <i class="icon-plus-circle2 mr-2"></i>
     Lưu và đóng
   </button>

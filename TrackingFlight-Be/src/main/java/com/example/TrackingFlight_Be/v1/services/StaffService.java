@@ -46,7 +46,7 @@ public class StaffService {
     public List<Staff> getStaffs(){
         return staffRepository.findAll();
     }
-    public StaffResponse updateUser(String staffCode, StaffCreationRequest request){
+    public StaffResponse updateStaff(String staffCode, StaffCreationRequest request){
         Staff staff = staffRepository.findById(staffCode)
                 .orElseThrow(() ->new RuntimeException("Couldn't find user"));
         staffMapper.updateStaff(staff,request);
