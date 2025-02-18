@@ -35,7 +35,7 @@ public class StaffController {
             @RequestParam("staffRole") Long staffRole,
             @RequestParam("staffFacility") Long staffFacility,
             @RequestParam("staffGender") Long staffGender,
-            @RequestParam(value = "staffPicture", required = false) MultipartFile staffPicture) {
+            @RequestParam("staffPicture") MultipartFile staffPicture) {
 
         // Tạo DTO từ các tham số
         StaffCreationRequest request = new StaffCreationRequest();
@@ -69,17 +69,10 @@ public class StaffController {
     }
 
     // Cập nhật thông tin Staff
-    @PutMapping(value = "/{staffCode}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PutMapping(value = "/{staffCode}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public StaffResponse updateStaff(
             @PathVariable String staffCode,
-            @RequestBody @Valid  StaffCreationRequest request,
-            @RequestPart(value = "staffPicture", required = false) MultipartFile staffPicture) {
-
-        // Nếu có ảnh mới, cập nhật ảnh
-        if (staffPicture != null && !staffPicture.isEmpty()) {
-            request.setStaffPicture(staffPicture);
-        }
-
+            @RequestBody @Valid StaffCreationRequest request) {
         return staffService.updateStaff(staffCode, request);
     }
 

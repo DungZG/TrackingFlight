@@ -64,7 +64,9 @@ export class CustomerComponent {
   }
 
   ngOnInit(): void {
+    this.dialogService.openLoading();
     this.getData();
+    this.dialogService.closeLoading();
   }
 
   async getData() {
@@ -72,13 +74,18 @@ export class CustomerComponent {
     const resStaff = await firstValueFrom(this.customerService.getAllItems());
     
     this.listOfData = resStaff;
+    setTimeout(() => {
     this.isLoading = false;
+    }, 1000);
   }
 
   handlerOpenDialog(mode: string = 'add', item: any = null) {
       const dialog = this.dialogService.openDialog(
         async (option) => {
           option.title = mode === 'view' ? 'Xem thông tin Khách Hàng' : 'Thêm Thông Tin Khách Hàng';
+          if(mode === 'edit'){
+            option.title = 'Sửa thông tin Khách Hàng';
+          }
           option.size = DialogSize.medium;
           option.component = CustomerDetailComponent;
           option.inputs = {
@@ -89,7 +96,12 @@ export class CustomerComponent {
         },
         (eventName, eventValue) => {
           if (eventName === 'onClose') {
+            this.isLoading = true
+            this.getData();
             this.dialogService.closeDialogById(dialog.id);
+            setTimeout(() => {
+            this.isLoading = false;
+            }, 1000);
           }
         }
       );
@@ -99,11 +111,8 @@ export class CustomerComponent {
       const confirm = await this.messageService.confirm(
         'Bạn có chắc chắn muốn xóa dữ liệu này không?'
       );
-      if (!confirm) return;
-      this.dialogService.openLoading();
+      if(!confirm) {return;}
       await firstValueFrom(this.customerService.deleteItem(item.customerCode));
-      this.dialogService.closeLoading();
-      this.messageService.notiMessageSuccess('Xóa dữ liệu thành công');
       this.getData();
     }
 } 

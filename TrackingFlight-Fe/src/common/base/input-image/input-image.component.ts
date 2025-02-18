@@ -3,9 +3,9 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-input-image',
-  standalone: false,
   templateUrl: './input-image.component.html',
-  styleUrl: './input-image.component.scss',
+  styleUrls: ['./input-image.component.scss'],
+  standalone: false,
   encapsulation: ViewEncapsulation.None,
   providers: [{
     provide: NG_VALUE_ACCESSOR,
@@ -14,76 +14,67 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   }]
 })
 export class InputImageComponent implements ControlValueAccessor {
-
-  @Input() listPreviewImages: any[] = [];
-  @Input() imageValue: string | null = null;
+  @Input() imageBase64: string | null = null; // Load ảnh từ base64
   @Input() maxFileSize: number = 5 * 1024 * 1024; // 5MB mặc định
   @Input() acceptTypes: string = 'image/*';
-  public listDataImages: any[] = [];
-  @Output() imagesChange = new EventEmitter<any[]>();
-  private onChange: (value: any) => void = () => {};
+  @Output() imageChange = new EventEmitter<File | string | null>();
+
+  public imageFile: File | null = null; // File ảnh nếu chọn mới
+  public imageUrl: string | null = null; // URL ảnh từ file
+
+  private onChange: (value: File | string | null) => void = () => {};
   private onTouched: () => void = () => {};
 
-  async handleDeletePreviewImage(item: any) {
-    const previewIndex = this.listPreviewImages.indexOf(item);
-    
-    if (previewIndex !== -1) {
-      this.listPreviewImages.splice(previewIndex, 1);
-    }
-  
-    if (previewIndex !== -1 && previewIndex < this.listDataImages.length) {
-      this.listDataImages.splice(previewIndex, 1);
-    }
-  
-    if (this.imageValue === item) {
-      this.imageValue = null; // Xóa biến ảnh base64
-    }
-  
-    this.emitImages();
-  }
-
-  async handlePreviewImage(event: Event) {
+  handlePreviewImage(event: Event) {
     const input = event.target as HTMLInputElement;
-    if (input.files && input.files[0]) {
-        const file = input.files[0];
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
 
-        if (file.size > this.maxFileSize) {
-            alert("Dung lượng file quá lớn!");
-            return;
-        }
+      if (file.size > this.maxFileSize) {
+        alert("Dung lượng file quá lớn!");
+        return;
+      }
 
-        const reader = new FileReader();
-        reader.onload = (e: any) => {
-            const base64String = e.target.result;
-
-            // Kiểm tra xem ảnh đã tồn tại trong danh sách chưa
-            if (!this.listPreviewImages.includes(base64String)) {
-                this.listPreviewImages.push(base64String);
-                this.listDataImages.push(file);
-                this.imageValue = base64String; 
-                this.emitImages();
-            }
-        };
-        reader.readAsDataURL(file);
+      this.imageFile = file;
+      this.imageUrl = URL.createObjectURL(file); // Hiển thị ảnh từ File
+      this.imageBase64 = null; // Xóa base64 khi chọn ảnh mới
+      this.emitImage();
     }
-    input.value = '';
+    input.value = ''; // Reset input
   }
 
-  private emitImages() {
-    this.imagesChange.emit(this.listDataImages);
-    this.onChange(this.listDataImages.length > 0 ? this.imageValue : null);
+  handleDeletePreviewImage() {
+    this.imageFile = null;
+    this.imageUrl = null;
+    this.imageBase64 = null;
+    this.emitImage();
   }
-  
 
-  writeValue(value: any): void {
-    if (value && typeof value === 'string' && !this.listPreviewImages.includes(value)) {
-        this.listPreviewImages = [value];  // Chỉ giữ một ảnh duy nhất nếu cần
-        this.imageValue = value;
+  private emitImage() {
+    this.imageChange.emit(this.imageFile || this.imageBase64);
+    this.onChange(this.imageFile || this.imageBase64);
+  }
+
+  writeValue(value: File | string | null): void {
+    if (typeof value === 'string') {
+      this.imageBase64 = value;
+      this.imageFile = null;
+      this.imageUrl = null;
+    } else if (value instanceof File) {
+      this.imageFile = value;
+      this.imageUrl = URL.createObjectURL(value);
+      this.imageBase64 = null;
+    } else {
+      this.imageBase64 = null;
+      this.imageFile = null;
+      this.imageUrl = null;
     }
   }
+
   registerOnChange(fn: any): void {
     this.onChange = fn;
   }
+
   registerOnTouched(fn: any): void {
     this.onTouched = fn;
   }

@@ -34,17 +34,17 @@ public class CustomerController {
         return customerService.getCustomers();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{customerCode}")
     CustomerResponse getCustomer(@PathVariable String customerCode) {
         return customerService.getCustomer(customerCode);
     }
 
-    @PutMapping("/{userId}")
+    @PutMapping("/{customerCode}")
     CustomerResponse updateCustomer(@PathVariable String customerCode, @RequestBody @Valid CustomerCreationRequest request) {
         return customerService.updateCustomers(customerCode,request);
     }
 
-    @DeleteMapping("/{userId}")
+    @DeleteMapping("/{customerCode}")
     public String deleteCustomer(@PathVariable String customerCode) {
         customerService.deleteCustomer(customerCode);
         return "User with id " + customerCode + " has been deleted";

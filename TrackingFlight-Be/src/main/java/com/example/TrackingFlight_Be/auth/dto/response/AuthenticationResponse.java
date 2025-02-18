@@ -1,4 +1,4 @@
-package com.devteria.identity_service.dto.response;
+package com.example.TrackingFlight_Be.auth.dto.response;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;

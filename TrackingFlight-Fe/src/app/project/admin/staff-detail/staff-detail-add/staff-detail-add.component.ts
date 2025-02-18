@@ -20,6 +20,7 @@ export class StaffDetailAddComponent implements OnInit, OnDestroy {
   onClose = new EventEmitter<any | null>();
   staffPicture: any;
   loading = false;
+  public isLoading = false;
   public listRole: any[] = [
     {
       value: 0,
@@ -60,6 +61,7 @@ export class StaffDetailAddComponent implements OnInit, OnDestroy {
   ];
   selectedFacility= null;
   selectedGender = null;
+  selectedImage: File | null = null;
   public myForm: FormGroup;
   constructor(
     private fb: FormBuilder,
@@ -89,7 +91,6 @@ export class StaffDetailAddComponent implements OnInit, OnDestroy {
       }
       this.myForm.enable();
     }
-    
   }
 
   async getData() {
@@ -103,26 +104,45 @@ export class StaffDetailAddComponent implements OnInit, OnDestroy {
   }
 
   async saveData() {
-    if(this.data.mode === 'add'){
-      this.loading = true;
-      let shareData = this.myForm.getRawValue();
-      const body = shareData;
-      const staffadd = await firstValueFrom(this.staffService.saveWithImage(body));
+    debugger
+    this.loading = true;
+    let shareData = this.myForm.getRawValue(); 
+  
+    const file = this.myForm.get('staffPicture')?.value;
+  
+    if (file) {
+      shareData.staffPicture = await this.convertFileToByteArray(file);
+    }
+    
+    try {
+      let response;
+      if (this.data.mode === 'add') {
+        response = await firstValueFrom(this.staffService.saveWithImage(shareData));
+      } else if (this.data.mode === 'edit') {
+        response = await firstValueFrom(this.staffService.updateWithImage(this.data.id, shareData));
+      }
+  
       this.dialogService.closeLoading();
       this.loading = false;
-      this.shareData.hasSaveData = staffadd;
+      this.shareData.hasSaveData = response;
       this.closeDialog();
-    }
-    if(this.data.mode === 'edit'){
-      this.loading = true;
-      let shareData = this.myForm.getRawValue();
-      const body = shareData;
-      const staffedit = await firstValueFrom(this.staffService.updateWithImage(this.data.id,body));
-      this.dialogService.closeLoading();
+    } catch (error) {
+      console.error("Lỗi khi gửi dữ liệu:", error);
       this.loading = false;
-      this.shareData.hasSaveData = staffedit;
       this.closeDialog();
     }
+  }
+  
+  convertFileToByteArray(file: File): Promise<Uint8Array> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        const byteArray = new Uint8Array(event.target?.result as ArrayBuffer);
+        resolve(byteArray);
+      };
+      reader.onerror = reject;
+      reader.readAsArrayBuffer(file);
+    });
   }
   
 }

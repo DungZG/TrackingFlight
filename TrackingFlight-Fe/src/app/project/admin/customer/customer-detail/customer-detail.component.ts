@@ -19,7 +19,7 @@ export class CustomerDetailComponent  {
   onClose = new EventEmitter<any | null>();
    selectedValue = null;
    public myForm: FormGroup;
-   loading = false;
+   public isLoading = false;
    constructor(
      private fb: FormBuilder,
      private shareData: CustomerDetailService,
@@ -32,26 +32,57 @@ export class CustomerDetailComponent  {
    async closeDialog() {
      this.onClose.emit(null);
    }
+
+   ngOnInit(){
+    this.shareData.onClose = this.onClose;
+    if (this.data.mode === 'view') {
+      this.myForm.disable();
+      if(this.data.id){
+        this.getData();
+      }
+    }
+    if(this.data.mode === 'edit' || this.data.mode === 'add'){
+      if(this.data.id){
+        this.getData();
+      }
+      else{
+       this.myForm.reset();
+      }
+      this.myForm.enable();
+    }
+    
+  }
+
+  async getData() {
+    const s =  await firstValueFrom(this.customerService.getItem(this.data.id));
+    this.myForm.patchValue(s);
+  }
  
    async saveData() {
+    debugger
        if(this.data.mode === 'add'){
-            this.loading = true;
+            this.isLoading = true;
             let shareData = this.myForm.getRawValue();
             const body = shareData;
             const staffadd = await firstValueFrom(this.customerService.saveWithImage(body));
             this.dialogService.closeLoading();
-            this.loading = false;
             this.shareData.hasSaveData = staffadd;
+            setTimeout(() => {
+              this.isLoading = false;
+            }, 1000);
             this.closeDialog();
           }
           if(this.data.mode === 'edit'){
-            this.loading = true;
+            this.isLoading = true;
             let shareData = this.myForm.getRawValue();
             const body = shareData;
-            const staffedit = await firstValueFrom(this.customerService.updateWithImage(this.data.id,body));
+            const customeredit = await firstValueFrom(this.customerService.updateWithImage(this.data.id,body));
             this.dialogService.closeLoading();
-            this.loading = false;
-            this.shareData.hasSaveData = staffedit;
+            this.shareData.hasSaveData = customeredit;
+            setTimeout(() => {
+              this.isLoading = false;
+            }, 1000);
+    
             this.closeDialog();
           }
    }

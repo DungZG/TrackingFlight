@@ -26,7 +26,7 @@ public class CustomerService {
 
 
     public Customer createCustomer(CustomerCreationRequest request){
-        if (customerRepository.existsByCustomerName(request.getCustomerName()))
+        if (customerRepository.existsByCustomerName(request.getCustomerEmail()))
             throw new AppException(ErrorCode.USER_EXISTED);
         Customer customer = customerMapper.toCustomer(request);
         return customerRepository.save(customer);

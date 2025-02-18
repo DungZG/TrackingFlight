@@ -23,7 +23,7 @@ export class CustomerDetailService {
     private fb: FormBuilder,
   ) {
     this.myForm = this.fb.group({
-      customerName: [null],
+        customerName: [null],
         customerCode: [null],
         customerPhoneNumber: [null],
         customerAddress: [null],
