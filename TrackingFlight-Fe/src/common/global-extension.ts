@@ -9,7 +9,6 @@ import {
 import { Observable, firstValueFrom } from 'rxjs';
 
 import { PagedListModel, ResponseModel } from '../common/model/response-model';
-
 declare let $: any;
 
 // dealare

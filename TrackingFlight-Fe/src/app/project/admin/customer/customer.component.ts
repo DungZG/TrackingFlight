@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DialogService, DialogSize } from '../../../../common/service/dialog.service';
 import { CustomerDetailComponent } from './customer-detail/customer-detail.component';
-import { firstValueFrom } from 'rxjs';
+import '../../../../common/global-extension';
 import{MessageService} from '../../../../common/service/message.service';
 import { CustomerService } from '../../../services/customer.service';
 import {
@@ -71,7 +71,7 @@ export class CustomerComponent {
 
   async getData() {
     this.isLoading = true;
-    const resStaff = await firstValueFrom(this.customerService.getAllItems());
+    const resStaff = await this.customerService.getAllItems().firstValueFrom();
     
     this.listOfData = resStaff;
     setTimeout(() => {
@@ -107,12 +107,23 @@ export class CustomerComponent {
       );
     }
 
-  async handlerDelete(item: any) {
-      const confirm = await this.messageService.confirm(
-        'Bạn có chắc chắn muốn xóa dữ liệu này không?'
-      );
-      if(!confirm) {return;}
-      await firstValueFrom(this.customerService.deleteItem(item.customerCode));
-      this.getData();
+    async handlerDelete(item: any) {
+      try {
+        const confirm = await this.messageService.confirm(
+          'Bạn có chắc chắn muốn xóa dữ liệu này không?'
+        );
+        if (!confirm) return;
+        this.dialogService.openLoading();
+        await this.customerService.deleteItem(item.customerCode).firstValueFrom();
+    
+        this.dialogService.closeLoading();
+        this.messageService.notiMessageSuccess('Xóa dữ liệu thành công');
+    
+        this.getData();
+      } catch (error) {
+        this.dialogService.closeLoading();
+        this.messageService.notiMessageError('Xóa dữ liệu thất bại');
+      }
     }
+    
 } 

@@ -13,8 +13,7 @@ export class AdminComponent implements AfterViewInit {
   constructor(private cdr: ChangeDetectorRef) {}
 
   ngAfterViewInit() {
-    // Đảm bảo Angular đã kiểm tra xong giá trị
-    this.cdr.detectChanges();  // Force Angular to check for changes after view initialization
+    this.cdr.detectChanges();  
   }
 
   ngOnChanges(changes: SimpleChanges) {

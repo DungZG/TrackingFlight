@@ -10,10 +10,10 @@
         <li nz-menu-item *ngIf="this.isCollapsed == true" [routerLink]="['/', 'admin', 'customer']">
           <nz-icon nzType="user" nzTheme="outline" />
         </li>
-        <li nz-menu-item *ngIf="this.isCollapsed == true" [routerLink]="['/', 'admin', 'ticket']">
+        <li nz-menu-item *ngIf="this.isCollapsed == true" [routerLink]="['/', 'admin', 'flight']">
           <nz-icon nzType="cloud" nzTheme="outline" />
         </li>
-        <li nz-menu-item *ngIf="this.isCollapsed == true" [routerLink]="['/', 'admin', 'flight']">
+        <li nz-menu-item *ngIf="this.isCollapsed == true" [routerLink]="['/', 'admin', 'ticket']">
           <nz-icon nzType="send" nzTheme="outline" />
         </li>
         <li nz-menu-item *ngIf="this.isCollapsed == true" [routerLink]="['/', 'admin', 'charts']">
@@ -25,11 +25,11 @@
         <li nz-menu-item *ngIf="this.isCollapsed != true" [routerLink]="['/', 'admin', 'customer']">
           <nz-icon nzType="user" nzTheme="outline" class="mr-2"/> Quản Lý Khách Hàng
         </li>
-        <li nz-menu-item *ngIf="this.isCollapsed != true" [routerLink]="['/', 'admin', 'ticket']">
-          <nz-icon nzType="cloud" nzTheme="outline" class="mr-2"/> Quản Lý Vé Máy Bay
-        </li>
         <li nz-menu-item *ngIf="this.isCollapsed != true" [routerLink]="['/', 'admin', 'flight']">
-          <nz-icon nzType="send" nzTheme="outline" class="mr-2"/> Quản Lý Chuyến Bay
+          <nz-icon nzType="cloud" nzTheme="outline" class="mr-2"/> Quản Lý Máy Bay
+        </li>
+        <li nz-menu-item *ngIf="this.isCollapsed != true" [routerLink]="['/', 'admin', 'ticket']">
+          <nz-icon nzType="send" nzTheme="outline" class="mr-2"/> Quản Lý Vé 
         </li>
         <li nz-menu-item *ngIf="this.isCollapsed != true" [routerLink]="['/', 'admin', 'charts']">
           <nz-icon nzType="area-chart" nzTheme="outline" class="mr-2"/> Báo Cáo & Thống Kê

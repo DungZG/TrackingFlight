@@ -2,21 +2,10 @@
   <nz-collapse-panel [nzHeader]="'Thông tin tìm kiếm'" [nzActive]="isPanelOpen" [nzShowArrow]="true">
       <form nz-form [formGroup]="validateForm" class="ant-advanced-search-form"style="border: none;">
           <div nz-row [nzGutter]="24" >
+            
               <div nz-col [nzSpan]="8">
                 <nz-form-item>
-                  <nz-form-label [nzFor]="'field'">Tên Vé</nz-form-label>
-                  <nz-form-control>
-                    <input nz-input
-                      placeholder="Tên Vé"
-                      [formControlName]="'ticketname'"
-                    />
-                  </nz-form-control>
-                </nz-form-item>
-              </div>
-
-              <div nz-col [nzSpan]="8">
-                <nz-form-item>
-                  <nz-form-label [nzFor]="'field'">Mã máy bay</nz-form-label>
+                  <nz-form-label [nzFor]="'field'">Mã Máy Bay</nz-form-label>
                   <nz-form-control>
                     <input nz-input
                       placeholder="Mã máy bay"
@@ -30,10 +19,16 @@
                 <nz-form-item>
                   <nz-form-label [nzFor]="'field'">Loại máy bay</nz-form-label>
                   <nz-form-control>
-                    <input nz-input
-                      placeholder="Loại máy bay"
-                      [formControlName]="'flighttype'"
-                    />
+                    <app-input-select [items]="listType" formControlName="flightType"></app-input-select>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+
+              <div nz-col [nzSpan]="8">
+                <nz-form-item>
+                  <nz-form-label [nzFor]="'field'">Hãng máy bay</nz-form-label>
+                  <nz-form-control>
+                    <app-input-select [items]="listCompany" formControlName="flightCompany"></app-input-select>
                   </nz-form-control>
                 </nz-form-item>
               </div>

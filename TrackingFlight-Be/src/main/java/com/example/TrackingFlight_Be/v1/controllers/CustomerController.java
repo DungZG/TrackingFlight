@@ -9,9 +9,12 @@ import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -45,8 +48,11 @@ public class CustomerController {
     }
 
     @DeleteMapping("/{customerCode}")
-    public String deleteCustomer(@PathVariable String customerCode) {
+    public ResponseEntity<Map<String, String>> deleteCustomer(@PathVariable String customerCode) {
         customerService.deleteCustomer(customerCode);
-        return "User with id " + customerCode + " has been deleted";
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "User with id " + customerCode + " has been deleted");
+
+        return ResponseEntity.ok(response);
     }
 }

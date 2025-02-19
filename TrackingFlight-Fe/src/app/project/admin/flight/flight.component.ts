@@ -24,6 +24,14 @@ export class FlightComponent{
       public validateForm: FormGroup;
       i = 0;
       editId: string | null = null;
+
+      public listType: any=[
+
+      ]
+      public listCompany: any=[
+
+      ]
+
       constructor(
         private fb: FormBuilder,
         private dialogService: DialogService,
@@ -31,7 +39,8 @@ export class FlightComponent{
         this.validateForm = this.fb.group({
           ticketname: [null, [Validators.required]],
           flightcode: [null, [Validators.required]],
-          flighttype: [null, [Validators.required]],
+          flightType: [null, [Validators.required]],
+          flightCompany:  [null, [Validators.required]]
         });
       }
 
