@@ -22,6 +22,7 @@ import { TicketComponent } from './ticket/ticket.component';
 import { FlightComponent } from './flight/flight.component';
 import { CustomerComponent } from './customer/customer.component';
 import { CustomerDetailComponent } from './customer/customer-detail/customer-detail.component';
+import { Manage_airline_ticketsComponent } from './ticket/Manage_airline_tickets/Manage_airline_tickets.component';
 @NgModule({
   declarations: [
     AdminComponent,
@@ -30,6 +31,7 @@ import { CustomerDetailComponent } from './customer/customer-detail/customer-det
     StaffDetailAddComponent,
     CustomerDetailComponent,
     TicketComponent,
+    Manage_airline_ticketsComponent,
     FlightComponent,
     CustomerComponent,
   ],
