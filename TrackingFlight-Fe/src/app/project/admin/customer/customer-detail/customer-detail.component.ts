@@ -59,7 +59,6 @@ export class CustomerDetailComponent  {
   }
  
    async saveData() {
-    debugger
        if(this.data.mode === 'add'){
             this.isLoading = true;
             let shareData = this.myForm.getRawValue();

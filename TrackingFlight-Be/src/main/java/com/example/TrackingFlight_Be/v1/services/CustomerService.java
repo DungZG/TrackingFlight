@@ -50,4 +50,8 @@ public class CustomerService {
     public CustomerResponse getCustomer(String customerCode){
         return customerMapper.toCustomerResponse(customerRepository.findById(customerCode).orElseThrow(() ->new RuntimeException("Couldn't find user")));
     }
+
+    public List<Customer> searchCustomers(String customername, String customercode, String customerphone) {
+        return customerRepository.findByFilters(customername, customercode, customerphone);
+    }
 }

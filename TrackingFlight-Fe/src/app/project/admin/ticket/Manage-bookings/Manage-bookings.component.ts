@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-Manage-bookings',
+  standalone:false,
   templateUrl: './Manage-bookings.component.html',
   styleUrls: ['./Manage-bookings.component.css']
 })

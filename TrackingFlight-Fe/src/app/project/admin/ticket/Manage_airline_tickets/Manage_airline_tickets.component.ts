@@ -20,7 +20,6 @@ import {
 export class Manage_airline_ticketsComponent {
 
   isPanelOpen = true;
-  
     controlArray: Array<{ index: number; show: boolean }> = [];
     isCollapse = true;
     public validateForm: FormGroup;

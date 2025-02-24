@@ -23,6 +23,13 @@ import { FlightComponent } from './flight/flight.component';
 import { CustomerComponent } from './customer/customer.component';
 import { CustomerDetailComponent } from './customer/customer-detail/customer-detail.component';
 import { Manage_airline_ticketsComponent } from './ticket/Manage_airline_tickets/Manage_airline_tickets.component';
+import { AircraftManagementComponent } from './flight/Aircraft-management/Aircraft-management.component';
+import { Airport_managementComponent } from './flight/Airport_management/Airport_management.component';
+import { Flight_route_managementComponent } from './flight/Flight_route_management/Flight_route_management.component';
+import { FlightManagementComponent } from './flight/Flight-management/Flight-management.component';
+import { ManageFlightSchedulesComponent } from './flight/Manage-flight-schedules/Manage-flight-schedules.component';
+import { RouteManagementComponent } from './flight/Route-management/Route-management.component';
+import { ManageBookingsComponent } from './ticket/Manage-bookings/Manage-bookings.component';
 @NgModule({
   declarations: [
     AdminComponent,
@@ -32,7 +39,15 @@ import { Manage_airline_ticketsComponent } from './ticket/Manage_airline_tickets
     CustomerDetailComponent,
     TicketComponent,
     Manage_airline_ticketsComponent,
+    ManageBookingsComponent,
+    
     FlightComponent,
+    AircraftManagementComponent,
+    Airport_managementComponent,
+    Flight_route_managementComponent,
+    FlightManagementComponent,
+    ManageFlightSchedulesComponent,
+    RouteManagementComponent,
     CustomerComponent,
   ],
   imports: [

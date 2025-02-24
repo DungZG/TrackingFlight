@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-Route-management',
+  standalone: false,
   templateUrl: './Route-management.component.html',
   styleUrls: ['./Route-management.component.css']
 })

@@ -34,8 +34,19 @@ public class CustomerController {
 
     @GetMapping
     public List<Customer> getUsers() {
+
         return customerService.getCustomers();
     }
+
+    @GetMapping("/search")
+    public List<Customer> searchCustomers(
+            @RequestParam(required = false) String customername,
+            @RequestParam(required = false) String customercode,
+            @RequestParam(required = false) String customerphone) {
+
+        return customerService.searchCustomers(customername, customercode, customerphone);
+    }
+
 
     @GetMapping("/{customerCode}")
     CustomerResponse getCustomer(@PathVariable String customerCode) {
