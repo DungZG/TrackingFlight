@@ -1,4 +1,4 @@
-package com.devteria.identity_service.entity;
+package com.example.TrackingFlight_Be.auth.common.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,8 +14,6 @@ import java.util.Objects;
 @Entity
 @Getter
 @Setter
-@ToString
-@RequiredArgsConstructor
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -28,6 +26,9 @@ public class User {
    String password;
    String firstName;
    String lastName;
+   String email;
+   String phoneNumber;
+   String address;
    LocalDate dod;
 
     @Override

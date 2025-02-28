@@ -32,9 +32,7 @@ public class AircraftController {
             @RequestParam("aircraftCode") String aircraftCode,
             @RequestParam("aircraftType") String aircraftType,
             @RequestParam("airline") String airline,
-            @RequestParam("seatBusiness") String seatBusiness,
-            @RequestParam("seatEconomy") String seatEconomy,
-            @RequestParam("seatPremiumEconomy") String seatPremiumEconomy,
+            @RequestParam("seat") String seat,
             @RequestParam("quantity") String quantity,
             @RequestParam("ghichu") String ghichu,
             @RequestParam("aircraftPicture") MultipartFile aircraftPicture) {
@@ -45,9 +43,7 @@ public class AircraftController {
         request.setAircraftCode(aircraftCode);
         request.setAircraftType(aircraftType);
         request.setAirline(airline);
-        request.setSeatEconomy(Long.parseLong(seatEconomy));
-        request.setSeatBusiness(Long.parseLong(seatBusiness));
-        request.setSeatPremiumEconomy(Long.parseLong(seatPremiumEconomy));
+        request.setSeat(Long.parseLong(seat));
         request.setQuantity(Long.parseLong(quantity));
         request.setGhichu(ghichu);
         request.setAircraftPicture(aircraftPicture);

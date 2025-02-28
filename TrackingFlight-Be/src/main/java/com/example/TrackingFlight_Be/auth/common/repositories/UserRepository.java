@@ -1,6 +1,7 @@
-package com.devteria.identity_service.repository;
+package com.example.TrackingFlight_Be.auth.common.repositories;
 
-import com.devteria.identity_service.entity.User;
+
+import com.example.TrackingFlight_Be.auth.common.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

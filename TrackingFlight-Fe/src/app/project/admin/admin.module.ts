@@ -11,6 +11,8 @@ import { FormModule } from '../../../common/module/form/form.module';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { NzFormModule,NzFormTooltipIcon } from 'ng-zorro-antd/form';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
@@ -18,6 +20,10 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { ChartDetailComponent } from './chart-detail/chart-detail.component';
 import { StaffDetailAddComponent } from './staff-detail/staff-detail-add/staff-detail-add.component';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
+import { NzImageModule } from 'ng-zorro-antd/image';
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { TicketComponent } from './ticket/ticket.component';
 import { FlightComponent } from './flight/flight.component';
 import { CustomerComponent } from './customer/customer.component';
@@ -66,6 +72,12 @@ import { ManageBookingsComponent } from './ticket/Manage-bookings/Manage-booking
     NzSelectModule,
     NzTableModule,
     NzModalModule,
+    NzCardModule,
+    NzGridModule,
+    NzAvatarModule,
+    NzSkeletonModule,
+    NzSwitchModule,
+    NzImageModule
   ]
 })
 export class AdminModule { }

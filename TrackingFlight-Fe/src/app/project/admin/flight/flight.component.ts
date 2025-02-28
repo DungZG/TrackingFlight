@@ -10,6 +10,7 @@ import {
   ValidationErrors,
 
 } from '@angular/forms';
+import { AircraftManagementComponent } from './Aircraft-management/Aircraft-management.component';
 @Component({
   selector: 'app-flight',
   standalone: false,
@@ -66,4 +67,22 @@ export class FlightComponent{
   stopEdit(): void {
     this.editId = null;
   }
+
+  handlerOpenAircraft() {
+        const dialog = this.dialogService.openDialog(
+          async (option) => {
+            option.title = 'Quản lý máy bay' ;
+            option.size = DialogSize.full;
+            option.component = AircraftManagementComponent;
+            option.inputs = {
+
+            };
+          },
+          (eventName) => {
+            if (eventName === 'onClose') {
+              this.dialogService.closeDialogById(dialog.id);
+            }
+          }
+        );
+      }
 }

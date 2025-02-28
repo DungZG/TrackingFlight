@@ -36,7 +36,7 @@ public class Customer {
         Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
         Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
         if (thisEffectiveClass != oEffectiveClass) return false;
-        Staff staff = (Staff) o;
-        return getCustomerCode() != null && Objects.equals(getCustomerCode(), staff.getStaffCode());
+        Customer customer = (Customer) o;
+        return getCustomerCode() != null && Objects.equals(getCustomerCode(), customer.getCustomerCode());
     }
 }

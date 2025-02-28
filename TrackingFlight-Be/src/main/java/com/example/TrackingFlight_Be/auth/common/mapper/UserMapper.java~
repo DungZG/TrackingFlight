@@ -2,9 +2,6 @@ package com.example.TrackingFlight_Be.auth.common.mapper;
 
 
 import com.example.TrackingFlight_Be.auth.common.entity.User;
-import com.example.TrackingFlight_Be.auth.dto.request.UserCreationRequest;
-import com.example.TrackingFlight_Be.auth.dto.request.UserUpdateRequest;
-import com.example.TrackingFlight_Be.auth.dto.response.UserResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.springframework.stereotype.Component;

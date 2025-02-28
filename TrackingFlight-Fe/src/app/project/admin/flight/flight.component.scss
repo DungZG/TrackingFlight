@@ -43,3 +43,12 @@
     padding: 4px 11px;
   }
 
+.click{
+  border: black 2px solid;
+  border-radius: 4px;
+  padding: 24px;
+}
+
+.click:hover{
+  border: skyblue 2px solid;
+}

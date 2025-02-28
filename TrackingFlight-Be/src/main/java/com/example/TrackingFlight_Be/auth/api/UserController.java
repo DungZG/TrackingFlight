@@ -1,17 +1,16 @@
-package com.devteria.identity_service.controller;
+package com.example.TrackingFlight_Be.auth.api;
 
-import com.devteria.identity_service.dto.Request.ApiResponse;
-import com.devteria.identity_service.dto.Request.UserCreationRequest;
-import com.devteria.identity_service.dto.Request.UserUpdateRequest;
-import com.devteria.identity_service.dto.response.UserResponse;
-import com.devteria.identity_service.entity.User;
-import com.devteria.identity_service.repository.UserRepository;
-import com.devteria.identity_service.service.UserService;
+
+import com.example.TrackingFlight_Be.auth.common.entity.User;
+import com.example.TrackingFlight_Be.auth.common.services.UserService;
+import com.example.TrackingFlight_Be.auth.dto.request.UserCreationRequest;
+import com.example.TrackingFlight_Be.auth.dto.request.UserUpdateRequest;
+import com.example.TrackingFlight_Be.auth.dto.response.UserResponse;
+import com.example.TrackingFlight_Be.v1.dto.request.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

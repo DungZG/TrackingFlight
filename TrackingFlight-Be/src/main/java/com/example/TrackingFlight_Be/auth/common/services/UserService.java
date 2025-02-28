@@ -1,18 +1,19 @@
-package com.devteria.identity_service.service;
+package com.example.TrackingFlight_Be.auth.common.services;
 
-import com.devteria.identity_service.dto.Request.UserCreationRequest;
-import com.devteria.identity_service.dto.Request.UserUpdateRequest;
-import com.devteria.identity_service.dto.response.UserResponse;
-import com.devteria.identity_service.entity.User;
-import com.devteria.identity_service.exception.AppException;
-import com.devteria.identity_service.exception.ErrorCode;
-import com.devteria.identity_service.mapper.UserMapper;
-import com.devteria.identity_service.repository.UserRepository;
+
+import com.example.TrackingFlight_Be.auth.common.entity.User;
+import com.example.TrackingFlight_Be.auth.common.mapper.UserMapper;
+import com.example.TrackingFlight_Be.auth.common.repositories.UserRepository;
+import com.example.TrackingFlight_Be.auth.dto.request.UserCreationRequest;
+import com.example.TrackingFlight_Be.auth.dto.request.UserUpdateRequest;
+import com.example.TrackingFlight_Be.auth.dto.response.UserResponse;
+import com.example.TrackingFlight_Be.v1.exception.AppException;
+import com.example.TrackingFlight_Be.v1.exception.ErrorCode;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,12 +30,12 @@ public class UserService {
             throw new AppException(ErrorCode.USER_EXISTED);
 
         User user = userMapper.toUser(request);
-        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
-        user.setPassword(passwordEncoder.encode(request.getPassword()));
+//        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
+//        user.setPassword(passwordEncoder.encode(request.getPassword()));
 
         return userRepository.save(user);
     }
-    public UserResponse updateUser(String userId,UserUpdateRequest request){
+    public UserResponse updateUser(String userId, UserUpdateRequest request){
         User user = userRepository.findById(userId)
                 .orElseThrow(() ->new RuntimeException("Couldn't find user"));
         userMapper.updateUser(user,request);

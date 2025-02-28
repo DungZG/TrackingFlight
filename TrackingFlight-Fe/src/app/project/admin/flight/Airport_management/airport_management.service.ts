@@ -9,7 +9,7 @@ import {
 @Injectable({
   providedIn: 'root',
 })
-export class AircraftManagementService {
+export class AirportManagementService {
   public id: any;
   mode: string = DialogMode.view;
   onClose = new EventEmitter<any | null>();
