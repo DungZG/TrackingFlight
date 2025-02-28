@@ -1,4 +1,4 @@
-package com.example.TrackingFlight_Be.auth.dto.request;
+package com.devteria.identity_service.dto.Request;
 
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -11,10 +11,14 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class LoginUpdateRequest {
+public class UserCreationRequest {
+    @Size(min = 3, message ="USERNAME_INVALID")
+     String username;
+
     @Size(min = 8, message = "INVALID_PASSWORD")
-    String password;
-    String firstName;
-    String lastName;
-    LocalDate dod;
+     String password;
+     String firstName;
+     String lastName;
+     LocalDate dod;
+
 }

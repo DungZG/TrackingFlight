@@ -1,10 +1,9 @@
-package com.example.TrackingFlight_Be.auth.common.entity;
+package com.devteria.identity_service.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.Email;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.proxy.HibernateProxy;
@@ -16,20 +15,20 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
+@RequiredArgsConstructor
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Login {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    String username;
-    String password;
-    String email;
-    Long role;
-    String firstName;
-    String lastName;
-    LocalDate dod;
+   String username;
+   String password;
+   String firstName;
+   String lastName;
+   LocalDate dod;
 
     @Override
     public final boolean equals(Object o) {
@@ -38,8 +37,8 @@ public class Login {
         Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
         Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
         if (thisEffectiveClass != oEffectiveClass) return false;
-        Login login = (Login) o;
-        return getId() != null && Objects.equals(getId(), login.getId());
+        User user = (User) o;
+        return getId() != null && Objects.equals(getId(), user.getId());
     }
 
     @Override

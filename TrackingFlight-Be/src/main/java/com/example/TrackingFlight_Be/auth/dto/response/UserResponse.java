@@ -1,16 +1,17 @@
-package com.example.TrackingFlight_Be.auth.dto.response;
+package com.devteria.identity_service.dto.response;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
 
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class LoginResponse {
+public class UserResponse {
     Long id;
     String username;
     String password;
