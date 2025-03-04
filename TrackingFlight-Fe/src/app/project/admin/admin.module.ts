@@ -23,6 +23,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 import { NzImageModule } from 'ng-zorro-antd/image';
+import { NgTemplateOutlet } from '@angular/common';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { TicketComponent } from './ticket/ticket.component';
 import { FlightComponent } from './flight/flight.component';
@@ -77,7 +78,8 @@ import { ManageBookingsComponent } from './ticket/Manage-bookings/Manage-booking
     NzAvatarModule,
     NzSkeletonModule,
     NzSwitchModule,
-    NzImageModule
+    NzImageModule,
+    NgTemplateOutlet
   ]
 })
 export class AdminModule { }

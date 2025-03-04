@@ -80,7 +80,7 @@
   </nz-table> -->
   <div class="grid grid-cols-3 gap-3">
     <div style="background: #fff; padding:30px;" class="mt-[20px] relative" *ngFor="let item of listOfData; let i = index">
-      <nz-card style="width:400px;" [nzCover]="coverTemplate" [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
+      <nz-card style="width:400px;" [nzCover]="coverTemplate" [nzActions]="[actionSetting, actionEdit, actionEllipsis]" [nzLoading]="isLoading">
         <nz-card-meta
           nzTitle="{{item.aircraftName}}"
           nzDescription="{{item.ghichu}}"
@@ -99,7 +99,7 @@
           <h1 class="font-semibold mr-2">Airline:</h1>
           <p class="mr-1">{{item.airline}}</p>
           <h1 class="font-semibold mr-2">Quantity:</h1>
-          <p>{{item.quantity}}</p>
+          <p class="text-orange-500 mr-1">{{item.quantity}}</p>
         </div>
       </nz-card>
       <ng-template #coverTemplate>

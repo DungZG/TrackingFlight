@@ -32,6 +32,7 @@ public class Aircraft {
     @Lob
     byte[] aircraftPicture;
 
+    @Column(name = "ghichu", columnDefinition = "TEXT")
     String ghichu;
 
     @Override
