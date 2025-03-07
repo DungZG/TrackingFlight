@@ -1,6 +1,26 @@
-<div class="w-100% h-auto absolute items-center justify-center">
-    <div class="ml-40 mr-40 mt-[20px]">
-        <label for="" class="font-bold text-2xl ">So sánh và đặt vé máy bay dễ dàng</label>
-        <p>Khám phá điểm đến trong mơ tiếp theo</p>
+<div class="w-100% h-auto justify-center flex flex-wrap">
+    <div class="mt-[20px] ">
+        <label for="" class="font-bold text-2xl ml-40">Tìm kiếm và đặt vé máy bay dễ dàng</label>
+        <div class="flex flex-wrap mt-8 mb-8 justify-center ">
+            <ul nz-menu nzMode="horizontal" class="shadow-lg">
+                <li nz-menu-item [routerLink]="['/', 'user','flight-ticket','book']" class="font-medium capitalize p-7 w-[350px] text-center rounded-l-lg bg-[#374b71] text-white">
+                    <nz-icon nzType="book" nzTheme="outline" /> Book</li>
+                <li nz-menu-item [routerLink]="['/', 'user','flight-ticket','check']" class="font-medium capitalize p-7 w-[350px] text-center bg-[#374b71] text-white">
+                    <nz-icon nzType="mobile" nzTheme="outline" /> Check In</li>
+                <li nz-menu-item [routerLink]="['/', 'user','flight-ticket','mybook']" class="font-medium capitalize p-7 w-[350px] text-center rounded-r-lg bg-[#374b71] text-white">
+                    <nz-icon nzType="star" nzTheme="outline" /> My Book</li>
+            </ul>
+
+            <div class="shadow-lg w-[1050px] bg-[#FBF9F2] h-[255px]">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+        <div>
+            <img src="https://www.vietnamairlines.com/~/media/3F2391B01C7E4E8789FF405A6DDC8963.ashx" alt="">
+        </div>
+        <label for="" class="font-bold text-2xl ml-40">Khám phá mức giá trên những chặng bay phổ biến</label>
+        <div>
+            
+        </div>
     </div>
 </div>

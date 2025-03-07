@@ -1,4 +1,14 @@
 package com.example.TrackingFlight_Be.v1.dto.request;
 
-public class Travelclass {
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class TravelclassCreationRequest {
+    Long travelclassId;
+    String travelclassName;
 }

@@ -15,6 +15,7 @@ public class Airline {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long airlineId;
+
     String airlineName;
     String airlineShotName;
 

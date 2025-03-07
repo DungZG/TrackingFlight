@@ -3,10 +3,8 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-flight-ticket',
   standalone: false,
-  
   templateUrl: './flight-ticket.component.html',
   styleUrl: './flight-ticket.component.scss'
 })
-export class FlightTicketComponent {
 
-}
+export class FlightTicketComponent {}
