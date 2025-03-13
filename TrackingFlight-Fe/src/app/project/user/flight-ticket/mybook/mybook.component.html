@@ -1,3 +1,61 @@
-<p>
-  mybook works!
-</p>
+<div class="mt-5 ml-3 p-5">
+  <form nz-form [nzLayout]="'inline'" [formGroup]="validatesForm" class="flex flex-col">
+    <div class="flex flex-row mt-4">
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Hãy Nhập Điểm Đi">
+        <div class="bg-[#fff] border-2 border-solid rounded-sm border-[#ADA598] h-[77.56px] focus:border-[#3B82F680] hover:border-[#3B82F680]">
+          <label for="" class="ml-2 block font-bold text-2xl">Reservation Code/Ticket Number</label>
+          <input class="border-none focus:border-none focus:shadow-none active:border-none focus-visible:broder-none" formControlName="ReservationCode" placeholder="#123" nz-input/>
+          <!-- <nz-autocomplete #auto [compareWith]="compareFun">
+          @for (option of options; track $index) {
+            <nz-auto-option [nzValue]="option" [nzLabel]="option.label">
+              {{ option.label }}
+            </nz-auto-option>
+          }
+          </nz-autocomplete> -->
+        </div>
+        
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your Password!">
+          <div class="bg-[#fff] border-2 border-solid rounded-sm border-[#ADA598] h-[77.56px] focus:border-[#3B82F680]  hover:border-[#3B82F680]">
+            <label for="" class="ml-2 block font-bold text-2xl">Last Name</label>
+            <input class="border-none focus:shadow-none" formControlName="LastName" placeholder="" nz-input  />
+            <!-- <nz-autocomplete #auto [compareWith]="compareFun">
+            @for (option of options; track $index) {
+              <nz-auto-option [nzValue]="option" [nzLabel]="option.label">
+                {{ option.label }}
+              </nz-auto-option>
+            }
+            </nz-autocomplete> -->
+          </div>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <button class="h-[77.56px] w-[150px] bg-[#DBA510] text-white text-sm font-bold" nz-button nzType="default">Search</button>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div class="flex flex-col mt-3">
+      <p class="text-[#ef2539da]">
+        Đối với vé mua trước ngày 26 tháng 9 năm 2023, vui lòng nhập mã đặt chỗ (PNR) để được hỗ trợ.
+        <a href="" class="text-sm font-bold">Click Here</a>
+      </p>
+      <p>
+        Tùy chỉnh chuyến bay của bạn với nhiều lựa chọn của chúng tôi:
+      </p>
+    </div>
+    <div class="flex flex-row mt-2">
+      <ul class="flex flex-row text-sm font-normal text-[#667085]">
+        <li>Paylater</li>
+        <li>Baggage information</li>
+        <li>Seat options</li>
+        <li>Business Lounge</li>
+        <li>Travel insurance</li>
+        <li>Exchange flights</li>
+      </ul>
+    </div>
+  </form>
+</div>

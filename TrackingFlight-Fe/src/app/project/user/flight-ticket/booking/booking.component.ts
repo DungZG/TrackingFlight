@@ -1,8 +1,9 @@
 import { Component, OnInit,inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,FormGroup } from '@angular/forms';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ValidatorExtension } from '../../../../../common/validator-extension';
+import { BookingService } from './booking.service';
 interface Option {
   label: string;
   value: string;
@@ -18,22 +19,19 @@ interface Option {
 export class BookingComponent implements OnInit {
   Passenger:any;
   radioValue = 'A';
-  inputValue: Option = { label: 'Lucy', value: 'lucy', age: 20 };
   options: Option[] = [
-    { label: 'Lucy', value: 'lucy', age: 20 },
-    { label: 'Jack', value: 'jack', age: 22 }
+    
   ];
+  public validateForm: FormGroup;
   
-  private fb = inject(NonNullableFormBuilder);
-  validateForm = this.fb.group({
-    Oneway: true,
-    Roundtrip: this.fb.control('', [Validators.required]),
-    travelclass: this.fb.control(1,[Validators.required])
-  });
-  constructor() { }
+  constructor(private shareData: BookingService) {
+    this.validateForm = this.shareData.myForm
+   }
 
   ngOnInit() {
-    
+    if(this.validateForm.getRawValue().Oneway == true){
+     this.validateForm.get('to')?.disable
+    }
   }
 
   getQuarter(date: Date): string {

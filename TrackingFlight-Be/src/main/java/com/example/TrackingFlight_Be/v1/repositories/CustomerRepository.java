@@ -1,7 +1,6 @@
 package com.example.TrackingFlight_Be.v1.repositories;
 
 import com.example.TrackingFlight_Be.v1.entity.Customer;
-import com.example.TrackingFlight_Be.v1.entity.Staff;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

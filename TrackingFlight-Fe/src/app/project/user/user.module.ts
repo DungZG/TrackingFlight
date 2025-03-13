@@ -20,6 +20,7 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 @NgModule({
   declarations: [
     UserComponent,
@@ -45,7 +46,8 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
     NzRadioModule,
     NzDatePickerModule,
     NzButtonModule,
-    NzInputNumberModule
+    NzInputNumberModule,
+    NzCarouselModule
   ]
 })
 export class UserModule { }

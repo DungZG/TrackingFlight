@@ -16,16 +16,29 @@ public interface LocationMapper {
     Location toLocation(LocationCreationRequest request);
 
     @Mapping(target = "locationPicture", source = "locationPicture", qualifiedByName = "mapMultipartFileToBytes")
-    void updateLocation(@MappingTarget Location location, LocationCreationRequest request);
+    default void updateLocation(@MappingTarget Location location, LocationCreationRequest request) {
+        if (request.getLocationCity() != null) {
+            location.setLocationCity(request.getLocationCity());
+        }
+        if (request.getLocationPicture() != null && !request.getLocationPicture().isEmpty()) {
+            location.setLocationPicture(mapMultipartFileToBytes(request.getLocationPicture()));
+        }
+    }
+
 
     @Named("mapMultipartFileToBytes")
     default byte[] mapMultipartFileToBytes(MultipartFile file) {
+        if (file == null || file.isEmpty()) {
+            return null;
+        }
         try {
-            return file != null ? file.getBytes() : null;
+            return file.getBytes();
         } catch (IOException e) {
             throw new RuntimeException("Failed to convert MultipartFile to byte[]", e);
         }
     }
 
+
     Location toLocationResponse(Location location);
+
 }

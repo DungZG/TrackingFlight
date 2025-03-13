@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MybookService } from './mybook.service';
 
 @Component({
   selector: 'app-mybook',
@@ -7,8 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./mybook.component.css']
 })
 export class MybookComponent implements OnInit {
-
-  constructor() { }
+  public validatesForm:any;
+  constructor(
+    public shareDate: MybookService,
+  ) { 
+    this.validatesForm = this.shareDate.myForm
+  }
 
   ngOnInit() {
   }

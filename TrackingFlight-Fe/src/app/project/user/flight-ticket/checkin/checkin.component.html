@@ -1,3 +1,53 @@
-<p>
-  checkin works!
-</p>
+<div class="mt-5 ml-3 p-5">
+  <form nz-form [nzLayout]="'inline'" [formGroup]="validateForm" class="flex flex-col">
+    <div class="flex flex-col">
+      <p class="text-[#2572ef80]">
+        Có thể làm thủ tục trực tuyến từ 24 giờ đến 1 giờ trước khi chuyến bay khởi hành
+        <br>
+        Vui lòng đảm bảo bạn nhập họ tên như trên vé của bạn.
+      </p>
+      <p>
+        Làm thủ tục trực tuyến chỉ áp dụng cho (i) Chuyến bay nội địa khởi hành từ Nội Bài
+        <br>(HAN), Đà Nẵng (DAD), Hồ Chí Minh (SGN), Nha Trang (CXR), Quy Nhon (UIH); (ii) Các chuyến bay quốc tế giữa Hồ Chí Minh (SGN) và Bangkok (DMK). 
+      </p>
+    </div>
+    <div class="flex flex-row mt-4">
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Hãy Nhập Điểm Đi">
+        <div class="bg-[#fff] border-2 border-solid rounded-sm border-[#ADA598] h-[77.56px] focus:border-[#3B82F680] hover:border-[#3B82F680]">
+          <label for="" class="ml-2 block font-bold text-2xl">Reservation Code</label>
+          <input class="border-none focus:border-none focus:shadow-none active:border-none focus-visible:broder-none" formControlName="ReservationCode" placeholder="#123" nz-input/>
+          <!-- <nz-autocomplete #auto [compareWith]="compareFun">
+          @for (option of options; track $index) {
+            <nz-auto-option [nzValue]="option" [nzLabel]="option.label">
+              {{ option.label }}
+            </nz-auto-option>
+          }
+          </nz-autocomplete> -->
+        </div>
+        
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your Password!">
+          <div class="bg-[#fff] border-2 border-solid rounded-sm border-[#ADA598] h-[77.56px] focus:border-[#3B82F680]  hover:border-[#3B82F680]">
+            <label for="" class="ml-2 block font-bold text-2xl">Last Name</label>
+            <input class="border-none focus:shadow-none" formControlName="LastName" placeholder="" nz-input  />
+            <!-- <nz-autocomplete #auto [compareWith]="compareFun">
+            @for (option of options; track $index) {
+              <nz-auto-option [nzValue]="option" [nzLabel]="option.label">
+                {{ option.label }}
+              </nz-auto-option>
+            }
+            </nz-autocomplete> -->
+          </div>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <button class="h-[77.56px] w-[150px] bg-[#DBA510] text-white text-sm font-bold" nz-button nzType="default">Check In</button>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </form>
+</div>

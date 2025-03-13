@@ -28,5 +28,4 @@ public class Booking {
     Long travelclassId;
 
     String status;
-
 }

@@ -12,5 +12,5 @@ import org.springframework.web.multipart.MultipartFile;
 public class LocaitonResponse {
     Long locationId;
     String locationCity;
-    byte[] locationPicture;
+    MultipartFile locationPicture;
 }

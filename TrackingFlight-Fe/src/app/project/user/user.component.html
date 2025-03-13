@@ -5,12 +5,12 @@
         <div class="text-white ml-10 mr-5 font-bold text-xl">TrackingFilght.Com</div>
         
         <div class="flex w-[550px] mb-5 justify-center text-white ">   
-            <button class="text-white mx-6 p-1 text-base font-normal">Đăng ký chỗ nghỉ của Qúy Vị</button>
+            <button class="text-white mx-6 p-1 text-base font-normal" [routerLink]="['/', 'user','flight-ticket','book']">Đăng ký chỗ nghỉ của Qúy Vị</button>
             <div class="bg-white mr-[2%] rounded-lg border-solid border-2 border-sky-500">   
-              <button class="text-[#006ce4] mx-6 p-1 text-sm" style="padding:10px">Đăng Ký</button>
+              <button class="text-[#006ce4] mx-6 p-1 text-sm" style="padding:10px" [routerLink]="['/', 'auth','login']">Đăng Ký</button>
             </div>
             <div class="bg-white rounded-lg border-solid border-2 border-sky-500">
-              <button class="text-[#006ce4] mx-6 p-1 text-sm" style="padding:10px">Đăng Nhập</button>
+              <button class="text-[#006ce4] mx-6 p-1 text-sm" style="padding:10px" [routerLink]="['/', 'auth','login']">Đăng Nhập</button>
             </div>
         </div>
   

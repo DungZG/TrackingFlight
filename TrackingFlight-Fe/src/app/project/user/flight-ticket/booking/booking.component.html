@@ -1,11 +1,11 @@
-<div class="mt-5 ml-3">
+<div class="mt-5 ml-3 p-3">
   <form nz-form [nzLayout]="'inline'" [formGroup]="validateForm" class="flex flex-col">
     <div class="flex flex-row">
       <nz-form-item>
         <nz-form-control>
-          <nz-radio-group [(ngModel)]="radioValue">
-            <label formControlName="Oneway" nz-radio nzValue="One way">Một Chiều</label>
-            <label formControlName="Roundtrip" nz-radio nzValue="Round trip">Khứ Hồi</label>
+          <nz-radio-group [(ngModel)]="radioValue" formControlName="ticketType">
+            <label nz-radio nzValue="One way">Một Chiều</label>
+            <label nz-radio nzValue="Round trip">Khứ Hồi</label>
           </nz-radio-group>
         </nz-form-control>
       </nz-form-item>
@@ -19,56 +19,69 @@
       </nz-form-item>
       <nz-form-item>
         <nz-form-control>
-          <label for="" class="mr-2">Passenger</label>
-          <nz-input-number nzPlaceHolder="Passenger" [(ngModel)]="Passenger" nzMin="1" nzMax="10" />
+          <label for="" class="mr-2">Hành khách</label>
+          <nz-input-number formControlName="Passenger" nzPlaceHolder="Passenger" [(ngModel)]="Passenger" nzMin="1" nzMax="10" />
         </nz-form-control>
       </nz-form-item>
     </div>
     <div class="flex flex-row mt-4">
       <nz-form-item>
         <nz-form-control nzErrorTip="Hãy Nhập Điểm Đi">
-          <input formControlName="form" placeholder="Từ" nz-input [(ngModel)]="inputValue" [nzAutocomplete]="auto" />
-        <nz-autocomplete #auto [compareWith]="compareFun">
+        <div class="bg-[#fff] border-2 border-solid rounded-sm border-[#ADA598] h-[77.56px] focus:border-[#3B82F680] hover:border-[#3B82F680]">
+          <label for="" class="ml-2 block font-bold text-2xl">Từ</label>
+          <input class="border-none focus:border-none focus:shadow-none active:border-none focus-visible:broder-none" formControlName="form" placeholder="" nz-input />
+          <nz-autocomplete #auto [compareWith]="compareFun">
           @for (option of options; track $index) {
             <nz-auto-option [nzValue]="option" [nzLabel]="option.label">
               {{ option.label }}
             </nz-auto-option>
           }
-        </nz-autocomplete>
+          </nz-autocomplete>
+        </div>
+        
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-control formControlName="to" nzErrorTip="Please input your Password!">
-          <input placeholder="Đến" nz-input [(ngModel)]="inputValue" [nzAutocomplete]="auto" />
-        <nz-autocomplete #auto [compareWith]="compareFun">
-          @for (option of options; track $index) {
-            <nz-auto-option [nzValue]="option" [nzLabel]="option.label">
-              {{ option.label }}
-            </nz-auto-option>
-          }
-        </nz-autocomplete>
+        <nz-form-control nzErrorTip="Please input your Password!">
+          <div class="bg-[#fff] border-2 border-solid rounded-sm border-[#ADA598] h-[77.56px] focus:border-[#3B82F680]  hover:border-[#3B82F680]">
+            <label for="" class="ml-2 block font-bold text-2xl">Đến</label>
+            <input class="border-none focus:shadow-none" formControlName="form" placeholder="" nz-input />
+            <nz-autocomplete #auto [compareWith]="compareFun">
+            @for (option of options; track $index) {
+              <nz-auto-option [nzValue]="option" [nzLabel]="option.label">
+                {{ option.label }}
+              </nz-auto-option>
+            }
+            </nz-autocomplete>
+          </div>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
         <nz-form-control>
-          <nz-date-picker [nzDateRender]="tplRender" nzPlaceHolder="Ngày Đi"></nz-date-picker>
-          <ng-template #tplRender let-current>
-            <div class="ant-picker-cell-inner" [class.border]="current.getDate() === 1"> {{ current.getDate() }} </div>
-          </ng-template>
+          <div class="bg-[#fff] border-2 border-solid rounded-sm border-[#ADA598] focus:border-[#3B82F680]  hover:border-[#3B82F680]">
+            <label for="" class="ml-2 block font-bold text-2xl">Khởi Hành</label>
+            <nz-date-picker class="border-none focus:border-none focus:shadow-none" formControlName="dateForm" [nzDateRender]="tplRender" nzPlaceHolder="Ngày Đi"></nz-date-picker>
+            <ng-template #tplRender let-current>
+              <div class="ant-picker-cell-inner" [class.border]="current.getDate() === 1"> {{ current.getDate() }} </div>
+            </ng-template>
+          </div>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
         <nz-form-control>
-          <nz-date-picker [nzDateRender]="tplRender" nzPlaceHolder="Ngày Về"></nz-date-picker>
-          <ng-template #tplRender let-current>
-            <div class="ant-picker-cell-inner" [class.border]="current.getDate() === 1"> {{ current.getDate() }} </div>
-          </ng-template>
+          <div class="bg-[#fff] border-2 border-solid rounded-sm border-[#ADA598]  hover:border-[#3B82F680]">
+            <label for="" class="ml-2 block font-bold text-2xl">Trở Về</label>
+            <nz-date-picker class="border-none focus:border-none focus:shadow-none" formControlName="dateTo" [nzDateRender]="tplRender" nzPlaceHolder="Ngày về"></nz-date-picker>
+            <ng-template #tplRender let-current>
+              <div class="ant-picker-cell-inner" [class.border]="current.getDate() === 1"> {{ current.getDate() }} </div>
+            </ng-template>
+          </div>
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-control>
-          <button nz-button nzType="primary">Tìm kiếm</button>
+          <button class="h-[77.56px] w-[150px] bg-[#DBA510] text-white text-sm font-bold" nz-button nzType="default">Tìm kiếm</button>
         </nz-form-control>
       </nz-form-item>
     </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CheckinService } from './checkin.service';
 
 @Component({
   selector: 'app-checkin',
@@ -7,8 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./checkin.component.css']
 })
 export class CheckinComponent implements OnInit {
-
-  constructor() { }
+  public validateForm: any;
+  constructor(
+    public shareDate: CheckinService,
+  ) { 
+    this.validateForm = this.shareDate.myForm
+  }
 
   ngOnInit() {
   }

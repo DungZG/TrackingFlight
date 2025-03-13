@@ -12,7 +12,6 @@ import java.util.Date;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class FlightResponse {
     Long flightId;
-
     Long flightNumber;
     String aircraftCode;
     String d_city;
@@ -20,6 +19,7 @@ public class FlightResponse {
     String city;
     Date a_date_Time;
     Long price;
+    String travelclassName;
     Boolean free_meals;
     Boolean refundable;
 }

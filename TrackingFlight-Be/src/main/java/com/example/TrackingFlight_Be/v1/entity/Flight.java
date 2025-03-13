@@ -28,6 +28,7 @@ public class Flight {
     String city;
     Date a_date_Time;
     Long price;
+    String travelclassName;
 
     Boolean free_meals;
     Boolean refundable;
