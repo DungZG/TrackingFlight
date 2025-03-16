@@ -52,7 +52,6 @@ export class FlightTicketComponent implements OnInit {
     public dialogService: DialogService,
   ) { }
 
-  // Lấy dữ liệu cho trang hiện tại và thêm vào listOfPrice
   async getData() {
     this.isLoading = true;
     const resLocation = await firstValueFrom(this.locationService.getAllItems());
@@ -60,29 +59,37 @@ export class FlightTicketComponent implements OnInit {
 
     const resLocationPrice = await firstValueFrom(this.flightService.getItemsWithPagination(this.currentPage, this.itemsPerPage));
     
-    
-    resLocationPrice.content.forEach((item: FlightItem) => {
-      item.a_houns = this.datePipe.transform(item.a_date_Time, 'HH:mm');
-      item.b_houns = this.datePipe.transform(item.d_date_Time, 'HH:mm');
-      item.a_day = this.convertDateToTextFormat(item.a_date_Time);
-      item.b_day = this.convertDateToTextFormat(item.d_date_Time);
+    if (resLocationPrice.content && Array.isArray(resLocationPrice.content)) {
+     
+      if (resLocationPrice.content.length < this.itemsPerPage) {
+        this.hasMoreData = false; 
+      }
 
-      const a_houns_in_minutes = this.convertToMinutes(item.a_houns);
-      const b_houns_in_minutes = this.convertToMinutes(item.b_houns);
-      item.a_houns_flight = b_houns_in_minutes - a_houns_in_minutes;
-      item.a_houns_flight_formatted = this.convertMinutesToTime(item.a_houns_flight);
-    });
-    this.listOfPrice = [...this.listOfPrice, ...resLocationPrice.content];
+      resLocationPrice.content.forEach((item: FlightItem) => {
+        item.a_houns = this.datePipe.transform(item.a_date_Time, 'HH:mm');
+        item.b_houns = this.datePipe.transform(item.d_date_Time, 'HH:mm');
+        item.a_day = this.convertDateToTextFormat(item.a_date_Time);
+        item.b_day = this.convertDateToTextFormat(item.d_date_Time);
 
+        const a_houns_in_minutes = this.convertToMinutes(item.a_houns);
+        const b_houns_in_minutes = this.convertToMinutes(item.b_houns);
+        item.a_houns_flight = b_houns_in_minutes - a_houns_in_minutes;
+        item.a_houns_flight_formatted = this.convertMinutesToTime(item.a_houns_flight);
+      });
+
+      this.listOfPrice = [...this.listOfPrice, ...resLocationPrice.content];
+    } else {
+      this.hasMoreData = false; 
+    }
     this.isLoading = false;
   }
 
-  
   loadMore() {
-    this.currentPage++;  
-    this.getData();  
+    if (this.hasMoreData) {
+      this.currentPage++;  
+      this.getData();  
+    }
   }
-
   
   goToFirstPage() {
     this.currentPage = 1;  
@@ -95,20 +102,16 @@ export class FlightTicketComponent implements OnInit {
     this.getData();  
   }
 
- 
   openHandelDialog(mode: string = DialogMode.add, item: any = null) {
     const dialog = this.dialogService.openDialog(
       async (option) => {
-        option.title = mode === DialogMode.view ? 'Xem thông tin Vé' : 'Xem thông tin Vé';
-        if (mode === DialogMode.edit) {
-          option.title = 'Cập nhật thông tin Nhân Viên';
-        }
+        option.title = 'Xem thông tin Vé';
         option.size = DialogSize.xlarge;
         option.component = FlightdetailComponent;
         option.inputs = {
           mode: mode,
-          id: item?.staffCode,
-          listItem: this.listOfData,
+          id: item?.flightId,
+          listItem: this.listOfPrice,
         };
       },
       (eventName, eventValue) => {
