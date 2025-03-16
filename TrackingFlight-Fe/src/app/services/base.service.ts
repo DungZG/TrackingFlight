@@ -41,4 +41,9 @@ export class BaseService {
   public editWithRawData<T=any>(id: number, body: any = null){
     return this.http.put<T>(this.apiBaseUrl + this.prefix + '/' + id, body);
   }
+
+  public getItemsWithPagination<T = any>(page: number, size: number) {
+    return this.http.get<T>(`${this.apiBaseUrl + this.prefix + '/items'}?page=${page}&size=${size}`);
+  }
+
 }

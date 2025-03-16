@@ -21,6 +21,8 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzCarouselModule } from 'ng-zorro-antd/carousel';
+import { NzTimelineModule } from 'ng-zorro-antd/timeline';
+import { DatePipe } from '@angular/common';
 @NgModule({
   declarations: [
     UserComponent,
@@ -47,7 +49,9 @@ import { NzCarouselModule } from 'ng-zorro-antd/carousel';
     NzDatePickerModule,
     NzButtonModule,
     NzInputNumberModule,
-    NzCarouselModule
-  ]
+    NzCarouselModule,
+    NzTimelineModule
+  ],
+  providers: [DatePipe],
 })
 export class UserModule { }

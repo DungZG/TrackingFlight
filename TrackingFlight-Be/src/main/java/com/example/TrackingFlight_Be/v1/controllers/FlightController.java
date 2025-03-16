@@ -5,11 +5,16 @@ import com.example.TrackingFlight_Be.v1.dto.request.ApiResponse;
 import com.example.TrackingFlight_Be.v1.dto.request.FlightCreationRequest;
 import com.example.TrackingFlight_Be.v1.dto.response.FlightResponse;
 import com.example.TrackingFlight_Be.v1.entity.Flight;
+import com.example.TrackingFlight_Be.v1.repositories.FlightRepository;
 import com.example.TrackingFlight_Be.v1.services.FlightService;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +31,8 @@ import java.util.Map;
 @FieldDefaults(level = AccessLevel.PRIVATE,makeFinal = true)
 public class FlightController {
     FlightService flightService;
-
+    @Autowired
+    FlightRepository flightRepository;
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ApiResponse<Flight> createFlight(
@@ -91,5 +97,10 @@ public class FlightController {
         Map<String, String> response = new HashMap<>();
         response.put("message", "User with id " + flightId + " has been deleted");
         return ResponseEntity.ok(response);
+    }
+    @GetMapping("/items")
+    public Page<Flight> getItemsWithPagination(@RequestParam int page, @RequestParam int size) {
+        PageRequest pageRequest = PageRequest.of(page - 1, size); // Bắt đầu từ trang 0
+        return flightRepository.findAll(pageRequest);
     }
 }

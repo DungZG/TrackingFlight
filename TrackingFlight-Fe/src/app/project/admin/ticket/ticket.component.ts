@@ -11,6 +11,7 @@ import {
   ValidationErrors,
 
 } from '@angular/forms';
+import { Ticket_detailComponent } from './ticket_detail/ticket_detail.component';
 @Component({
   selector: 'app-ticket',
   standalone: false,
@@ -19,8 +20,8 @@ import {
   styleUrl: './ticket.component.scss'
 })
 export class TicketComponent {
-  isPanelOpen = true;
-  
+    isPanelOpen = true;
+    public listOfData:any;
     controlArray: Array<{ index: number; show: boolean }> = [];
     isCollapse = true;
     public validateForm: FormGroup;
@@ -55,6 +56,32 @@ export class TicketComponent {
   
     stopEdit(): void {
       this.editId = null;
+    }
+
+    handOpenDialog(mode: string = DialogMode.add, item: any = null){
+      const dialog = this.dialogService.openDialog(
+            async (option) => {
+              option.title = mode === DialogMode.view ? 'Xem thông tin Nhân Viên' : 'Thêm Thông Tin Nhân Viên';
+              if (mode === DialogMode.edit) {
+                option.title = 'Cập nhật thông tin Nhân Viên';
+              }
+              option.size = DialogSize.xlarge;
+              option.component = Ticket_detailComponent;
+              option.inputs = {
+                mode: mode,
+                id: item?.staffCode,
+                listItem: this.listOfData,
+              };
+            },
+            (eventName, eventValue) => {
+              if (eventName === 'onClose') {
+                this.dialogService.closeDialogById(dialog.id);
+              }
+              // if (eventValue) {
+              //   this.getData();
+              // }
+            }
+          );
     }
 
 }
