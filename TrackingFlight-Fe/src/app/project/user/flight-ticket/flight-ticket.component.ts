@@ -31,7 +31,7 @@ export class FlightTicketComponent implements OnInit {
   public listOfData: any;
   public listOfPrice: any[] =[];
   public currentPage = 1;
-  public itemsPerPage = 3;
+  public itemsPerPage = 5;
   public hasMoreData = true;  
   public list: any = [
     {
@@ -58,7 +58,6 @@ export class FlightTicketComponent implements OnInit {
     this.listOfData = resLocation;
 
     const resLocationPrice = await firstValueFrom(this.flightService.getItemsWithPagination(this.currentPage, this.itemsPerPage));
-    
     if (resLocationPrice.content && Array.isArray(resLocationPrice.content)) {
      
       if (resLocationPrice.content.length < this.itemsPerPage) {

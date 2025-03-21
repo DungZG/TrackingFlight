@@ -22,6 +22,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 import { NzTimelineModule } from 'ng-zorro-antd/timeline';
+import { FlightdetailComponent } from './flight-ticket/flightdetail/flightdetail.component';
 import { DatePipe } from '@angular/common';
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { DatePipe } from '@angular/common';
     BookingComponent,
     CheckinComponent,
     MybookComponent,
+    FlightdetailComponent,
   ],
   imports: [
     CommonModule,
@@ -50,7 +52,7 @@ import { DatePipe } from '@angular/common';
     NzButtonModule,
     NzInputNumberModule,
     NzCarouselModule,
-    NzTimelineModule
+    NzTimelineModule,
   ],
   providers: [DatePipe],
 })

@@ -86,7 +86,7 @@
         <div class="w-100% text-center h-[18px] mt-3">
             <button class="p-[12px] border border-[#ddd] hover:border-sky-500 hover:text-sky-500 " (click)="loadMore()" *ngIf="!isLoading && hasMoreData">Xem Thêm</button>
             <button class="p-[12px] border border-[#ddd] hover:border-sky-500 hover:text-sky-500 " (click)="goToFirstPage()" *ngIf="!isLoading && !hasMoreData">Thu Gọn</button>
-            <div *ngIf="isLoading">Đang tải...</div>
+            <div *ngIf="isLoading"><app-loading></app-loading></div>
         </div>
     </div>
 </div>

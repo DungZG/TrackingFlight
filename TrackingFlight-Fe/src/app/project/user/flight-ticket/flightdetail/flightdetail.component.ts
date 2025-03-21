@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit,EventEmitter } from '@angular/core';
+import { FlightService } from '../flight.service';
 @Component({
   selector: 'app-flightdetail',
   standalone: false,
@@ -7,14 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./flightdetail.component.css']
 })
 export class FlightdetailComponent implements OnInit {
+  onClose = new EventEmitter<any | null>();
+  constructor(
+    public shareData: FlightService,
+  ) { }
 
-  constructor() { }
 
-
-  ngOnInit() {
+  ngOnInit():void {
+    this.shareData.onClose = this.onClose;
   }
-  
-  closeDialog(){
 
+  async closeDialog(){
+    this.shareData.closeDialog()
   }
 }

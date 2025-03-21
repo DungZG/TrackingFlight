@@ -69,20 +69,17 @@ public class FlightController {
         apiResponse.setResult(flightService.createFlight(request));
         return apiResponse;
     }
-
-    // Lấy danh sách tất cả Staff
+    
     @GetMapping
     public List<Flight> getFlights() {
         return flightService.getFlights();
     }
 
-    // Lấy thông tin Staff theo mã code
     @GetMapping("/{flightId}")
     public FlightResponse getFlight(@PathVariable String flightId) {
         return flightService.getFlight(flightId);
     }
 
-    // Cập nhật thông tin Staff
     @PutMapping(value = "/{flightId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public FlightResponse updateFlight(
             @PathVariable String flightId,
@@ -90,7 +87,6 @@ public class FlightController {
         return flightService.updateFlight(flightId, request);
     }
 
-    // Xóa Staff theo mã code
     @DeleteMapping("/{flightId}")
     public ResponseEntity<Map<String, String>> deleteStaff(@PathVariable String flightId) {
         flightService.deleteFlight(flightId);

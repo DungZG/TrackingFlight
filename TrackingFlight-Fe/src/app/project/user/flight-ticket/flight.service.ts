@@ -9,11 +9,10 @@ import {
 @Injectable({
   providedIn: 'root',
 })
-export class CustomerDetailService {
+export class FlightService {
   public id: any;
   mode: string = DialogMode.view;
   onClose = new EventEmitter<any | null>();
-  
 
   myForm: FormGroup;
   hasSaveData: any;
@@ -23,12 +22,7 @@ export class CustomerDetailService {
     private fb: FormBuilder,
   ) {
     this.myForm = this.fb.group({
-        customerName: [null],
-        customerCode: [null],
-        customerPhoneNumber: [null],
-        customerAddress: [null],
-        customerEmail:  [null],
-        customerIdentity: [null],
+     
     });
   }
 
