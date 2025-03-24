@@ -1,4 +1,4 @@
 package com.example.TrackingFlight_Be.v1.entity;
 
-public class Tickkets {
+public class AuditLog {
 }
