@@ -1,12 +1,10 @@
 package com.example.TrackingFlight_Be.v1.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -19,17 +17,21 @@ import java.util.Date;
 public class Flight {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long flightId;
+    private Long flightId;
 
-    Long flightNumber;
-    String aircraftCode;
-    String d_city;
-    Date d_date_Time;
-    String city;
-    Date a_date_Time;
-    Long price;
-    String travelclassName;
+    @ManyToOne
+    @JoinColumn(name = "airline_id")
+    private Airline airline;
 
-    Boolean free_meals;
-    Boolean refundable;
+    private String flightNumber;
+    private String departureLocation;
+    private String arrivalLocation;
+
+    @Column(name = "departure_time")
+    private LocalDateTime departureTime;
+
+    @Column(name = "arrival_time")
+    private LocalDateTime arrivalTime;
+
+    private Double price;
 }

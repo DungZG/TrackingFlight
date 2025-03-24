@@ -14,12 +14,12 @@ import lombok.experimental.FieldDefaults;
 public class Airline {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long airlineId;
+    private Long airlineId;
 
-    String airlineName;
-    String airlineShotName;
+    private String name;
+    private String code;
 
     @Lob
-    byte[] airlineLogo;
+    byte[] imageUrl;
 
 }

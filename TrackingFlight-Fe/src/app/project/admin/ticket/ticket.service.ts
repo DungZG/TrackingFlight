@@ -9,7 +9,7 @@ import {
 @Injectable({
   providedIn: 'root',
 })
-export class FlightDetailService {
+export class TicketService {
   public id: any;
   mode: string = DialogMode.view;
   onClose = new EventEmitter<any | null>();
@@ -23,10 +23,10 @@ export class FlightDetailService {
     private fb: FormBuilder,
   ) {
     this.myForm = this.fb.group({
-      flightNumber: [null, [Validators.required]],
-      airline: [null, [Validators.required]],
-      departureLocation: [null, [Validators.required]],
-      arrivalLocation:  [null, [Validators.required]]
+        ticketId: [null, [Validators.required]],
+        flight: [null, [Validators.required]],
+        status: [null, [Validators.required]],
+        ticketClass:  [null, [Validators.required]]
     });
   }
 

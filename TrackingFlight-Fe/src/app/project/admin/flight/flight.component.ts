@@ -10,7 +10,7 @@ import {
   ValidationErrors,
 
 } from '@angular/forms';
-import { AircraftManagementComponent } from './Aircraft-management/Aircraft-management.component';
+import {FlightDetailService} from'./flight.service';
 @Component({
   selector: 'app-flight',
   standalone: false,
@@ -36,13 +36,9 @@ export class FlightComponent{
       constructor(
         private fb: FormBuilder,
         private dialogService: DialogService,
+        private shareData: FlightDetailService,
       ) {
-        this.validateForm = this.fb.group({
-          ticketname: [null, [Validators.required]],
-          flightcode: [null, [Validators.required]],
-          flightType: [null, [Validators.required]],
-          flightCompany:  [null, [Validators.required]]
-        });
+        this.validateForm = this.shareData.myForm
       }
 
   ngOnInit() {
@@ -68,21 +64,4 @@ export class FlightComponent{
     this.editId = null;
   }
 
-  handlerOpenAircraft() {
-        const dialog = this.dialogService.openDialog(
-          async (option) => {
-            option.title = 'Quản lý máy bay' ;
-            option.size = DialogSize.full;
-            option.component = AircraftManagementComponent;
-            option.inputs = {
-
-            };
-          },
-          (eventName) => {
-            if (eventName === 'onClose') {
-              this.dialogService.closeDialogById(dialog.id);
-            }
-          }
-        );
-      }
 }

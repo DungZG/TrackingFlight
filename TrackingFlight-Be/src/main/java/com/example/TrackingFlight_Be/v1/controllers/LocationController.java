@@ -2,10 +2,7 @@ package com.example.TrackingFlight_Be.v1.controllers;
 
 import com.example.TrackingFlight_Be.v1.dto.request.ApiResponse;
 import com.example.TrackingFlight_Be.v1.dto.request.LocationCreationRequest;
-import com.example.TrackingFlight_Be.v1.dto.request.StaffCreationRequest;
-import com.example.TrackingFlight_Be.v1.dto.response.StaffResponse;
 import com.example.TrackingFlight_Be.v1.entity.Location;
-import com.example.TrackingFlight_Be.v1.entity.Staff;
 import com.example.TrackingFlight_Be.v1.services.LocationService;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
@@ -30,13 +27,14 @@ public class LocationController {
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ApiResponse<Location> createLocation(
-            @RequestParam("locationCity") String locationCity,
-            @RequestParam("locationPicture") MultipartFile locationPicture) {
+            @RequestParam("name") String name,
+            @RequestParam("country") String country,
+            @RequestParam("imageUrl") MultipartFile imageUrl) {
 
         LocationCreationRequest request = new LocationCreationRequest();
-        request.setLocationCity(locationCity);
-        request.setLocationPicture(locationPicture);
-
+        request.setName(name);
+        request.setCountry(country);
+        request.setImageUrl(imageUrl);
 
         ApiResponse<Location> apiResponse = new ApiResponse<>();
         apiResponse.setResult(locationService.createLocation(request));
@@ -66,7 +64,7 @@ public class LocationController {
     public ResponseEntity<Map<String, String>> deleteStaff(@PathVariable String locationId) {
         locationService.deleteLocation(locationId);
         Map<String, String> response = new HashMap<>();
-        response.put("message", "User with id " + locationId + " has been deleted");
+        response.put("message", "location with id " + locationId + " has been deleted");
         return ResponseEntity.ok(response);
     }
 }

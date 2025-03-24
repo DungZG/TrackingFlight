@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class LocationCreationRequest {
     Long locationId;
-    String locationCity;
-    MultipartFile locationPicture;
+    String name;
+    String country;
+    MultipartFile imageUrl;
 }

@@ -7,8 +7,8 @@
                     <nz-form-label [nzFor]="'field'">Mã Vé</nz-form-label>
                     <nz-form-control>
                       <input nz-input
-                        placeholder="Tên Vé"
-                        [formControlName]="'ticketname'"
+                        placeholder="Nhập Mã Vé"
+                        [formControlName]="'ticketId'"
                       />
                     </nz-form-control>
                   </nz-form-item>
@@ -19,8 +19,8 @@
                     <nz-form-label [nzFor]="'field'">Mã máy bay</nz-form-label>
                     <nz-form-control>
                       <input nz-input
-                        placeholder="Mã Vé Máy Bay"
-                        [formControlName]="'ticketcode'"
+                        placeholder="Nhập Mã Vé Máy Bay"
+                        [formControlName]="'flight'"
                       />
                     </nz-form-control>
                   </nz-form-item>
@@ -32,7 +32,19 @@
                     <nz-form-control>
                       <input nz-input
                         placeholder="Tình trạng vé"
-                        [formControlName]="'ticketstatus'"
+                        [formControlName]="'status'"
+                      />
+                    </nz-form-control>
+                  </nz-form-item>
+                </div>
+
+                <div nz-col [nzSpan]="8">
+                  <nz-form-item>
+                    <nz-form-label [nzFor]="'field'">Hạng Vé</nz-form-label>
+                    <nz-form-control>
+                      <input nz-input
+                        placeholder="Chọn hạng vé"
+                        [formControlName]="'ticketClass'"
                       />
                     </nz-form-control>
                   </nz-form-item>
@@ -56,7 +68,7 @@
 
 <div class="search-result-list" style="margin-top: 0px; padding-top: 30px;">
   <div style="text-align: right;">
-    <button nz-button [nzType]="'primary'" (click)="handOpenDialog()">
+    <button nz-button [nzType]="'primary'">
       <nz-icon nzType="user-add" nzTheme="outline"  /> Thêm Mới</button>
     <button nz-button class="bg-green-500 text-white">
       <nz-icon nzType="download" nzTheme="outline" /> Xuất File</button>
@@ -65,16 +77,15 @@
       <thead>
         <tr>
           <th>Mã Vé</th>
-          <th>Thời gian</th>
-          <th>Mã máy bay</th>
-          <th>Mã số chuyến bay</th>
-          <th>Trang Thái</th>
+          <th>Mã Máy Bay</th>
           <th>Hạng Vé</th>
-          <th>Người dùng</th>
+          <th>Loại Vé</th>
+          <th>Tình Trạng Vé</th>
+          <th>Thao Tác</th>
         </tr>
       </thead>
       <tbody>
-        @for (data of editRowTable.data; track data) {
+        <!-- @for (data of editRowTable.data; track data) {
           <tr class="editable-row">
             <td>{{ data.name }}</td>
             <td>{{ data.age }}</td>
@@ -86,7 +97,7 @@
               <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" class="text-red-600"><nz-icon nzType="delete" nzTheme="outline" /></a>
             </td>
           </tr>
-        }
+        } -->
       </tbody>
     </nz-table>
 </div>

@@ -1,5 +1,5 @@
 import { Component, AfterViewInit, ElementRef, Renderer2, ViewChild } from '@angular/core';
-
+import { LoginService } from './login.service';
 @Component({
   selector: 'app-login',
   standalone: false,
@@ -11,7 +11,11 @@ export class LoginComponent implements AfterViewInit {
   @ViewChild('loginButton', { static: true }) loginButton!: ElementRef;
   @ViewChild('container', { static: true }) container!: ElementRef;
 
-  constructor(private renderer: Renderer2) {}
+  constructor(private renderer: Renderer2,
+    private shareData: LoginService
+  ) {
+    this
+  }
 
   ngAfterViewInit(): void {
     this.renderer.listen(this.registerButton.nativeElement, 'click', () => {

@@ -18,6 +18,7 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     AuthRoutingModule,
     FormsModule,
+    FormModule,
     NzIconModule
   ]
 })

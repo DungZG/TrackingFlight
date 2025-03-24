@@ -21,12 +21,12 @@ public class LocationService {
 
     public Location createLocation(LocationCreationRequest request) {
         Location location = new Location();
-        location.setLocationCity(request.getLocationCity());
-
+        location.setCountry(request.getCountry());
+        location.setName(request.getName());
 
         try {
-            if (request.getLocationPicture() != null && !request.getLocationPicture().isEmpty()) {
-                location.setLocationPicture(request.getLocationPicture().getBytes());
+            if (request.getImageUrl() != null && !request.getImageUrl().isEmpty()) {
+                location.setImageUrl(request.getImageUrl().getBytes());
             }
         } catch (IOException e) {
             throw new RuntimeException("Failed to process staff picture", e);

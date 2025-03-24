@@ -12,16 +12,16 @@ import java.io.IOException;
 
 @Mapper(componentModel = "spring")
 public interface LocationMapper {
-    @Mapping(target = "locationPicture", source = "locationPicture", qualifiedByName = "mapMultipartFileToBytes")
+    @Mapping(target = "imageUrl", source = "imageUrl", qualifiedByName = "mapMultipartFileToBytes")
     Location toLocation(LocationCreationRequest request);
 
-    @Mapping(target = "locationPicture", source = "locationPicture", qualifiedByName = "mapMultipartFileToBytes")
+    @Mapping(target = "imageUrl", source = "imageUrl", qualifiedByName = "mapMultipartFileToBytes")
     default void updateLocation(@MappingTarget Location location, LocationCreationRequest request) {
-        if (request.getLocationCity() != null) {
-            location.setLocationCity(request.getLocationCity());
+        if (request.getCountry() != null) {
+            location.setCountry(request.getCountry());
         }
-        if (request.getLocationPicture() != null && !request.getLocationPicture().isEmpty()) {
-            location.setLocationPicture(mapMultipartFileToBytes(request.getLocationPicture()));
+        if (request.getImageUrl() != null && !request.getImageUrl().isEmpty()) {
+            location.setImageUrl(mapMultipartFileToBytes(request.getImageUrl()));
         }
     }
 

@@ -9,16 +9,15 @@ import {
   Validators,
   AbstractControl,
   ValidationErrors,
-
 } from '@angular/forms';
-import { Ticket_detailComponent } from './ticket_detail/ticket_detail.component';
+import {TicketService} from './ticket.service';
 @Component({
   selector: 'app-ticket',
   standalone: false,
-  
   templateUrl: './ticket.component.html',
   styleUrl: './ticket.component.scss'
 })
+
 export class TicketComponent {
     isPanelOpen = true;
     public listOfData:any;
@@ -31,12 +30,9 @@ export class TicketComponent {
     constructor(
       private fb: FormBuilder,
       private dialogService: DialogService,
+      private shareData:TicketService,
     ) {
-      this.validateForm = this.fb.group({
-        ticketname: [null, [Validators.required]],
-        ticketcode: [null, [Validators.required]],
-        ticketstatus: [null, [Validators.required]],
-      });
+      this.validateForm = this.shareData.myForm
     }
     toggleCollapse(): void {
       this.isCollapse = !this.isCollapse;
@@ -56,32 +52,6 @@ export class TicketComponent {
   
     stopEdit(): void {
       this.editId = null;
-    }
-
-    handOpenDialog(mode: string = DialogMode.add, item: any = null){
-      const dialog = this.dialogService.openDialog(
-            async (option) => {
-              option.title = mode === DialogMode.view ? 'Xem thông tin Nhân Viên' : 'Thêm Thông Tin Nhân Viên';
-              if (mode === DialogMode.edit) {
-                option.title = 'Cập nhật thông tin Nhân Viên';
-              }
-              option.size = DialogSize.xlarge;
-              option.component = Ticket_detailComponent;
-              option.inputs = {
-                mode: mode,
-                id: item?.staffCode,
-                listItem: this.listOfData,
-              };
-            },
-            (eventName, eventValue) => {
-              if (eventName === 'onClose') {
-                this.dialogService.closeDialogById(dialog.id);
-              }
-              // if (eventValue) {
-              //   this.getData();
-              // }
-            }
-          );
     }
 
 }

@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class LocaitonResponse {
     Long locationId;
-    String locationCity;
-    byte[] locationPicture;
+    String name;
+    String country;
+    byte[] imageUrl;
 }

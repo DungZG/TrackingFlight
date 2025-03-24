@@ -1,11 +1,11 @@
 package com.example.TrackingFlight_Be.v1.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.TrackingFlight_Be.auth.common.entity.User;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -14,15 +14,35 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Tickkets {
+public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long ticketId;
-    Long userId;
-    Long flightId;
-    String ticketType;
-    String seatNumber;
-    String status;
+    private Long ticketId;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "flight_id")
+    private Flight flight;
+
+    private String ticketType;
+    private String seatNumber;
+    private String status;
+
+    @Column(name = "booking_time")
+    private LocalDateTime bookingTime;
+
+    @ManyToOne
+    @JoinColumn(name = "payment_id")
+    private Payment payment;
+
+    private String ticketClass;
+
+    @ManyToOne
+    @JoinColumn(name = "discount_id")
+    private Discount discount;
 
 
 }
