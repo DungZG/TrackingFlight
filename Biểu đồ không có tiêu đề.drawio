@@ -62,7 +62,7 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="OJNPDnojGu3_ibi4Fh8v-6" value="&lt;p style=&quot;text-align: center; margin: 4px 0px 0px;&quot;&gt;&lt;b&gt;&lt;u&gt;Cavity&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;&lt;hr style=&quot;text-align: center;&quot;&gt;&lt;p style=&quot;text-align: center; margin: 0px 0px 0px 8px;&quot;&gt;cavity-id&lt;/p&gt;&lt;p style=&quot;text-align: center; margin: 0px 0px 0px 8px;&quot;&gt;aircraft-id&lt;/p&gt;&lt;p style=&quot;text-align: center; margin: 0px 0px 0px 8px;&quot;&gt;cavity-number&lt;/p&gt;&lt;p style=&quot;text-align: center; margin: 0px 0px 0px 8px;&quot;&gt;cavity-to&lt;/p&gt;&lt;p style=&quot;text-align: center; margin: 0px 0px 0px 8px;&quot;&gt;cavity-from&lt;/p&gt;&lt;p style=&quot;text-align: center; margin: 0px 0px 0px 8px;&quot;&gt;price&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;shadow=1;labelBackgroundColor=none;" vertex="1" parent="1">
-          <mxGeometry x="740" y="550" width="160" height="150" as="geometry" />
+          <mxGeometry x="770" y="650" width="160" height="150" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
