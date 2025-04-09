@@ -1,4 +1,8 @@
 package com.example.TrackingFlight_Be.v1.repositories;
 
-public interface TicketRepository {
+import com.example.TrackingFlight_Be.v1.entity.Ticket;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface TicketRepository extends JpaRepository<Ticket, String> {
+
 }

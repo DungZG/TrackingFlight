@@ -3,7 +3,7 @@
     <div class="flex flex-row">
       <nz-form-item>
         <nz-form-control>
-          <nz-radio-group [(ngModel)]="radioValue" formControlName="ticketType">
+          <nz-radio-group [(ngModel)]="radioValue" formControlName="ticketType" class="block font-bold">
             <label nz-radio nzValue="One way">Một Chiều</label>
             <label nz-radio nzValue="Round trip">Khứ Hồi</label>
           </nz-radio-group>
@@ -19,8 +19,8 @@
       </nz-form-item>
       <nz-form-item>
         <nz-form-control>
-          <label for="" class="mr-2">Hành khách</label>
-          <nz-input-number formControlName="Passenger" nzPlaceHolder="Hành khách" [(ngModel)]="Passenger" nzMin="1" nzMax="10" />
+          <label for="" class="font-bold mr-2">Hành khách</label>
+          <nz-input-number class="w-[150px]" formControlName="Passenger" nzPlaceHolder="Hành khách" [(ngModel)]="Passenger" nzMin="1" nzMax="10" />
         </nz-form-control>
       </nz-form-item>
     </div>
@@ -81,7 +81,7 @@
 
       <nz-form-item>
         <nz-form-control>
-          <button class="h-[77.56px] w-[150px] bg-[#DBA510] text-white text-sm font-bold" nz-button nzType="default">Tìm kiếm</button>
+          <button class="h-[77.56px] w-[150px] bg-[#DBA510] text-white text-sm font-bold" nz-button nzType="default" (click)="handlerOpenDialog()">Tìm kiếm</button>
         </nz-form-control>
       </nz-form-item>
     </div>

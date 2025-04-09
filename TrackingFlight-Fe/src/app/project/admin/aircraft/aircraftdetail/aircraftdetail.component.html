@@ -1,0 +1,129 @@
+<button aria-label="Close" class="ant-modal-close ng-star-inserted" (click)="closeDialog()">
+  <span class="ant-modal-close-x">
+    <i nz-icon nzType="close" nzTheme="outline" class="anticon ant-modal-close-icon anticon-close"></i>
+  </span>
+</button>
+
+<form nz-form [formGroup]="validateForm" class="ant-advanced-search-form"style="border: none;">
+  <div nz-row [nzGutter]="16" >
+      <div nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label [nzFor]="'field'">Tên Máy Bay</nz-form-label>
+          <nz-form-control>
+            <input nz-input
+              placeholder="Nhập Tên Máy Bay"
+              [formControlName]="'aircraftName'"
+            />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label [nzFor]="'field'">Mã Máy Bay</nz-form-label>
+          <nz-form-control>
+            <input nz-input
+              placeholder="Nhập Mã Vé Máy Bay"
+              [formControlName]="'aircraftCode'"
+            />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label [nzFor]="'field'">Sức Chứa</nz-form-label>
+          <nz-form-control>
+            <input nz-input
+              placeholder="Nhập Sức Chứa"
+              [formControlName]="'tankage'"
+            />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label [nzFor]="'field'">Hãng Bay</nz-form-label>
+          <nz-form-control>
+           <app-input-select [items]="items" [formControlName]="'airlineName'" placeholder="Chọn Hãng"></app-input-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+  </div>
+  <div class="flex justify-between mb-3">
+    <Label class="font-semibold text-xl">Thêm Khoang</Label>
+    <button nz-button [nzType]="'primary'" class="">Thêm</button>
+  </div>
+  <div nz-row [nzGutter]="16" >
+    <div nz-col [nzSpan]="12">
+      <nz-form-item>
+        <nz-form-label [nzFor]="'field'">Số Khoang</nz-form-label>
+        <nz-form-control>
+          <input nz-input
+            placeholder="Nhập Số Khoang"
+            [formControlName]="'cavityNumber'"
+          />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div nz-col [nzSpan]="12">
+      <nz-form-item>
+        <nz-form-label [nzFor]="'field'">Từ</nz-form-label>
+        <nz-form-control>
+          <input nz-input
+            placeholder="Nhập số ghế bắt đầu"
+            [formControlName]="'cavityTo'"
+          />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div nz-col [nzSpan]="12">
+      <nz-form-item>
+        <nz-form-label [nzFor]="'field'">Giá</nz-form-label>
+        <nz-form-control>
+          <input nz-input
+            placeholder="Nhập Gía"
+            [formControlName]="'price'"
+          />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div nz-col [nzSpan]="12">
+      <nz-form-item>
+        <nz-form-label [nzFor]="'field'">Đến</nz-form-label>
+        <nz-form-control>
+          <input nz-input
+            placeholder="Nhập số ghế đến"
+            [formControlName]="'cavityFrom'"
+          />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+  <nz-table #editRowTable nzBordered>
+    <thead>
+      <tr>
+        <th>Số Khoang </th>
+        <th>Số Ghế Bắt Đầu</th>
+        <th>Số Ghế Kết Thúc </th>
+        <th>Giá</th>
+        <th>Thao Tác</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+  </nz-table>
+
+</form>
+<div class="flex justify-center mt-3">
+  <button nz-button [nzType]="'default'" class="mr-2" (click)="closeDialog()"><i nz-icon nzType="close" nzTheme="outline" class="anticon ant-modal-close-icon anticon-close"></i>Hủy Bỏ</button>
+  <button nz-button [nzType]="'primary'" class="">Lưu Thông Tin</button>
+</div>
+
+
+

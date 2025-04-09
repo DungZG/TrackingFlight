@@ -20,10 +20,10 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long userId;
-   String username;
-   String password;
-   String email;
-   String phone;
+    String username;
+    String password;
+    String email;
+    String phone;
 
     @Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime createdAt;

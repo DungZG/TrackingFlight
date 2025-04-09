@@ -26,13 +26,21 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { TicketComponent } from './ticket/ticket.component';
 import { FlightComponent } from './flight/flight.component';
 import { UserComponent } from './user/user.component';
+import { FlightdetailComponent } from './flight/flightdetail/flightdetail.component';
+import { TicketdetailComponent } from './ticket/ticketdetail/ticketdetail.component';
+import { AircraftComponent } from './aircraft/aircraft.component';
+import { AircraftdetailComponent } from './aircraft/aircraftdetail/aircraftdetail.component';
 @NgModule({
   declarations: [
     AdminComponent,
     ChartDetailComponent,
     TicketComponent,
     FlightComponent,
+    FlightdetailComponent,
+    TicketdetailComponent,
     UserComponent,
+    AircraftComponent,
+    AircraftdetailComponent
   ],
   imports: [
     CommonModule,

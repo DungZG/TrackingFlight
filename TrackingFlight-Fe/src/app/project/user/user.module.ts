@@ -24,6 +24,11 @@ import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 import { NzTimelineModule } from 'ng-zorro-antd/timeline';
 import { FlightdetailComponent } from './flight-ticket/flightdetail/flightdetail.component';
 import { DatePipe } from '@angular/common';
+import { BookingdetailComponent } from './flight-ticket/booking/bookingdetail/bookingdetail.component';
+import { NzStepsModule } from 'ng-zorro-antd/steps';
+import { PaymentComponent } from './payment/payment.component';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { PaymentDetailComponent } from './payment/payment-detail/payment-detail.component';
 @NgModule({
   declarations: [
     UserComponent,
@@ -33,6 +38,9 @@ import { DatePipe } from '@angular/common';
     CheckinComponent,
     MybookComponent,
     FlightdetailComponent,
+    BookingdetailComponent,
+    PaymentComponent,
+    PaymentDetailComponent
   ],
   imports: [
     CommonModule,
@@ -53,6 +61,8 @@ import { DatePipe } from '@angular/common';
     NzInputNumberModule,
     NzCarouselModule,
     NzTimelineModule,
+    NzStepsModule,
+    NzCheckboxModule
   ],
   providers: [DatePipe],
 })

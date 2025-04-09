@@ -11,6 +11,7 @@ import {
 
 } from '@angular/forms';
 import {FlightDetailService} from'./flight.service';
+import { FlightdetailComponent } from './flightdetail/flightdetail.component';
 @Component({
   selector: 'app-flight',
   standalone: false,
@@ -19,7 +20,8 @@ import {FlightDetailService} from'./flight.service';
 })
 export class FlightComponent{
   isPanelOpen = true;
-    
+  public isLoading: any;
+  public listOfData:any;
       controlArray: Array<{ index: number; show: boolean }> = [];
       isCollapse = true;
       public validateForm: FormGroup;
@@ -63,5 +65,36 @@ export class FlightComponent{
   stopEdit(): void {
     this.editId = null;
   }
+  async getData(){
+
+  }
+
+  handlerOpenDialog(mode: string = 'add', item: any = null) {
+        const dialog = this.dialogService.openDialog(
+          async (option) => {
+            option.title = mode === 'view' ? 'Xem thông Chuyến Bay' : 'Thêm Chuyến Bay ';
+            if(mode === 'edit'){
+              option.title = 'Sửa thông tin Chuyến Bay';
+            }
+            option.size = DialogSize.medium;
+            option.component = FlightdetailComponent;
+            option.inputs = {
+              mode: mode,
+              id: item?.customerCode,
+              listItem: this.listOfData,
+            };
+          },
+          (eventName, eventValue) => {
+            if (eventName === 'onClose') {
+              this.isLoading = true
+              this.getData();
+              this.dialogService.closeDialogById(dialog.id);
+              setTimeout(() => {
+              this.isLoading = false;
+              }, 1000);
+            }
+          }
+        );
+      }
 
 }

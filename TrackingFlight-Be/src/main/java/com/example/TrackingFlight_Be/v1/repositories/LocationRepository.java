@@ -7,6 +7,5 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 @Repository
 public interface LocationRepository extends JpaRepository<Location, String> {
-    boolean existsByLocationCity(String locationCity);
-    Optional<Location> findByLocationCity(String locationCity);
+
 }

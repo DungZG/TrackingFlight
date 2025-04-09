@@ -3,7 +3,7 @@ package com.example.TrackingFlight_Be.v1.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.springframework.data.annotation.Id;
+
 @Entity
 @Getter
 @Setter
@@ -16,7 +16,7 @@ public class Passenger {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long passengerId;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "ticket_id")
     private Ticket ticket;
 

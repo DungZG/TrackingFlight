@@ -6,6 +6,6 @@ import { BaseService } from './base.service';
 })
 export class FlightService extends BaseService{
 
-  protected override prefix: string = 'flight';
+  protected override prefix: string = 'api/flight';
 
 }

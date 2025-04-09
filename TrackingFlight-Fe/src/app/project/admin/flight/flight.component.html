@@ -68,19 +68,20 @@
   
   <div class="search-result-list" style="margin-top: 0px; padding-top: 30px;">
   <div style="text-align: right;">
-    <button nz-button [nzType]="'primary'">
-      <nz-icon nzType="user-add" nzTheme="outline"  /> Thêm Mới</button>
+    <button nz-button [nzType]="'primary'" (click)="handlerOpenDialog()">
+      <nz-icon nzType="user-add" nzTheme="outline"   /> Thêm Mới</button>
     <button nz-button class="bg-green-500 text-white">
       <nz-icon nzType="download" nzTheme="outline" /> Xuất File</button>
   </div>
     <nz-table #editRowTable nzBordered>
       <thead>
         <tr>
+          <th>Mã Chuyến Bay</th>
           <th>Mã Máy Bay</th>
-          <th>Hãng</th>
           <th>Điểm Khởi Hành</th>
           <th>Điểm Đến</th>
-          <th>Giá</th>
+          <th>Giờ khởi hành</th>
+          <th>Thời gian đến</th>
           <th>Thao Tác</th>
         </tr>
       </thead>

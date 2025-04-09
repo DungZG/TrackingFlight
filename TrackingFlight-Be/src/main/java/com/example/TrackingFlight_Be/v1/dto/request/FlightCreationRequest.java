@@ -12,16 +12,11 @@ import java.util.Date;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class FlightCreationRequest {
     Long flightId;
-
+    String airlineId;
     Long flightNumber;
-    String aircraftCode;
-    String d_city;
-    Date d_date_Time;
-    String city;
-    Date a_date_Time;
+    String departureLocation;
+    Date departureTime;
+    String arrivalLocation;
+    Date arrivalTime;
     Long price;
-    String travelclassName;
-
-    Boolean free_meals;
-    Boolean refundable;
 }

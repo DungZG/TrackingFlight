@@ -13,13 +13,9 @@ import java.util.Date;
 public class FlightResponse {
     Long flightId;
     Long flightNumber;
-    String aircraftCode;
-    String d_city;
-    Date d_date_Time;
-    String city;
-    Date a_date_Time;
+    String departureLocation;
+    Date departureTime;
+    String arrivalLocation;
+    Date arrivalTime;
     Long price;
-    String travelclassName;
-    Boolean free_meals;
-    Boolean refundable;
 }

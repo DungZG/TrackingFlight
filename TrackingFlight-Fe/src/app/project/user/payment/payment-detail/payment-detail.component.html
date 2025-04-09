@@ -1,0 +1,38 @@
+<button aria-label="Close" class="ant-modal-close ng-star-inserted" (click)="closeDialog()">
+  <span class="ant-modal-close-x">
+    <i nz-icon nzType="close" nzTheme="outline" class="anticon ant-modal-close-icon anticon-close"></i>
+  </span>
+</button>
+<form nz-form>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="3" nzFor="name">Họ và Tên:</nz-form-label>
+    <nz-form-control [nzSpan]="12">
+      <app-input-text></app-input-text>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="3" nzFor="gender">Giới tính:</nz-form-label>
+    <nz-form-control [nzSpan]="6">
+      <app-input-select></app-input-select>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="3" nzFor="email">E-mail:</nz-form-label>
+    <nz-form-control [nzSpan]="12">
+      <app-input-text></app-input-text>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4" nzFor="email">Số Điện Thoại:</nz-form-label>
+    <nz-form-control [nzSpan]="12">
+      <app-input-text></app-input-text>
+    </nz-form-control>
+  </nz-form-item>
+
+  <button class="h-[50px] mt-3" nz-button nzType="primary">
+    <span>Submit</span>
+  </button>
+</form>

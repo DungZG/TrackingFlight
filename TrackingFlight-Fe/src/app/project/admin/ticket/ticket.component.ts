@@ -11,6 +11,7 @@ import {
   ValidationErrors,
 } from '@angular/forms';
 import {TicketService} from './ticket.service';
+import { TicketdetailComponent } from './ticketdetail/ticketdetail.component';
 @Component({
   selector: 'app-ticket',
   standalone: false,
@@ -19,11 +20,12 @@ import {TicketService} from './ticket.service';
 })
 
 export class TicketComponent {
-    isPanelOpen = true;
+    public isPanelOpen = true;
     public listOfData:any;
     controlArray: Array<{ index: number; show: boolean }> = [];
-    isCollapse = true;
+    public isCollapse = true;
     public validateForm: FormGroup;
+    public isLoading: any;
     i = 0;
     editId: string | null = null;
   
@@ -52,6 +54,38 @@ export class TicketComponent {
   
     stopEdit(): void {
       this.editId = null;
+    }
+
+    async getData(){
+
+    }
+
+    handlerOpenDialog(mode: string = 'add', item: any = null) {
+      const dialog = this.dialogService.openDialog(
+        async (option) => {
+          option.title = mode === 'view' ? 'Xem thông tin Vé' : 'Thêm Vé ';
+          if(mode === 'edit'){
+            option.title = 'Sửa thông tin vé';
+          }
+          option.size = DialogSize.medium;
+          option.component = TicketdetailComponent;
+          option.inputs = {
+            mode: mode,
+            id: item?.customerCode,
+            listItem: this.listOfData,
+          };
+        },
+        (eventName, eventValue) => {
+          if (eventName === 'onClose') {
+            this.isLoading = true
+            // this.getData();
+            this.dialogService.closeDialogById(dialog.id);
+            // setTimeout(() => {
+            // this.isLoading = false;
+            // }, 1000);
+          }
+        }
+      );
     }
 
 }

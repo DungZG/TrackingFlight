@@ -21,26 +21,16 @@ public class FlightService {
    FlightMapper flightMapper;
 
    public Flight createFlight(FlightCreationRequest request) {
-      Flight flight = new Flight();
-      flight.setFlightNumber(request.getFlightNumber());
-      flight.setAircraftCode(request.getAircraftCode());
-      flight.setD_city(request.getD_city());
-      flight.setD_date_Time(request.getD_date_Time());
-      flight.setCity(request.getCity());
-      flight.setA_date_Time(request.getA_date_Time());
-      flight.setPrice(request.getPrice());
-      flight.setTravelclassName(request.getTravelclassName());
-      flight.setFree_meals(request.getFree_meals());
-      flight.setRefundable(request.getRefundable());
-
+      Flight flight = flightMapper.toFlight(request);
       return flightRepository.save(flight);
    }
+
    public List<Flight> getFlights(){
       return flightRepository.findAll();
    }
    public FlightResponse updateFlight(String flightId, FlightCreationRequest request){
       Flight flight = flightRepository.findById(flightId)
-              .orElseThrow(() ->new RuntimeException("Couldn't find user"));
+              .orElseThrow(() ->new RuntimeException("Couldn't"));
       flightMapper.updateFlight(flight,request);
       return flightMapper.toFlightResponse(flightRepository.save(flight));
    }

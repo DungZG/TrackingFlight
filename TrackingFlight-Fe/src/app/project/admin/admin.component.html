@@ -7,6 +7,9 @@
         <li nz-menu-item *ngIf="this.isCollapsed == true" [routerLink]="['/', 'admin', 'user']">
           <nz-icon nzType="user" nzTheme="outline" />
         </li>
+        <li nz-menu-item *ngIf="this.isCollapsed == true" [routerLink]="['/', 'admin', 'aircraft']">
+          <nz-icon nzType="rocket" nzTheme="outline" />
+        </li>
         <li nz-menu-item *ngIf="this.isCollapsed == true" [routerLink]="['/', 'admin', 'flight']">
           <nz-icon nzType="cloud" nzTheme="outline" />
         </li>
@@ -19,8 +22,11 @@
         <li nz-menu-item *ngIf="this.isCollapsed != true" [routerLink]="['/', 'admin', 'user']">
           <nz-icon nzType="user" nzTheme="outline" /> Quản Lý Người Dùng
         </li>
+        <li nz-menu-item *ngIf="this.isCollapsed != true" [routerLink]="['/', 'admin', 'aircraft']">
+          <nz-icon nzType="rocket" nzTheme="outline" class="mr-2"/> Quản Lý Máy Bay
+        </li>
         <li nz-menu-item *ngIf="this.isCollapsed != true" [routerLink]="['/', 'admin', 'flight']">
-          <nz-icon nzType="cloud" nzTheme="outline" class="mr-2"/> Quản Lý Máy Bay
+          <nz-icon nzType="cloud" nzTheme="outline" class="mr-2"/> Quản Lý Chuyến Bay
         </li>
         <li nz-menu-item *ngIf="this.isCollapsed != true" [routerLink]="['/', 'admin', 'ticket']">
           <nz-icon nzType="send" nzTheme="outline" class="mr-2"/> Quản Lý Vé 

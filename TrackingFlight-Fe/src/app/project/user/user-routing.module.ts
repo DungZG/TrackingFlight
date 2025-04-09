@@ -6,6 +6,7 @@ import { LocationComponent } from './location/location.component';
 import { BookingComponent } from './flight-ticket/booking/booking.component';
 import { CheckinComponent } from './flight-ticket/checkin/checkin.component';
 import { MybookComponent } from './flight-ticket/mybook/mybook.component';
+import { PaymentComponent } from './payment/payment.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
         { path: '', redirectTo: 'book', pathMatch: 'full' } 
       ] 
       },
+      { path: 'payment', component: PaymentComponent },
       { path: '', redirectTo: 'flight-ticket', pathMatch: 'full' }
     ],
   },

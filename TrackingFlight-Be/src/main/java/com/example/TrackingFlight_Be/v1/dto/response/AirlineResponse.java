@@ -10,7 +10,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class AirlineResponse {
     Long airlineId;
-    String airlineName;
-    String airlineShotName;
-    byte[] airlineLogo;
+    String name;
+    String code;
+    byte[] imageUrl;
 }

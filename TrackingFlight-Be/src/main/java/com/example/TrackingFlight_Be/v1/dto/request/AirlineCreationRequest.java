@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class AirlineCreationRequest {
     Long airlineId;
-    String airlineName;
-    String airlineShotName;
-    MultipartFile airlineLogo;
+    String name;
+    String code;
+    MultipartFile imageUrl;
 }

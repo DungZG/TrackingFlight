@@ -1,0 +1,57 @@
+<button aria-label="Close" class="ant-modal-close ng-star-inserted" (click)="closeDialog()">
+  <span class="ant-modal-close-x">
+    <i nz-icon nzType="close" nzTheme="outline" class="anticon ant-modal-close-icon anticon-close"></i>
+  </span>
+</button>
+
+<form nz-form [formGroup]="validateForm" class="ant-advanced-search-form"style="border: none;">
+      <div nz-row [nzGutter]="24" >
+          <div nz-col [nzSpan]="8">
+            <nz-form-item>
+              <nz-form-label [nzFor]="'field'">Mã Vé</nz-form-label>
+              <nz-form-control>
+                <input nz-input
+                  placeholder="Nhập Mã Vé"
+                  [formControlName]="'ticketId'"
+                />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+
+          <div nz-col [nzSpan]="8">
+            <nz-form-item>
+              <nz-form-label [nzFor]="'field'">Mã máy bay</nz-form-label>
+              <nz-form-control>
+                <input nz-input
+                  placeholder="Nhập Mã Vé Máy Bay"
+                  [formControlName]="'flight'"
+                />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+
+          <div nz-col [nzSpan]="8">
+            <nz-form-item>
+              <nz-form-label [nzFor]="'field'">Tình trạng vé</nz-form-label>
+              <nz-form-control>
+                <input nz-input
+                  placeholder="Tình trạng vé"
+                  [formControlName]="'status'"
+                />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+
+          <div nz-col [nzSpan]="8">
+            <nz-form-item>
+              <nz-form-label [nzFor]="'field'">Hạng Vé</nz-form-label>
+              <nz-form-control>
+                <input nz-input
+                  placeholder="Chọn hạng vé"
+                  [formControlName]="'ticketClass'"
+                />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+      </div>
+</form>

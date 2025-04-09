@@ -5,7 +5,6 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @Getter
@@ -33,5 +32,7 @@ public class Flight {
     @Column(name = "arrival_time")
     private LocalDateTime arrivalTime;
 
-    private Double price;
+    @ManyToOne
+    @JoinColumn(name = "price")
+    private Cavity cavity;
 }

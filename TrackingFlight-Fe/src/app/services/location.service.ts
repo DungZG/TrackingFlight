@@ -6,6 +6,6 @@ import { BaseService } from './base.service';
 })
 export class LocationService extends BaseService{
 
-  protected override prefix: string = 'location';
+  protected override prefix: string = 'api/location';
 
 }

@@ -105,7 +105,7 @@ export class FlightTicketComponent implements OnInit {
     const dialog = this.dialogService.openDialog(
       async (option) => {
         option.title = 'Xem thông tin Vé';
-        option.size = DialogSize.xlarge;
+        option.size = DialogSize.medium;
         option.component = FlightdetailComponent;
         option.inputs = {
           mode: mode,

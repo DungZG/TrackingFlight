@@ -19,7 +19,7 @@ import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/location")
+@RequestMapping("/api/location")
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE,makeFinal = true)
 public class LocationController {

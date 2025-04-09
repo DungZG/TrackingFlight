@@ -3,7 +3,6 @@ package com.example.TrackingFlight_Be.v1.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.springframework.data.annotation.Id;
 
 @Entity
 @Getter

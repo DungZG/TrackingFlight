@@ -5,9 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.hibernate.proxy.HibernateProxy;
 
-import java.util.Objects;
 
 @Entity
 @Getter

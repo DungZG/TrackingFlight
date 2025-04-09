@@ -14,19 +14,18 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.HttpEntity;
+
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/flight")
+@RequestMapping("/api/flight")
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE,makeFinal = true)
 public class FlightController {
@@ -36,35 +35,9 @@ public class FlightController {
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ApiResponse<Flight> createFlight(
-            @RequestParam("aircraftCode") String aircraftCode,
-            @RequestParam("flightNumber") Long flightNumber,
-            @RequestParam("d_city") String d_city,
-            @RequestParam("d_date_Time") Date d_date_Time,
-            @RequestParam("city") String city,
-            @RequestParam("a_date_Time") Date a_date_Time,
-            @RequestParam("price") Long price,
-            @RequestParam("travelclassName") String travelclassName,
-            @RequestParam("free_meals") Boolean free_meals,
-            @RequestParam("refundable") Boolean refundable
+            @RequestBody @Valid FlightCreationRequest request
     )
-
     {
-
-        // Tạo DTO từ các tham số
-        FlightCreationRequest request = new FlightCreationRequest();
-        request.setFlightNumber(flightNumber);
-        request.setD_city(d_city);
-        request.setD_date_Time(d_date_Time);
-        request.setCity(city);
-        request.setA_date_Time(a_date_Time);
-        request.setPrice(price);
-        request.setTravelclassName(travelclassName);
-        request.setFree_meals(free_meals);
-        request.setRefundable(refundable);
-        request.setAircraftCode(aircraftCode);
-
-
-        // Xử lý và trả về kết quả
         ApiResponse<Flight> apiResponse = new ApiResponse<>();
         apiResponse.setResult(flightService.createFlight(request));
         return apiResponse;

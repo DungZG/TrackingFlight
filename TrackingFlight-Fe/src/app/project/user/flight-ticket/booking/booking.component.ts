@@ -1,9 +1,12 @@
 import { Component, OnInit,inject } from '@angular/core';
 import { FormsModule,FormGroup } from '@angular/forms';
+import { DialogMode, } from '../../../../../common/enums/dialog-mode';
+import { DialogService, DialogSize } from '../../../../../common/service/dialog.service';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ValidatorExtension } from '../../../../../common/validator-extension';
 import { BookingService } from './booking.service';
+import { BookingdetailComponent } from './bookingdetail/bookingdetail.component';
 interface Option {
   label: string;
   value: string;
@@ -19,12 +22,16 @@ interface Option {
 export class BookingComponent implements OnInit {
   Passenger:any;
   radioValue = 'A';
+  public isLoading:any;
+  public listOfData:any;
   options: Option[] = [
-    
+  
   ];
   public validateForm: FormGroup;
   
-  constructor(private shareData: BookingService) {
+  constructor(private shareData: BookingService,
+    private dialogService: DialogService,
+  ) {
     this.validateForm = this.shareData.myForm
    }
 
@@ -47,5 +54,29 @@ export class BookingComponent implements OnInit {
       return false;
     }
   };
+  handlerOpenDialog(mode: string = 'find', item: any = null) {
+        const dialog = this.dialogService.openDialog(
+          async (option) => {
+            option.title =  'Thông Tin Tìm Kiếm';
+            option.size = DialogSize.tab;
+            option.component = BookingdetailComponent;
+            option.inputs = {
+              mode: mode,
+              id: item?.customerCode,
+              listItem: this.listOfData,
+            };
+          },
+          (eventName, eventValue) => {
+            if (eventName === 'onClose') {
+              this.isLoading = true;
+              // this.getData();
+              this.dialogService.closeDialogById(dialog.id);
+              // setTimeout(() => {
+              // this.isLoading = false;
+              // }, 1000);
+            }
+          }
+        );
+      }
   
 }
