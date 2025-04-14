@@ -46,4 +46,8 @@ export class BaseService {
     return this.http.get<T>(`${this.apiBaseUrl + this.prefix + '/items'}?page=${page}&size=${size}`);
   }
 
+  public search<T = any>(searchParams: any) {
+    const params = new URLSearchParams(searchParams).toString();
+    return this.http.get<T>(`${this.apiBaseUrl + this.prefix}/search?${params}`);
+  }
 }

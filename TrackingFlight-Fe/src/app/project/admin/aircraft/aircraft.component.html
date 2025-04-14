@@ -1,57 +1,70 @@
 <nz-collapse>
   <nz-collapse-panel [nzHeader]="'Thông tin tìm kiếm'" [nzActive]="isPanelOpen" [nzShowArrow]="true">
-      <form nz-form [formGroup]="validateForm" class="ant-advanced-search-form"style="border: none;">
-          <div nz-row [nzGutter]="24" >
-              <div nz-col [nzSpan]="8">
-                <nz-form-item>
-                  <nz-form-label [nzFor]="'field'">Mã Máy Bay</nz-form-label>
-                  <nz-form-control>
-                    <input nz-input
-                      placeholder="Nhập mã chuyến bay"
-                      [formControlName]="'flightNumber'"
-                    />
-                  </nz-form-control>
-                </nz-form-item>
-              </div>
-
-              <div nz-col [nzSpan]="8">
-                  <nz-form-item>
-                    <nz-form-label [nzFor]="'field'">Tên Máy Bay</nz-form-label>
-                    <nz-form-control>
-                      <input nz-input
-                        placeholder="Chọn Hãng Bay"
-                        [formControlName]="'airline'"
-                      />
-                    </nz-form-control>
-                  </nz-form-item>
-                </div>
-          </div>
-          <div nz-row>
-            <div nz-col [nzSpan]="24" class="search-area text-center" style="text-align: center;">
-              <button nz-button [nzType]="'primary'">
-                <nz-icon nzType="search" nzTheme="outline" />Tìm Kiếm</button>
-              <button nz-button (click)="resetForm()">
-                <nz-icon nzType="reload" nzTheme="outline" />Làm Mới</button>
-              <a class="collapse" (click)="toggleCollapse()">
-                Collapse
-                <nz-icon [nzType]="isCollapse ? 'down' : 'up'" />
-              </a>
-            </div>
-          </div>
-        </form>
+    <form nz-form [formGroup]="validateForm" class="ant-advanced-search-form" style="border: none; padding: 10px;">
+      <div nz-row [nzGutter]="16">
+        <!-- Mã Máy Bay -->
+        <div nz-col [nzSpan]="8">
+          <nz-form-item>
+            <nz-form-label [nzFor]="'aircraftCode'">Mã Máy Bay</nz-form-label>
+            <nz-form-control>
+              <input nz-input placeholder="Nhập mã chuyến bay" formControlName="aircraftCode" />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+    
+        <!-- Tên Máy Bay -->
+        <div nz-col [nzSpan]="8">
+          <nz-form-item>
+            <nz-form-label [nzFor]="'aircraftName'">Tên Máy Bay</nz-form-label>
+            <nz-form-control>
+              <input nz-input placeholder="Nhập tên máy bay" formControlName="aircraftName" />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+    
+        <!-- Hãng Máy Bay -->
+        <div nz-col [nzSpan]="8">
+          <nz-form-item>
+            <nz-form-label [nzFor]="'airlineId'">Hãng Máy Bay</nz-form-label>
+            <nz-form-control>
+              <app-input-select formControlName="airlineId" placeholder="Chọn Hãng Bay" [items]="listAirline" class="w-full py-2 px-1"></app-input-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+    
+      <div nz-row>
+        <!-- Các nút Tìm Kiếm và Làm Mới -->
+        <div nz-col [nzSpan]="24" class="search-area text-center">
+          <button class="mr-2" nz-button [nzType]="'primary'" (click)="onSearch()">
+            <nz-icon nzType="search" nzTheme="outline"></nz-icon> Tìm Kiếm
+          </button>
+          <button nz-button (click)="resetForm()">
+            <nz-icon nzType="reload" nzTheme="outline"></nz-icon> Làm Mới
+          </button>
+        </div>
+      </div>
+    
+      <!-- Collapse section -->
+      <div nz-row class="text-center">
+        <a class="collapse" (click)="toggleCollapse()">
+          Collapse <nz-icon [nzType]="isCollapse ? 'down' : 'up'" />
+        </a>
+      </div>
+    </form>
   </nz-collapse-panel>
 </nz-collapse>
 
 <div class="search-result-list" style="margin-top: 0px; padding-top: 30px;">
 <div style="text-align: right;">
-  <button nz-button [nzType]="'primary'" (click)="handlerOpenDialog()">
-    <nz-icon nzType="user-add" nzTheme="outline"   /> Thêm Mới</button>
+  <button nz-button [nzType]="'primary'" (click)="handlerOpenDialog()" class="mr-2">
+    <nz-icon nzType="user-add" nzTheme="outline"  /> Thêm Mới</button>
   <button nz-button class="bg-green-500 text-white">
     <nz-icon nzType="download" nzTheme="outline" /> Xuất File</button>
 </div>
   <nz-table #editRowTable nzBordered>
     <thead>
-      <tr>
+      <tr class="item-center">
         <th>Mã Máy Bay</th>
         <th>Tên Máy Bay</th>
         <th>Hãng</th>
@@ -60,7 +73,17 @@
       </tr>
     </thead>
     <tbody>
-
+      <tr *ngFor="let aircraft of listOfData; let i = index">
+        <td>{{ aircraft.aircraftCode }}</td> 
+        <td>{{ aircraft.aircraftName }}</td> 
+        <td>{{ aircraft.airline?.name }}</td> 
+        <td>{{ aircraft.tankage }}</td> 
+        <td>
+          <nz-icon class="text-green-500 mr-4" nzType="eye" nzTheme="outline" (click)="handlerOpenDialog('view',aircraft,i)"></nz-icon>
+          <nz-icon class="text-sky-500 mr-4" nz-tooltip nzTooltipTitle="Cập nhật" nzType="edit" nzTheme="outline" (click)="handlerOpenDialog('edit',aircraft,i)"></nz-icon>
+          <nz-icon class="text-red-500" nz-tooltip nzTooltipTitle="Xóa" nzType="delete" nzTheme="outline" (click)="handlerDelete(i)" ></nz-icon>
+        </td>
+      </tr>
     </tbody>
   </nz-table>
 </div>

@@ -30,6 +30,7 @@ import { FlightdetailComponent } from './flight/flightdetail/flightdetail.compon
 import { TicketdetailComponent } from './ticket/ticketdetail/ticketdetail.component';
 import { AircraftComponent } from './aircraft/aircraft.component';
 import { AircraftdetailComponent } from './aircraft/aircraftdetail/aircraftdetail.component';
+import { AircraftcontainerComponent } from './aircraft/aircraftdetail/aircraftcontainer/aircraftcontainer.component';
 @NgModule({
   declarations: [
     AdminComponent,
@@ -40,7 +41,8 @@ import { AircraftdetailComponent } from './aircraft/aircraftdetail/aircraftdetai
     TicketdetailComponent,
     UserComponent,
     AircraftComponent,
-    AircraftdetailComponent
+    AircraftdetailComponent,
+    AircraftcontainerComponent,
   ],
   imports: [
     CommonModule,

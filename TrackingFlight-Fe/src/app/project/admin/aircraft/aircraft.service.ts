@@ -23,10 +23,9 @@ export class AircraftDetailService {
     private fb: FormBuilder,
   ) {
     this.myForm = this.fb.group({
-      flightNumber: [null, [Validators.required]],
-      airline: [null, [Validators.required]],
-      departureLocation: [null, [Validators.required]],
-      arrivalLocation:  [null, [Validators.required]]
+      aircraftCode: [null, [Validators.required]],
+      aircraftName: [null, [Validators.required]],
+      airlineId: [null, [Validators.required]],
     });
   }
 

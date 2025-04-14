@@ -25,5 +25,4 @@ public class Aircraft {
     @ManyToOne
     @JoinColumn(name = "cavity_id")
     Cavity cavity;
-
 }

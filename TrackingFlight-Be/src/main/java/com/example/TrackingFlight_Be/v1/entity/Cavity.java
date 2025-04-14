@@ -1,9 +1,6 @@
 package com.example.TrackingFlight_Be.v1.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -22,5 +19,10 @@ public class Cavity {
     Long cavityNumber;
     Long carvityTo;
     Long carvityFrom;
+    String cavityClass;
     Float price;
+
+    @ManyToOne
+    @JoinColumn(name = "aircraft_id")
+    Aircraft aircraft;
 }

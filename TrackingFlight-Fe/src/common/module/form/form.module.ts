@@ -20,6 +20,7 @@ import { InputDateRangeComponent } from '../../base/input-date-range/input-date-
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { RenderErrorsComponent } from '../render-errors/render-errors.component';
 import { FormControlComponent } from '../form-control/form-control.component';
+
 @NgModule({
   declarations: [
     InputTextSearchComponent,
@@ -29,7 +30,7 @@ import { FormControlComponent } from '../form-control/form-control.component';
     InputDateRangeComponent,
     LoadingComponent,
     FormControlComponent,
-    RenderErrorsComponent
+    RenderErrorsComponent,
   ],
   imports: [
     CommonModule,

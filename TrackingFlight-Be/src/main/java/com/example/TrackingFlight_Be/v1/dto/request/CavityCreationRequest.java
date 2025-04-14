@@ -9,8 +9,10 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CavityCreationRequest {
+    Long cavityId;
     Long cavityNumber;
-    Long carvityTo;
-    Long carvityFrom;
+    Long cavityTo;
+    Long cavityFrom;
+    String cavityClass;
     Float price;
 }

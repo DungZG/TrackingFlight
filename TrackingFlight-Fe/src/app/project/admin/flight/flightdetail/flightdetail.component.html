@@ -6,7 +6,7 @@
 
 <form nz-form [formGroup]="validateForm" class="ant-advanced-search-form"style="border: none;">
   <div nz-row [nzGutter]="16" >
-      <div nz-col [nzSpan]="24">
+      <div nz-col [nzSpan]="12">
         <nz-form-item>
           <nz-form-label [nzFor]="'field'">Máy Bay</nz-form-label>
           <nz-form-control>
@@ -20,12 +20,21 @@
 
       <div nz-col [nzSpan]="12">
         <nz-form-item>
-          <nz-form-label [nzFor]="'field'">Điểm Khởi Hành</nz-form-label>
+          <nz-form-label [nzFor]="'field'">Quốc gia</nz-form-label>
           <nz-form-control>
             <input nz-input
-              placeholder="Chọn Điểm Bắt Đầu"
-              [formControlName]="'depatureLocation'"
+              placeholder="Chọn Quốc Gia"
+              [formControlName]="'aircraftCode'"
             />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label [nzFor]="'field'">Điểm Khởi Hành</nz-form-label>
+          <nz-form-control>
+            <app-input-select formControlName="arrivalLocation" placeholder="----Chọn Điểm Khởi Hành----" [items]="items" class="w-full py-2 px-1" [disabled]="true"></app-input-select>
           </nz-form-control>
         </nz-form-item>
       </div>
@@ -34,10 +43,7 @@
         <nz-form-item>
           <nz-form-label [nzFor]="'field'">Điểm Đến</nz-form-label>
           <nz-form-control>
-            <input nz-input
-              placeholder="Chọn Điểm Đến"
-              [formControlName]="'arrivalLocation'"
-            />
+            <app-input-select formControlName="depatureLocation" placeholder="----Chọn Điểm Đến ----" [items]="items" class="w-full py-2 px-1" [disabled]="true"></app-input-select>
           </nz-form-control>
         </nz-form-item>
       </div>
@@ -46,7 +52,38 @@
         <nz-form-item>
           <nz-form-label [nzFor]="'field'">Giờ Khởi Hành Và Thời Gian Đến</nz-form-label>
           <nz-form-control>
-            <nz-range-picker [nzShowTime]="true" [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-range-picker>
+            <nz-range-picker [formControlName]="'arrivaldepature'" [nzShowTime]="true" [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-range-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div class="" nz-col [nzSpan]="24">
+        <label for="" class="text-2xl font-bold">Dịch Vụ</label>
+      </div>
+
+      <div nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label [nzFor]="'field'">Hạng</nz-form-label>
+          <nz-form-control>
+            
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label [nzFor]="'field'">Đồ ăn</nz-form-label>
+          <nz-form-control>
+            
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label [nzFor]="'field'">Ký gửi</nz-form-label>
+          <nz-form-control>
+            
           </nz-form-control>
         </nz-form-item>
       </div>

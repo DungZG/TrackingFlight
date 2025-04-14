@@ -29,7 +29,7 @@ export class InputSelectComponent implements OnInit, ControlValueAccessor {
   eventBaseTouched = () => { };
 
   ngOnInit(): void {
-    this.placeholder = "--Chọn--";
+
   }
 
   onChange(value: any){
