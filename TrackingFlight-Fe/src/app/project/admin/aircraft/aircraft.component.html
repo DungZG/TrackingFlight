@@ -62,7 +62,11 @@
   <button nz-button class="bg-green-500 text-white">
     <nz-icon nzType="download" nzTheme="outline" /> Xuất File</button>
 </div>
-  <nz-table #editRowTable nzBordered>
+  <nz-table #editRowTable nzBordered [nzData]="listOfData"
+  [nzNoResult]="listOfData.length === 0 ? 'Không có dữ liệu' : undefined"
+  [nzShowPagination]="true"
+  [nzFrontPagination]="false"
+  [nzPaginationPosition]="'bottom'">
     <thead>
       <tr class="item-center">
         <th>Mã Máy Bay</th>
@@ -86,4 +90,10 @@
       </tr>
     </tbody>
   </nz-table>
+
+  <nz-pagination class="mt-2 flex justify-end" nation [nzPageIndex]="currentPage"
+               [nzTotal]="totalItems"
+               [nzPageSize]="pageSize"
+               (nzPageIndexChange)="onPageChange($event)">
+  </nz-pagination>
 </div>

@@ -1,9 +1,8 @@
-package com.teca.application.common.exceptions;
-
-import org.springframework.http.HttpStatus;
+package com.example.TrackingFlight_Be.v1.common.exceptions;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.http.HttpStatus;
 
 @Getter
 @Setter

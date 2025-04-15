@@ -35,7 +35,7 @@ public class AirlineController {
         return apiResponse;
     }
 
-    @GetMapping("/all")
+    @GetMapping
     public ApiResponse<List<Airline>> getAirlines(){
         ApiResponse<List<Airline>> apiResponse = new ApiResponse<>();
         apiResponse.setResult(airlineService.getAirlines());

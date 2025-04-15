@@ -1,20 +1,20 @@
-package com.teca.application.common.utilities;
+package com.example.TrackingFlight_Be.v1.common.utilities;
 
+import com.example.TrackingFlight_Be.v1.common.enums.CriteriaOperator;
+import com.example.TrackingFlight_Be.v1.common.enums.OrderDirection;
+import com.example.TrackingFlight_Be.v1.common.model.CriteriaFilter;
+import com.example.TrackingFlight_Be.v1.common.model.CriteriaOrder;
+
+import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.Order;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.teca.application.common.enums.CriteriaOperator;
-import com.teca.application.common.enums.OrderDirection;
-import com.teca.application.common.model.CriteriaFilter;
-import com.teca.application.common.model.CriteriaOrder;
-
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.Order;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 
 public class CriteriaBuilderUtil {
     private CriteriaBuilderUtil() {

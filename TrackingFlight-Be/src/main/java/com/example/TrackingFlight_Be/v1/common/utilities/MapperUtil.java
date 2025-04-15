@@ -1,4 +1,13 @@
-package com.teca.application.common.utilities;
+package com.example.TrackingFlight_Be.v1.common.utilities;
+
+import com.example.TrackingFlight_Be.v1.common.model.ListItemDTO;
+import com.example.TrackingFlight_Be.v1.common.model.PageableQuery;
+import com.example.TrackingFlight_Be.v1.common.model.PaginatedDTO;
+import com.example.TrackingFlight_Be.v1.common.model.PaginatedMeta;
+import com.example.TrackingFlight_Be.v1.domain.comon.BaseEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -6,16 +15,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-
-import com.teca.application.common.model.ListItemDTO;
-import com.teca.application.common.model.PageableQuery;
-import com.teca.application.common.model.PaginatedDTO;
-import com.teca.application.common.model.PaginatedMeta;
-import com.teca.domain.common.BaseEntity;
 
 public class MapperUtil {
 

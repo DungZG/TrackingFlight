@@ -1,6 +1,6 @@
-package com.teca.core.utility;
+package com.example.TrackingFlight_Be.core.utility;
 
-import javax.xml.bind.DatatypeConverter;
+
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -55,22 +55,22 @@ public class StringUtil {
         return s.trim().replaceAll("//s+", " ");
     }
 
-    public static String hashPassword(String password) throws NoSuchAlgorithmException {
-        MessageDigest md = MessageDigest.getInstance("MD5");
-        byte[] hash = password.getBytes();
+//    public static String hashPassword(String password) throws NoSuchAlgorithmException {
+//        MessageDigest md = MessageDigest.getInstance("MD5");
+//        byte[] hash = password.getBytes();
+//
+//        for (int i = 0; i < 5; i++) {
+//            md.update(hash);
+//            hash = md.digest();
+//        }
+//
+//        return DatatypeConverter.printHexBinary(hash).toUpperCase();
+//    }
 
-        for (int i = 0; i < 5; i++) {
-            md.update(hash);
-            hash = md.digest();
-        }
-
-        return DatatypeConverter.printHexBinary(hash).toUpperCase();
-    }
-
-    public static boolean checkPassword(String inputPassword, String storedHash) throws NoSuchAlgorithmException {
-        String hashedInputPassword = hashPassword(inputPassword);
-        return hashedInputPassword.equals(storedHash);
-    }
+//    public static boolean checkPassword(String inputPassword, String storedHash) throws NoSuchAlgorithmException {
+//        String hashedInputPassword = hashPassword(inputPassword);
+//        return hashedInputPassword.equals(storedHash);
+//    }
 
     public static List<String> slitToList(String str) {
         return Arrays.asList(str.split(","));

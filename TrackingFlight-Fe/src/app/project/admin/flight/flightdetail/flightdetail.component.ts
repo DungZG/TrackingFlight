@@ -5,6 +5,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DialogService } from '../../../../../common/service/dialog.service';
 import {LocationService} from '../../../../services/location.service'
+import { AircraftService } from '../../../../services/aircraft.service';
 @Component({
   selector: 'app-flightdetail',
   standalone: false,
@@ -13,21 +14,26 @@ import {LocationService} from '../../../../services/location.service'
 })
 export class FlightdetailComponent implements OnInit {
   date:any
+  public isLoading: any;
   public validateForm: FormGroup;
   public listOfLocation: any[] = [];
+  public listCompany: any []=[];
+  public listAircraft: any[] = [];
   onClose = new EventEmitter<any | null>();
   @Input() items: { label: string, value: any }[] = [];
+  @Input() itemsAircraft: { label: string, value: any }[] = [];
   constructor(
     public fb:FormBuilder,
     public Loaction:LocationService,
+    public Aircraft:AircraftService,
     @Inject(NZ_MODAL_DATA) public data: any,
     
   ) {
     this.validateForm = this.fb.group({
-      aircraftCode: [null],
-      depatureLocation: [null],
-      arrivalLocation:[null],
-      arrivaldepature: [null]
+      aircraftCode: [{ value: null, disabled: false }],
+      depatureLocation: [{ value: null, disabled: false }],
+      arrivalLocation:[{ value: null, disabled: false }],
+      arrivaldepature: [{ value: null, disabled: false }]
     })
    }
 
@@ -36,13 +42,21 @@ export class FlightdetailComponent implements OnInit {
   }
 
   async getData(){
-    const reslocation = await this.Loaction.getAllItems().firstValueFrom();
-    const listOfLocation = reslocation;
-    this.items = this.listOfLocation.map(item => ({
+    this.isLoading = true;
+    const resLocation = await this.Loaction.getAllItems().firstValueFrom();
+    const resAircraft = await this.Aircraft.getAllItems().firstValueFrom();
+    this.listCompany = resLocation;
+    this.listAircraft = resAircraft.result;
+    debugger
+    this.items = this.listCompany.map(item => ({
       label: item.name,
-      value: item.name
+      value: item.locationId
     }));
-    console.log(this.items)
+    this.itemsAircraft = this.listAircraft.map(item => ({
+      label: item.aircraftName,
+      value: item.aircraftId
+    }))
+    this.isLoading = false;
   }
 
   async closeDialog(){

@@ -1,6 +1,8 @@
 package com.example.TrackingFlight_Be.v1.repositories;
 
 import com.example.TrackingFlight_Be.v1.entity.Aircraft;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,12 +10,17 @@ import java.util.List;
 
 @Repository
 public interface AircraftRepository extends JpaRepository<Aircraft,String> {
-    // Tìm kiếm theo Mã Máy Bay
-    List<Aircraft> findByAircraftCode(String aircraftCode);
+    Page<Aircraft> findByAircraftCodeAndAircraftNameAndAirlineName(
+            String aircraftCode,
+            String aircraftName,
+            String airlineName,
+            Pageable pageable);
 
-    // Tìm kiếm theo Tên Máy Bay
-    List<Aircraft> findByAircraftNameContaining(String aircraftName);
+    Page<Aircraft> findByAircraftCode(String aircraftCode, Pageable pageable);
 
-    // Tìm kiếm theo Hãng Máy Bay
-    List<Aircraft> findByAirlineNameContaining(String airlineName);
+    Page<Aircraft> findByAircraftName(String aircraftName, Pageable pageable);
+
+    Page<Aircraft> findByAirlineName(String airlineName, Pageable pageable);
+
+
 }

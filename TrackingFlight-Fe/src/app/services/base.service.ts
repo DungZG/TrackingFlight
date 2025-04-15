@@ -15,7 +15,7 @@ export class BaseService {
   ) { }
 
   public getAllItems<T = any>() {
-    return this.http.get<T>(this.apiBaseUrl + this.prefix);
+    return this.http.get<T>(this.apiBaseUrl + this.prefix + '/all');
   }
 
   public getItem<T = any>(id: number) {

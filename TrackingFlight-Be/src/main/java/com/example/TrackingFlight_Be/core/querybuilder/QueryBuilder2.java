@@ -1,6 +1,6 @@
-package com.teca.core.querybuilder;
+package com.example.TrackingFlight_Be.core.querybuilder;
 
-import com.teca.core.utility.StringUtil;
+import com.example.TrackingFlight_Be.core.utility.StringUtil;
 import lombok.Getter;
 
 import java.util.*;

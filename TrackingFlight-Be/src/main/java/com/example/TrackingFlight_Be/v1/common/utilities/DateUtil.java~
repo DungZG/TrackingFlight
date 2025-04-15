@@ -1,4 +1,4 @@
-package com.example.TrackingFlight_Be.v1.common.utilities;
+package com.teca.application.common.utilities;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

@@ -1,4 +1,4 @@
-package com.teca.application.common.exceptions;
+package com.example.TrackingFlight_Be.v1.common.exceptions;
 
 import org.springframework.http.HttpStatus;
 

@@ -1,4 +1,4 @@
-package com.teca.application.common.model;
+package com.example.TrackingFlight_Be.v1.common.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

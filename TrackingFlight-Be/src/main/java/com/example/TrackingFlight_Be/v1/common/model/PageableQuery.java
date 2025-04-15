@@ -1,15 +1,14 @@
-package com.teca.application.common.model;
+package com.example.TrackingFlight_Be.v1.common.model;
+
+import com.example.TrackingFlight_Be.v1.common.enums.OrderDirection;
+import com.example.TrackingFlight_Be.v1.common.exceptions.BadRequestException;
+import com.example.TrackingFlight_Be.v1.common.utilities.CriteriaBuilderUtil;
+import com.example.TrackingFlight_Be.v1.common.utilities.StringUtil;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Arrays;
 import java.util.List;
-
-import com.teca.application.common.utilities.CriteriaBuilderUtil;
-import com.teca.application.common.utilities.StringUtil;
-import com.teca.application.common.enums.OrderDirection;
-import com.teca.application.common.exceptions.BadRequestException;
-
-import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 @Setter

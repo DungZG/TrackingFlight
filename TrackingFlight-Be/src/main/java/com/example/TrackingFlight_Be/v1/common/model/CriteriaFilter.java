@@ -1,7 +1,6 @@
-package com.teca.application.common.model;
+package com.example.TrackingFlight_Be.v1.common.model;
 
-import com.teca.application.common.enums.CriteriaOperator;
-
+import com.example.TrackingFlight_Be.v1.common.enums.CriteriaOperator;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

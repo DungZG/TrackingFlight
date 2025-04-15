@@ -42,7 +42,7 @@ public class LocationController {
     }
 
 
-    @GetMapping("/all")
+    @GetMapping
     public List<Location> getLocations() {
         return locationService.getLocations();
     }

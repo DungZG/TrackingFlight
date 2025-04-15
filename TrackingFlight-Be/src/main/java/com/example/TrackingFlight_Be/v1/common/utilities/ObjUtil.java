@@ -1,12 +1,11 @@
-package com.teca.application.common.utilities;
+package com.example.TrackingFlight_Be.v1.common.utilities;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 
-import javax.persistence.Tuple;
+import jakarta.persistence.Tuple;
 import java.lang.reflect.AccessibleObject;
 import java.util.HashMap;
 import java.util.Objects;

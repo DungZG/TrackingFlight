@@ -1,4 +1,4 @@
-package com.teca.application.common.enums;
+package com.example.TrackingFlight_Be.v1.common.enums;
 
 public enum CriteriaOperator {
 

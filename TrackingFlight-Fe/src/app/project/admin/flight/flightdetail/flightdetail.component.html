@@ -10,10 +10,11 @@
         <nz-form-item>
           <nz-form-label [nzFor]="'field'">Máy Bay</nz-form-label>
           <nz-form-control>
-            <input nz-input
+            <app-input-select nz-input
+              [items]="itemsAircraft"
               placeholder="Chọn Máy Bay"
               [formControlName]="'aircraftCode'"
-            />
+            ></app-input-select>
           </nz-form-control>
         </nz-form-item>
       </div>

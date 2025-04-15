@@ -1,4 +1,4 @@
-package com.teca.application.common.utilities;
+package com.example.TrackingFlight_Be.v1.common.utilities;
 
 import java.text.Normalizer;
 import java.util.Arrays;

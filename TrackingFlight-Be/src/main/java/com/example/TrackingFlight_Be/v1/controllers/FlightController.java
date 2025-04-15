@@ -43,7 +43,7 @@ public class FlightController {
         return apiResponse;
     }
     
-    @GetMapping
+    @GetMapping("/all")
     public List<Flight> getFlights() {
         return flightService.getFlights();
     }

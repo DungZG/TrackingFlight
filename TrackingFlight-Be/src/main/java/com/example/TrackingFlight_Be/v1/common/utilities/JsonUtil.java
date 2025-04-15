@@ -1,4 +1,4 @@
-package com.teca.application.common.utilities;
+package com.example.TrackingFlight_Be.v1.common.utilities;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

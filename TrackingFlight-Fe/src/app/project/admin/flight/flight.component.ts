@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { DialogService, DialogSize } from '../../../../common/service/dialog.service';
 import {
   FormBuilder,
@@ -12,6 +12,7 @@ import {
 } from '@angular/forms';
 import {FlightDetailService} from'./flight.service';
 import { FlightdetailComponent } from './flightdetail/flightdetail.component';
+import { LocationService } from '../../../services/location.service'; 
 @Component({
   selector: 'app-flight',
   standalone: false,
@@ -22,6 +23,7 @@ export class FlightComponent{
   isPanelOpen = true;
   public isLoading: any;
   public listOfData:any;
+  @Input() items: { label: string, value: any }[] = [];
       controlArray: Array<{ index: number; show: boolean }> = [];
       isCollapse = true;
       public validateForm: FormGroup;
@@ -31,7 +33,7 @@ export class FlightComponent{
       public listType: any=[
 
       ]
-      public listCompany: any=[
+      public listCompany: any []=[
 
       ]
 
@@ -39,32 +41,17 @@ export class FlightComponent{
         private fb: FormBuilder,
         private dialogService: DialogService,
         private shareData: FlightDetailService,
+        private locationService:LocationService
       ) {
         this.validateForm = this.shareData.myForm
       }
 
   ngOnInit() {
-  }
+    this.getData();
 
-  toggleCollapse(): void {
-    this.isCollapse = !this.isCollapse;
-    this.controlArray.forEach((c, index) => {
-      c.show = this.isCollapse ? index < 6 : true;
-    });
-  }
-
-  resetForm(): void {
-    this.validateForm.reset();
   }
 
 
-  startEdit(id: string): void {
-    this.editId = id;
-  }
-
-  stopEdit(): void {
-    this.editId = null;
-  }
   async getData(){
 
   }
@@ -97,4 +84,23 @@ export class FlightComponent{
         );
       }
 
+      toggleCollapse(): void {
+        this.isCollapse = !this.isCollapse;
+        this.controlArray.forEach((c, index) => {
+          c.show = this.isCollapse ? index < 6 : true;
+        });
+      }
+    
+      resetForm(): void {
+        this.validateForm.reset();
+      }
+    
+    
+      startEdit(id: string): void {
+        this.editId = id;
+      }
+    
+      stopEdit(): void {
+        this.editId = null;
+      }
 }

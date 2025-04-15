@@ -1,4 +1,4 @@
-package com.teca.core.constant;
+package com.example.TrackingFlight_Be.core.constant;
 
 import java.util.Arrays;
 import java.util.List;

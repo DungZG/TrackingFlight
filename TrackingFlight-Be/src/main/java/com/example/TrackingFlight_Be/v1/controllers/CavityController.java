@@ -32,7 +32,7 @@ public class CavityController {
         return apiResponse;
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ApiResponse<List<Cavity>> getAllCavities() {
         ApiResponse<List<Cavity>> apiResponse = new ApiResponse<>();
         apiResponse.setResult(cavityService.getAllCavities());

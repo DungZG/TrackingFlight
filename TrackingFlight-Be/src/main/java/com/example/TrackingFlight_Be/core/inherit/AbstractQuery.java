@@ -1,25 +1,19 @@
-package com.teca.core.inherit;
+package com.example.TrackingFlight_Be.core.inherit;
 
-import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import com.teca.core.model.response.OneResponse;
-import com.teca.core.querybuilder.QueryBuilder2;
-import com.teca.core.service.QueryBuilder2Service;
-
+import com.example.TrackingFlight_Be.v1.common.model.PageableQuery;
+import com.example.TrackingFlight_Be.v1.common.model.PaginatedDTO;
+import com.example.TrackingFlight_Be.v1.common.model.PaginatedMeta;
+import com.example.TrackingFlight_Be.core.querybuilder.QueryBuilder2;
+import com.example.TrackingFlight_Be.core.service.QueryBuilder2Service;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import com.teca.application.common.model.PageableQuery;
-import com.teca.application.common.model.PaginatedDTO;
-import com.teca.application.common.model.PaginatedMeta;
-import com.teca.core.model.dto.MetaDTO;
-import com.teca.core.model.request.ListRequest;
-import com.teca.core.model.response.ListResponse;
+import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 public abstract class AbstractQuery {

@@ -1,4 +1,4 @@
-package com.teca.core.utility;
+package com.example.TrackingFlight_Be.core.utility;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

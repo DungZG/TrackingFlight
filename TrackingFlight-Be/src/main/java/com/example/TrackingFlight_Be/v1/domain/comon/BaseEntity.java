@@ -1,15 +1,14 @@
-package com.teca.domain.common;
+package com.example.TrackingFlight_Be.v1.domain.comon;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.PrePersist;
-
-import com.teca.application.common.utilities.DateUtil;
-import com.teca.application.common.utilities.StringUtil;
-
+import com.example.TrackingFlight_Be.v1.common.utilities.DateUtil;
+import com.example.TrackingFlight_Be.v1.common.utilities.StringUtil;
 import lombok.Getter;
 import lombok.Setter;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.PrePersist;
 
 @Getter
 @Setter

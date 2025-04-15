@@ -1,14 +1,14 @@
-package com.teca.core.service;
+package com.example.TrackingFlight_Be.core.service;
 
-import com.teca.core.constant.Constants;
-import com.teca.core.utility.StringUtil;
+import com.example.TrackingFlight_Be.core.constant.Constants;
+import com.example.TrackingFlight_Be.core.utility.StringUtil;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Tuple;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Tuple;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

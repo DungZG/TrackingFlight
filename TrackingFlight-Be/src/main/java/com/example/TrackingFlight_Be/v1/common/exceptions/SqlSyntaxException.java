@@ -1,4 +1,4 @@
-package com.teca.application.common.exceptions;
+package com.example.TrackingFlight_Be.v1.common.exceptions;
 
 public class SqlSyntaxException extends RuntimeException {
     

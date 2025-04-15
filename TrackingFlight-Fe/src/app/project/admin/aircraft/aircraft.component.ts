@@ -28,6 +28,9 @@ export class AircraftComponent {
   public validateForm: FormGroup;
   i = 0;
   editId: string | null = null;
+  totalItems: number = 0; // Tổng số phần tử trong danh sách
+  currentPage: number = 0; // Trang hiện tại
+  pageSize: number = 5; // Số lượng item mỗi trang
   public listType: any=[]
   public listCompany: any=[]
   public listOfCurrentPageData: any[] = [];
@@ -48,36 +51,40 @@ export class AircraftComponent {
     this.getData();
   }
 
-  async getData(){
+  async getData(page: number = 1){
     this.isLoading = true;
-    const resAircraft = await this.aircraftService.getAllItems().firstValueFrom();
-    this.listOfData = resAircraft.result;
+    const resAircraft = await this.aircraftService.getItemsWithPagination(page, this.pageSize).firstValueFrom();
+    debugger
+    this.listOfData = resAircraft.result.content;
+    this.totalItems = resAircraft.result.totalElements;
     this.isLoading = false;
+  }
+
+  onPageChange(page: number= 1) {
+    this.currentPage = page;
+    this.getData(page);
   }
 
   handlerOpenDialog(mode: string = 'add', item: any = null, index: number | null = null) {
     const dialog = this.dialogService.openDialog(
       async (option) => {
-        // Chọn tiêu đề dialog theo chế độ
         option.title = mode === 'view' ? 'Xem thông tin Máy Bay' : 'Thêm Máy Bay ';
         if (mode === 'edit') {
           option.title = 'Sửa thông tin Máy Bay';
         }
-  
-        // Cấu hình dialog
         option.size = DialogSize.medium;
-        option.component = AircraftdetailComponent; // Component chứa form
+        option.component = AircraftdetailComponent; 
         option.inputs = {
           mode: mode,
-          id: item?.aircraftCode,  // Dùng id (mã máy bay)
-          aircraftData: item,  // Dữ liệu chi tiết của máy bay
+          id: item?.aircraftCode, 
+          aircraftData: item,  
         };
       },
       (eventName, eventValue) => {
         if (eventName === 'onClose') {
           this.isLoading = true;
-          this.getData(); // Lấy lại dữ liệu sau khi đóng popup
-          this.dialogService.closeDialogById(dialog.id); // Đóng dialog
+          this.getData(); 
+          this.dialogService.closeDialogById(dialog.id); 
           setTimeout(() => {
             this.isLoading = false;
           }, 1000);
@@ -88,15 +95,13 @@ export class AircraftComponent {
 
   async handlerDelete(index: number) {
     const aircraftToDelete = this.listOfData[index];
-  
-    // Xác nhận xóa
     const isConfirmed = confirm(`Bạn có chắc chắn muốn xóa máy bay: ${aircraftToDelete.aircraftName}?`);
   
     if (isConfirmed) {
       try {
         this.isLoading = true;
-        await this.aircraftService.deleteItem(aircraftToDelete.aircraftCode);  // Gọi service xóa
-        this.listOfData.splice(index, 1);  // Xóa máy bay khỏi danh sách trong frontend
+        await this.aircraftService.deleteItem(aircraftToDelete.aircraftCode);  
+        this.listOfData.splice(index, 1); 
         this.isLoading = false;
         alert('Xóa thành công!');
       } catch (error) {
@@ -106,14 +111,12 @@ export class AircraftComponent {
     }
   }
 
-  // Gọi API tìm kiếm khi nhấn Tìm Kiếm
-  async onSearch() {
+  async onSearch(page: number = 0, size: number = 5) {
     const formValue = this.validateForm.value;
     this.isLoading = true;
   
     const searchParams: any = {};
-  
-    // Chỉ thêm các tham số có giá trị vào searchParams
+    
     if (formValue.aircraftCode) {
       searchParams.aircraftCode = formValue.aircraftCode;
     }
@@ -124,9 +127,18 @@ export class AircraftComponent {
       searchParams.airlineName = formValue.airlineName;
     }
   
+    searchParams.page = page;
+    searchParams.size = size;
+  
     try {
       const res = await this.aircraftService.searchAircraft(searchParams).firstValueFrom();
-      this.listOfData = res.result;
+      
+      if (res && res.result && res.result.content) {
+        this.listOfData = res.result.content;
+      } else {
+        this.listOfData = [];
+      }
+      
     } catch (error) {
       console.error('Error fetching search results:', error);
     } finally {

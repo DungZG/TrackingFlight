@@ -8,6 +8,9 @@ import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -32,14 +35,18 @@ public class AircraftController {
         return apiResponse;
     }
 
-    @GetMapping
-    public ApiResponse<List<Aircraft>> getAllCavities() {
-        ApiResponse<List<Aircraft>> apiResponse = new ApiResponse<>();
-        apiResponse.setResult(aircraftService.getAircrafts());
+    @GetMapping("/items")
+    public ApiResponse<Page<Aircraft>> getAllAircrafts(
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "5") int size) {
+
+        Pageable pageable = PageRequest.of(page-1, size);
+        Page<Aircraft> aircraftPage = aircraftService.getAircrafts(pageable);
+        ApiResponse<Page<Aircraft>> apiResponse = new ApiResponse<>();
+        apiResponse.setResult(aircraftPage);
         return apiResponse;
     }
 
-    // Lấy thông tin chi tiết một Aircraft
     @GetMapping("/{aircraftId}")
     public ApiResponse<Aircraft> getAircraftById(@PathVariable Long aircraftId) {
         ApiResponse<Aircraft> apiResponse = new ApiResponse<>();
@@ -47,7 +54,6 @@ public class AircraftController {
         return apiResponse;
     }
 
-    // Sửa thông tin Aircraft
     @PutMapping("/{aircraftId}")
     public ApiResponse<Aircraft> updateAircraft(
             @PathVariable Long aircraftId,
@@ -58,7 +64,6 @@ public class AircraftController {
         return apiResponse;
     }
 
-    // Xóa một Aircraft
     @DeleteMapping("/{aircraftId}")
     public ResponseEntity<Void> deleteAircraft(@PathVariable Long aircraftId) {
         aircraftService.deleteAircraft(aircraftId);
@@ -66,13 +71,25 @@ public class AircraftController {
     }
 
     @GetMapping("/search")
-    public ApiResponse<List<Aircraft>> searchAircraft(
+    public ApiResponse<Page<Aircraft>> searchAircraft(
             @RequestParam(required = false) String aircraftCode,
             @RequestParam(required = false) String aircraftName,
-            @RequestParam(required = false) String airlineName
+            @RequestParam(required = false) String airlineName,
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "5") int size
     ) {
+        Pageable pageable = PageRequest.of(page -1, size);
+        Page<Aircraft> result = aircraftService.searchAircraft(aircraftCode, aircraftName, airlineName, pageable);
+        ApiResponse<Page<Aircraft>> apiResponse = new ApiResponse<>();
+        apiResponse.setResult(result);
+        return apiResponse;
+    }
+
+
+    @GetMapping("/all")
+    public ApiResponse<List<Aircraft>> getAllAircraft() {
         ApiResponse<List<Aircraft>> apiResponse = new ApiResponse<>();
-        apiResponse.setResult(aircraftService.searchAircraft(aircraftCode, aircraftName, airlineName));
+        apiResponse.setResult(aircraftService.getAircraftss());
         return apiResponse;
     }
 }

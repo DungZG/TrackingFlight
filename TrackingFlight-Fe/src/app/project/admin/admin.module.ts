@@ -31,6 +31,8 @@ import { TicketdetailComponent } from './ticket/ticketdetail/ticketdetail.compon
 import { AircraftComponent } from './aircraft/aircraft.component';
 import { AircraftdetailComponent } from './aircraft/aircraftdetail/aircraftdetail.component';
 import { AircraftcontainerComponent } from './aircraft/aircraftdetail/aircraftcontainer/aircraftcontainer.component';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { NzResultModule } from 'ng-zorro-antd/result';
 @NgModule({
   declarations: [
     AdminComponent,
@@ -66,7 +68,9 @@ import { AircraftcontainerComponent } from './aircraft/aircraftdetail/aircraftco
     NzSkeletonModule,
     NzSwitchModule,
     NzImageModule,
-    NgTemplateOutlet
+    NgTemplateOutlet,
+    NzPaginationModule,
+    NzResultModule
   ]
 })
 export class AdminModule { }
