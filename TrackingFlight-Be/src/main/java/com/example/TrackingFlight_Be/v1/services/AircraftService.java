@@ -43,7 +43,7 @@ public class AircraftService {
                     cavity.setCarvityFrom(c.getCavityFrom());
                     cavity.setCarvityTo(c.getCavityTo());
                     cavity.setCavityClass(c.getCavityClass());
-                    cavity.setPrice(c.getPrice());
+                    cavity.setPrice(Double.valueOf(c.getPrice()));
                     return cavity;
                 }).collect(Collectors.toList());
         cavityRepository.saveAll(cavities);
@@ -51,7 +51,7 @@ public class AircraftService {
     }
 
     public Aircraft getAircraft(Long aircraftId) {
-        return aircraftRepository.findById(String.valueOf(aircraftId)).get();
+        return aircraftRepository.findById(aircraftId).get();
     }
 
     public Page<Aircraft> getAircrafts(Pageable pageable) {
@@ -63,7 +63,7 @@ public class AircraftService {
     }
 
     public Aircraft updateAircraft(Long aircraftId, AircraftCreationRequest request) {
-        Aircraft existingAircraft = aircraftRepository.findById(String.valueOf(aircraftId))
+        Aircraft existingAircraft = aircraftRepository.findById(aircraftId)
                 .orElseThrow(() -> new RuntimeException("Aircraft not found"));
 
         Airline airline = airlineRepository.findById(request.getAirlineId())
@@ -85,7 +85,7 @@ public class AircraftService {
             cavity.setCarvityFrom(cavityRequest.getCavityFrom());
             cavity.setCarvityTo(cavityRequest.getCavityTo());
             cavity.setCavityClass(cavityRequest.getCavityClass());
-            cavity.setPrice(cavityRequest.getPrice());
+            cavity.setPrice(Double.valueOf(cavityRequest.getPrice()));
             cavityRepository.save(cavity);
         }
 
@@ -93,7 +93,7 @@ public class AircraftService {
     }
 
     public void deleteAircraft(Long aircraftId) {
-        Aircraft aircraft = aircraftRepository.findById(String.valueOf(aircraftId))
+        Aircraft aircraft = aircraftRepository.findById(aircraftId)
                 .orElseThrow(() -> new RuntimeException("Aircraft not found"));
 
         List<Cavity> cavities = cavityRepository.findByAircraft(aircraft);

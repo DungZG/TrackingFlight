@@ -13,6 +13,7 @@ import {
 import {FlightDetailService} from'./flight.service';
 import { FlightdetailComponent } from './flightdetail/flightdetail.component';
 import { LocationService } from '../../../services/location.service'; 
+import { FlightService } from '../../../services/flight.service';
 @Component({
   selector: 'app-flight',
   standalone: false,
@@ -22,7 +23,14 @@ import { LocationService } from '../../../services/location.service';
 export class FlightComponent{
   isPanelOpen = true;
   public isLoading: any;
-  public listOfData:any;
+  public listOfData: any[] = [];
+  public status:any []= [
+    { label: 'Đang hoạt động', value: 1 },
+    { label: 'Tạm Ngưng', value: 2 },
+  ];
+  totalItems: number = 0;
+  currentPage: number = 0; 
+  pageSize: number = 5; 
   @Input() items: { label: string, value: any }[] = [];
       controlArray: Array<{ index: number; show: boolean }> = [];
       isCollapse = true;
@@ -41,20 +49,25 @@ export class FlightComponent{
         private fb: FormBuilder,
         private dialogService: DialogService,
         private shareData: FlightDetailService,
-        private locationService:LocationService
+        private locationService:LocationService,
+        private flightService:FlightService,
       ) {
         this.validateForm = this.shareData.myForm
       }
 
   ngOnInit() {
     this.getData();
-
   }
 
 
-  async getData(){
-
+  async getData(page: number = 1){
+    this.isLoading = true;
+    const resFlight = await this.flightService.getItemsWithPagination(page, this.pageSize).firstValueFrom();
+    this.listOfData = resFlight.content;
+    this.isLoading = false;
   }
+
+  
 
   handlerOpenDialog(mode: string = 'add', item: any = null) {
         const dialog = this.dialogService.openDialog(

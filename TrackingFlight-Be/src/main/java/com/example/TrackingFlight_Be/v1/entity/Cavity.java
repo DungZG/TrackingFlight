@@ -1,5 +1,6 @@
 package com.example.TrackingFlight_Be.v1.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -20,9 +21,10 @@ public class Cavity {
     Long carvityTo;
     Long carvityFrom;
     String cavityClass;
-    Float price;
+    Double price;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "aircraft_id")
     Aircraft aircraft;
 }

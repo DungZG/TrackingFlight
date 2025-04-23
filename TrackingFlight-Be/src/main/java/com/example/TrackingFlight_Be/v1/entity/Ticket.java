@@ -39,6 +39,7 @@ public class Ticket {
     private Payment payment;
 
     private String ticketClass;
+    private Float price;
 
     @ManyToOne
     @JoinColumn(name = "discount_id")

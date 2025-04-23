@@ -3,7 +3,8 @@ package com.example.TrackingFlight_Be.v1.dto.request;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.util.Date;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -11,12 +12,14 @@ import java.util.Date;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class FlightCreationRequest {
-    Long flightId;
-    String airlineId;
-    Long flightNumber;
-    String departureLocation;
-    Date departureTime;
-    String arrivalLocation;
-    Date arrivalTime;
-    Long price;
+    private Long airlineId;
+    private String flightNumber;
+    private String departureLocation;
+    private String arrivalLocation;
+    private Timestamp departureTime;
+    private Timestamp arrivalTime;
+    private Double price;
+    private Long aircraftId;
+    private Long status;
+    private  Long typeFlight;
 }

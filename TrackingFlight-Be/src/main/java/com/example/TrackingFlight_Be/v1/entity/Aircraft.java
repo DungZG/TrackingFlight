@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.List;
 
 @Entity
 @Getter
@@ -22,7 +23,7 @@ public class Aircraft {
     @JoinColumn(name = "airline_id")
     Airline airline;
     Long tankage;
-    @ManyToOne
-    @JoinColumn(name = "cavity_id")
-    Cavity cavity;
+
+    @OneToMany(mappedBy = "aircraft", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    List<Cavity> cavityList;
 }

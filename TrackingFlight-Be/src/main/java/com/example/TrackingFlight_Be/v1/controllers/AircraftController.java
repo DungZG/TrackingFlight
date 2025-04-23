@@ -67,7 +67,7 @@ public class AircraftController {
     @DeleteMapping("/{aircraftId}")
     public ResponseEntity<Void> deleteAircraft(@PathVariable Long aircraftId) {
         aircraftService.deleteAircraft(aircraftId);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT); // Xóa thành công, không có nội dung trả về
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/search")

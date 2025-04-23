@@ -15,13 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
-import org.springframework.http.MediaType;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -29,47 +26,33 @@ import java.util.Map;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE,makeFinal = true)
 public class FlightController {
-    FlightService flightService;
-    @Autowired
-    FlightRepository flightRepository;
+    private final FlightService flightService;
 
-    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ApiResponse<Flight> createFlight(
-            @RequestBody @Valid FlightCreationRequest request
-    )
-    {
-        ApiResponse<Flight> apiResponse = new ApiResponse<>();
-        apiResponse.setResult(flightService.createFlight(request));
-        return apiResponse;
-    }
-    
-    @GetMapping("/all")
-    public List<Flight> getFlights() {
-        return flightService.getFlights();
+    @PostMapping
+    public ResponseEntity<Flight> createFlight(@RequestBody FlightCreationRequest request) {
+        return ResponseEntity.ok(flightService.createFlight(request));
     }
 
-    @GetMapping("/{flightId}")
-    public FlightResponse getFlight(@PathVariable String flightId) {
-        return flightService.getFlight(flightId);
-    }
-
-    @PutMapping(value = "/{flightId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public FlightResponse updateFlight(
-            @PathVariable String flightId,
-            @RequestBody @Valid FlightCreationRequest request) {
-        return flightService.updateFlight(flightId, request);
-    }
-
-    @DeleteMapping("/{flightId}")
-    public ResponseEntity<Map<String, String>> deleteStaff(@PathVariable String flightId) {
-        flightService.deleteFlight(flightId);
-        Map<String, String> response = new HashMap<>();
-        response.put("message", "User with id " + flightId + " has been deleted");
-        return ResponseEntity.ok(response);
-    }
     @GetMapping("/items")
-    public Page<Flight> getItemsWithPagination(@RequestParam int page, @RequestParam int size) {
-        PageRequest pageRequest = PageRequest.of(page - 1, size); // Bắt đầu từ trang 0
-        return flightRepository.findAll(pageRequest);
+    public ResponseEntity<Page<Flight>> getAllFlights(@RequestParam(defaultValue = "1") int page,
+                                                      @RequestParam(defaultValue = "5") int size) {
+        Pageable pageable = PageRequest.of(page-1, size);
+        return ResponseEntity.ok(flightService.getAllFlights(pageable));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Flight> getFlight(@PathVariable Long id) {
+        return ResponseEntity.ok(flightService.getFlight(id));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Flight> updateFlight(@PathVariable Long id, @RequestBody FlightCreationRequest request) {
+        return ResponseEntity.ok(flightService.updateFlight(id, request));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteFlight(@PathVariable Long id) {
+        flightService.deleteFlight(id);
+        return ResponseEntity.noContent().build();
     }
 }

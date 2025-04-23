@@ -20,9 +20,9 @@ export class AircraftdetailComponent implements OnInit {
     public cabinList: any[] = [];
     public cabin:any;
     @Input() items: { label: string, value: any }[] = [];
-    @Input() mode: string; // "view", "edit", "add"
+    @Input() mode: string;
     @Input() id: string;
-    @Input() aircraftData: any;  // Dữ liệu máy bay khi chỉnh sửa hoặc xem
+    @Input() aircraftData: any;
     onClose = new EventEmitter<any | null>();
       constructor(
         private fb:FormBuilder,
@@ -42,6 +42,9 @@ export class AircraftdetailComponent implements OnInit {
     
       ngOnInit() {
         this.getData();
+        if(this.mode == 'view'){
+          this.validateForm.get('aircraftName')?.value 
+        }
       }
 
       async getData(){

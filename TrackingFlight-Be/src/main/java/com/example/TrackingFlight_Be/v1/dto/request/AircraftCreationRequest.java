@@ -11,6 +11,7 @@ import java.util.List;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class AircraftCreationRequest {
+    Long aircraftId;
     String aircraftName;
     String aircraftCode;
     Long tankage;

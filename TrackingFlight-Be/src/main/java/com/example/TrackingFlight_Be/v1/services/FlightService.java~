@@ -45,7 +45,6 @@ public class FlightService {
       flight.setArrivalTime(request.getArrivalTime());
       flight.setPrice(request.getPrice());
       flight.setStatus(1L);
-      flight.setTypeFlight(request.getTypeFlight());
 
       return flightRepository.save(flight);
    }

@@ -28,16 +28,18 @@ export class AircraftComponent {
   public validateForm: FormGroup;
   i = 0;
   editId: string | null = null;
-  totalItems: number = 0; // Tổng số phần tử trong danh sách
-  currentPage: number = 0; // Trang hiện tại
-  pageSize: number = 5; // Số lượng item mỗi trang
+  totalItems: number = 0;
+  currentPage: number = 0; 
+  pageSize: number = 5; 
   public listType: any=[]
   public listCompany: any=[]
   public listOfCurrentPageData: any[] = [];
+  public paging:any;
   public listAirline:any []= [
     { label: 'Vietnam Airlines', value: '1' },
     { label: 'VietJet ', value: '2' }
   ];
+  
       constructor(
         private fb: FormBuilder,
         private dialogService: DialogService,
@@ -54,7 +56,6 @@ export class AircraftComponent {
   async getData(page: number = 1){
     this.isLoading = true;
     const resAircraft = await this.aircraftService.getItemsWithPagination(page, this.pageSize).firstValueFrom();
-    debugger
     this.listOfData = resAircraft.result.content;
     this.totalItems = resAircraft.result.totalElements;
     this.isLoading = false;
@@ -111,7 +112,7 @@ export class AircraftComponent {
     }
   }
 
-  async onSearch(page: number = 0, size: number = 5) {
+  async onSearch(page: number = 1, size: number = 5) {
     const formValue = this.validateForm.value;
     this.isLoading = true;
   
