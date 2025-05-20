@@ -73,7 +73,11 @@
     <button nz-button class="bg-green-500 text-white">
       <nz-icon nzType="download" nzTheme="outline" /> Xuất File</button>
   </div>
-    <nz-table #editRowTable nzBordered>
+  <nz-table #editRowTable nzBordered [nzData]="listOfData"
+  [nzNoResult]="listOfData.length === 0 ? 'Không có dữ liệu' : undefined"
+  [nzShowPagination]="true"
+  [nzFrontPagination]="false"
+  [nzPaginationPosition]="'bottom'" style="overflow: auto;">
       <thead>
         <tr>
           <th>Mã Chuyến Bay</th>
@@ -88,21 +92,27 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let flight of listOfData; let i = index">
-          <td>{{ flight.flightId }}</td> 
-          <td>{{ flight.aircraft.aircraftCode }}</td> 
-          <td>{{ flight.departureLocation }}</td> 
-          <td>{{ flight.arrivalLocation }}</td>
-          <td>{{ flight.departureTime }}</td> 
-          <td>{{ flight.arrivalTime }}</td> 
-          <td>{{ flight.typeFlight }}</td> 
-          <td>{{ flight.status }}</td>  
+        <tr *ngFor="let item of listOfData; let i = index">
+          <td>{{ item.flightId }}</td> 
+          <td>{{ item.aircraft.aircraftCode }}</td> 
+          <td>{{ item.departureLocation | labelValue: listCompany }}</td> 
+          <td>{{ item.arrivalLocation | labelValue: listCompany }}</td>
+          <td>{{ item.departureTime | viDateFormat}}</td> 
+          <td>{{ item.arrivalTime | viDateFormat}}</td> 
+          <td>{{ item.typeFlight | labelValue: listType}}</td> 
+          <td>{{ item.status | labelValue: status}}</td>  
           <td>
-            <nz-icon class="text-green-500 mr-4" nzType="eye" nzTheme="outline" ></nz-icon>
-            <nz-icon class="text-sky-500 mr-4" nz-tooltip nzTooltipTitle="Cập nhật" nzType="edit" nzTheme="outline" ></nz-icon>
-            <nz-icon class="text-red-500" nz-tooltip nzTooltipTitle="Xóa" nzType="delete" nzTheme="outline"  ></nz-icon>
+            <nz-icon class="text-green-500 mr-4" nzType="eye" nzTheme="outline" (click)="handlerOpenDialog('view',item)" ></nz-icon>
+            <nz-icon class="text-sky-500 mr-4" nz-tooltip nzTooltipTitle="Cập nhật" nzType="edit" nzTheme="outline" (click)="handlerOpenDialog('edit',item)"></nz-icon>
+            <nz-icon class="text-red-500" nz-tooltip nzTooltipTitle="Xóa" nzType="delete" nzTheme="outline"  (click)="handlerOpenDialog()"></nz-icon>
           </td>
         </tr>
       </tbody>
     </nz-table>
+
+    <nz-pagination class="mt-2 flex justify-end" nation [nzPageIndex]="currentPage"
+    [nzTotal]="totalItems"
+    [nzPageSize]="pageSize"
+    (nzPageIndexChange)="onPageChange($event)">
+    </nz-pagination>
   </div>

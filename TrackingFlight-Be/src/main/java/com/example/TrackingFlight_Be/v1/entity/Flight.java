@@ -3,10 +3,8 @@ package com.example.TrackingFlight_Be.v1.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.hibernate.annotations.CreationTimestamp;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Entity
 @Getter
@@ -18,27 +16,30 @@ import java.time.LocalDateTime;
 public class Flight {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long flightId;
+    Long flightId;
 
     @ManyToOne
     @JoinColumn(name = "airline_id")
-    private Airline airline;
+    Airline airline;
 
     @ManyToOne
     @JoinColumn(name = "aircraft_id")
-    private Aircraft aircraft;
+    Aircraft aircraft;
 
-    private String flightNumber;
-    private String departureLocation;
-    private String arrivalLocation;
-    private Long status;
-    private Long typeFlight;
-    @Column(name = "departure_time")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Timestamp departureTime;
+    String flightNumber;
 
-    @Column(name = "arrival_time")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Timestamp arrivalTime;
-    private Double price;
+    Long departureLocation;
+    Long arrivalLocation;
+
+    OffsetDateTime departureTime;
+    OffsetDateTime arrivalTime;
+
+    Double price;
+
+    Long status;
+    Long typeFlight;
+
+    Boolean isReturnFlight;
+
+    Long groupId;
 }

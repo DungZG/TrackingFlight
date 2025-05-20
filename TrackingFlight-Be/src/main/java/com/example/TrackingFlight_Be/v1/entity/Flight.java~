@@ -1,0 +1,50 @@
+package com.example.TrackingFlight_Be.v1.entity;
+
+import jakarta.persistence.*;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+import java.time.OffsetDateTime;
+
+@Entity
+@Getter
+@Setter
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class Flight {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long flightId;
+
+    @ManyToOne
+    @JoinColumn(name = "airline_id")
+    private Airline airline;
+
+    @ManyToOne
+    @JoinColumn(name = "aircraft_id")
+    private Aircraft aircraft;
+
+    private String flightNumber;
+    private Long departureLocation;
+    private Long arrivalLocation;
+    private Long status;
+    private Long typeFlight;
+    @Column(name = "departure_time")
+    private OffsetDateTime departureTime;
+
+    @Column(name = "arrival_time")
+    private OffsetDateTime arrivalTime;
+
+    @Column(name = "kdeparture_time")
+    private OffsetDateTime rtdepartureTime;
+
+    @Column(name = "karrival_time")
+    private OffsetDateTime rtarrivalTime;
+
+    private Long rtdepartureLocation;
+    private Long rtarrivalLocation;
+
+    private Double price;
+}

@@ -1,0 +1,4 @@
+<nz-date-picker [(ngModel)]="controlValue" [nzDisabledDate]="disabledDate" [nzShowTime]="{ nzHideDisabledOptions: true, nzDefaultOpenValue: timeDefaultValue, 
+    nzFormat:'HH:mm'}" nzFormat="yyyy-MM-dd HH:mm"
+    (ngModelChange)="onChangePicker($event)" [disabled]="disabled">
+</nz-date-picker>

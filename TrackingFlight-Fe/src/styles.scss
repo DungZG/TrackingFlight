@@ -3,7 +3,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 /* You can add global styles to this file, and also import other style files */
 
 html {
@@ -1475,4 +1474,14 @@ input-date-dynamic {
 }
 .ant-layout-sider-children{
   height: 100vh !important;
+}
+
+app-input-select {
+  
+  > nz-select {
+
+     > nz-select-top-control {
+      border: none !important;
+    }
+  }
 }

@@ -21,6 +21,7 @@ public class Location {
 
     String name;
     String country;
+    String locationCode;
 
     @Lob
     byte[] imageUrl;

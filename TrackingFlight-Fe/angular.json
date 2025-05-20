@@ -47,7 +47,10 @@
               "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+                "./node_modules/flyonui/dist/index.js",
+                "./node_modules/flyonui/dist/accordion.js"
+            ]
           },
           "configurations": {
             "production": {

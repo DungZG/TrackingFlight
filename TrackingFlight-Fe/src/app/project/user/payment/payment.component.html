@@ -5,85 +5,80 @@
   <nz-step nzTitle="Kiểm Tra và Thanh Toán"></nz-step>
 </nz-steps>
 
-<div class="steps-content">
+  <div class="steps-content">
   @if (current == 0) {
     <div class="mb-8 mt-8">
       <label for="">
-        Một chiều
+        {{selectedFlight.typeFlight | labelValue: listType}}
         ·
         1 hành khách
         ·
-        T7, 26 tháng 4
+        {{selectedFlight.departureTime | viDateFormat}}
       </label>
-      <h3 class="font-bold text-2xl">Từ Hà Nội đến TP. Hồ Chí Minh</h3>
+      <h3 class="font-bold text-2xl">Từ {{this.selectedFlight.departureLocation |labelValue:listOfLocation }} đến {{this.selectedFlight.arrivalLocation|labelValue:listOfLocation}}</h3>
     </div>
     <span class="font-bold">Chọn loại vé của bạn</span>
     <div class="flex flex-row mt-2">
-      <div class="flex flex-col " style="border: 1px solid #dcdada;border-radius:15px;padding:20px;">
-          <label for="" class="font-bold">Vé Tiêu Chuẩn</label>
-          <span class="flex flex-row">
-            <p class="pr-2">Tổng giá </p>
-            <p class="font-bold"> VND 2.058.883,00</p>
-          </span>
-
-          <div class="flex flex-col mt-1">
-            <p>Giá thấp nhất</p>
-            <p>
-              Không cần sự linh hoạt - bạn chắc chắn về  <br>
-              kế hoạch của mình
-            </p>
-          </div>
-
-          <button class="h-[50px] mt-3" nz-button nzType="primary" (click)="next()">
-            <span>Tiếp</span>
-          </button>
-      </div>
-
-      <div class="flex flex-col ml-4 w-[400px]" style="border: 1px solid #dcdada;border-radius:15px;padding:20px;">
-        <label for="" class="font-bold">Vé linh hoạt</label>
+      <!-- Vé Tiêu Chuẩn -->
+      <div class="flex flex-col" style="border: 1px solid #dcdada;border-radius:15px;padding:20px;">
+        <label for="" class="font-bold">Vé Tiêu Chuẩn</label>
         <span class="flex flex-row">
           <p class="pr-2">Tổng giá </p>
-          <p class="font-bold"> VND 2.326.537,79</p>
+          <p class="font-bold"> VND {{this.selectedFlight.price | number}}</p>
         </span>
-
+    
         <div class="flex flex-col mt-1">
-          <p>Đổi giờ hoặc ngày bay một lần, lên đến 24 giờ trước giờ cất cánh</p>
+          <p>Giá thấp nhất</p>
           <p>
-            Bay cùng hãng hàng không theo tuyến đã đặt ban đầu
-          </p>
-          <p>
-            Không tính phí đổi – chỉ thanh toán giá chênh lệch (nếu có)
+            Không cần sự linh hoạt - bạn chắc chắn về  <br>
+            kế hoạch của mình
           </p>
         </div>
-
-        <label for="" class="font-bold">Cách để thay đổi</label>
-        <div class="flex flex-col mt-1">
-          <p>Liên hệ Dịch vụ Khách hàng của chúng tôi qua tính năng chat trực tiếp hoặc gọi điện ít nhất 24 giờ trước chuyến bay ban đầu</p>
-          <p>
-            Chúng tôi sẽ chia sẻ các chuyến bay còn vé, phù hợp với yêu cầu đổi của bạn
-          </p>
-          <p>
-            Chúng tôi sẽ hỗ trợ bạn trong việc thanh toán giá vé chênh lệch và xác nhận chuyến bay mới
-          </p>
-        </div>
-
+    
         <button class="h-[50px] mt-3" nz-button nzType="primary" (click)="next()">
           <span>Tiếp</span>
         </button>
       </div>
-
+    
+      <!-- Vé linh hoạt -->
+      <div class="flex flex-col ml-4 w-[400px]" style="border: 1px solid #dcdada;border-radius:15px;padding:20px;">
+        <label for="" class="font-bold">Vé linh hoạt</label>
+        <span class="flex flex-row">
+          <p class="pr-2">Tổng giá </p>
+          <p class="font-bold"> VND {{this.selectedFlight.price * 1.1 | number}}</p>
+        </span>
+    
+        <div class="flex flex-col mt-1">
+          <p>Đổi giờ hoặc ngày bay một lần, lên đến 24 giờ trước giờ cất cánh</p>
+          <p>Bay cùng hãng hàng không theo tuyến đã đặt ban đầu</p>
+          <p>Không tính phí đổi – chỉ thanh toán giá chênh lệch (nếu có)</p>
+        </div>
+    
+        <label for="" class="font-bold">Cách để thay đổi</label>
+        <div class="flex flex-col mt-1">
+          <p>Liên hệ Dịch vụ Khách hàng của chúng tôi qua tính năng chat trực tiếp hoặc gọi điện ít nhất 24 giờ trước chuyến bay ban đầu</p>
+          <p>Chúng tôi sẽ chia sẻ các chuyến bay còn vé, phù hợp với yêu cầu đổi của bạn</p>
+          <p>Chúng tôi sẽ hỗ trợ bạn trong việc thanh toán giá vé chênh lệch và xác nhận chuyến bay mới</p>
+        </div>
+    
+        <button class="h-[50px] mt-3" nz-button nzType="primary" (click)="next()">
+          <span>Tiếp</span>
+        </button>
+      </div>
+    
+      <!-- Chuyến bay -->
       <div class="ml-3">
-          <label for="" class="font-bold">Chuyến bay</label>
-          <span class="flex flex-row">
-            <p>Người lớn (1)</p>
-            <p>VND 2.058.883,00</p>
+        <label for="" class="font-bold">Chuyến bay</label>
+        <span class="flex flex-row">
+          <p>Người (1)</p>
+          <p>VND {{selectedFlight.price | number}}</p>
+        </span>
+        <div>
+          <span class=" flex flex-row font-bold text-xl">
+            <p>Tổng</p>
+            <p>VND {{totalPrice | number}}</p>
           </span>
-          <div>
-            <span class=" flex flex-row font-bold text-xl">
-              <p>Tổng</p>
-              <p>VND 2.058.883,00</p>
-            </span>
-          </div>
+        </div>
       </div>
     </div>
   }
@@ -97,7 +92,11 @@
         </div>
    
        <div class="mt-4 p-5 border border-solid border-[#dcdada] rounded-md items-center w-[450px]">
-         <button nz-button nzType="default" class="flex justify-center font-bold p-5 border border-solid border-[#dcdada] rounded-md items-center" (click)="openHandelDialog()">Thêm Thông Tin của bạn</button>
+        <button nz-button nzType="default" class="flex justify-center font-bold p-5 border border-solid border-[#dcdada] rounded-md items-center" (click)="openHandelDialog()">
+          {{ userInfo?.name && userInfo?.sdt && userInfo?.gender && userInfo?.email
+            ? userInfo.name + ' , ' + userInfo.sdt + ' , ' + userInfo.gender + ' , ' + userInfo.email
+            : 'Thêm Thông Tin của bạn' }}
+        </button>
          <div>
            <p class="mt-2">1 túi xách nhỏ
              <br>Đã bao gồm
@@ -106,7 +105,7 @@
              1 hành lý cabin
              <br>Đã bao gồm
            </p>
-           <label class="mt-5 p-5 border border-solid border-[#dcdada] rounded-md" [(ngModel)]="checked" nz-checkbox >
+           <label class="mt-5 p-5 border border-solid border-[#dcdada] rounded-md" [(ngModel)]="checked" nz-checkbox (ngModelChange)="updateTotalPrice()">
              Thêm 1 hành lí kí gửi
              + VND 244.136,60 
              20 kg
@@ -120,12 +119,12 @@
           <label for="" class="font-bold">Chuyến bay</label>
           <span class="flex flex-row">
             <p>Người lớn (1)</p>
-            <p>VND 2.058.883,00</p>
+            <p>VND {{this.totalPrice | number}}</p>
           </span>
           <div>
             <span class=" flex flex-row font-bold text-xl mt-10">
               <p>Tổng</p>
-              <p>VND 2.058.883,00</p>
+              <p>VND {{this.totalPrice | number}}</p>
             </span>
           </div>
         </div>
@@ -136,113 +135,81 @@
   @if (current == 2) {
     <label for="" class="font-bold text-xl">Chọn Ghế</label>
     <div class="mt-10">
-      <p class="font-bold text-sm">Hà Nội - Hồ Chí Minh</p>
+      <p class="font-bold text-sm">{{this.selectedFlight.departureLocation | labelValue:listOfLocation }} - {{this.selectedFlight.arrivalLocation | labelValue:listOfLocation}}</p>
       <p>2h 10' · VietJet Aviation</p>
+      
       <div class="mt-10 flex flex-row justify-around p-5 border border-solid border-[#dcdada] rounded-md">
         <div class="flex flex-col">
-          <p class="font-bold text-sm">Nguyen Dung</p>
-          <p>Chưa chọn ghế</p>
-          <p >{{this.seatData}}</p>
+          <p class="font-bold text-sm">{{userInfo.name}}</p>
+          <p *ngIf="this.seatData == null">Chưa chọn ghế</p>
+          <p>{{this.seatData}}</p>
         </div>
-        <div class="airplane-container">
-          <!-- Legend -->
-          <div class="seat-legend">
-            <div class="legend-item">
-              <div class="seat-demo first"></div>
-              <span>First Class</span>
-            </div>
-            <div class="legend-item">
-              <div class="seat-demo business"></div>
-              <span>Business Class</span>
-            </div>
-            <div class="legend-item">
-              <div class="seat-demo economy"></div>
-              <span>Economy Class</span>
-            </div>
-          </div>
-        
+
+         
+    
+         <div class="seat-map">
           <!-- Seat Map -->
-          <div class="seat-map">
-            <!-- Header -->
-            <!-- <div class="seat-row header">
-              <div class="section left">
-                <span *ngFor="let col of leftSection">{{col}}</span>
-              </div>
-              <div class="section middle">
-                <span *ngFor="let col of middleSection">{{col}}</span>
-              </div>
-              <div class="section right">
-                <span *ngFor="let col of rightSection">{{col}}</span>
-              </div>
-            </div> -->
-        
-            <!-- Rows -->
-            <div *ngFor="let row of rows" class="seat-row" [class.emergency-exit]="isEmergencyExit(row)">
-              <!-- Left Section (2 seats) -->
-              <div class="section left">
-                <div *ngFor="let col of leftSection" 
-                     class="seat" 
-                     [class.first]="seatMap[col+row].type === 'first'"
-                     [class.business]="seatMap[col+row].type === 'business'"
-                     [class.economy]="seatMap[col+row].type === 'economy'"
-                     (click)="onSeatSelect(col+row)">
-                  {{col}}{{row}}
-                </div>
-              </div>
-        
-              <!-- Middle Section (3 seats) -->
-              <div class="section middle">
-                <div *ngFor="let col of middleSection"
-                     class="seat"
-                     [class.first]="seatMap[col+row].type === 'first'"
-                     [class.business]="seatMap[col+row].type === 'business'"
-                     [class.economy]="seatMap[col+row].type === 'economy'"
-                     [class.occupied]="seatMap[col+row].status === 'occupied'"
-                     [class.selected]="seatMap[col+row].status === 'selected'"
-                     (click)="onSeatSelect(col+row)">
-                  {{col}}{{row}}
-                </div>
-              </div>
-        
-              <!-- Right Section (2 seats) -->
-              <div class="section right">
-                <div *ngFor="let col of rightSection"
-                     class="seat"
-                     [class.first]="seatMap[col+row].type === 'first'"
-                     [class.business]="seatMap[col+row].type === 'business'"
-                     [class.economy]="seatMap[col+row].type === 'economy'"
-                     [class.occupied]="seatMap[col+row].status === 'occupied'"
-                     [class.selected]="seatMap[col+row].status === 'selected'"
-                     (click)="onSeatSelect(col+row)">
-                  {{col}}{{row}}
-                </div>
-              </div>
-        
-              <!-- Row Number -->
-              <!-- <div class="row-number">{{row}}</div> -->
-        
-              <!-- Emergency Exit Indicators -->
-              <ng-container *ngIf="isEmergencyExit(row)">
-                <div class="exit left">EXIT</div>
-                <div class="exit right">EXIT</div>
-              </ng-container>
-        
-              <!-- Lavatory Indicators -->
-              <ng-container *ngIf="isLavatory(row)">
-                <div class="lavatory left">
-                  <i class="fas fa-toilet"></i>
-                </div>
-                <div class="lavatory right">
-                  <i class="fas fa-toilet"></i>
-                </div>
-              </ng-container>
+         <div class="airplane-container">
+          <div class="seat-legend">
+            <div class="legend-item" *ngFor="let cavity of selectedFlight.aircraft.cavityList">
+              <div class="seat-demo" [ngClass]="{'first': cavity.cavityClass === 'First Class', 'economy': cavity.cavityClass === 'Economy Class', 'business': cavity.cavityClass === 'Business Class'}"></div>
+              <span>{{cavity.cavityClass}}</span>
             </div>
           </div>
+         </div>
+         <div *ngFor="let row of rows" class="seat-row" [class.emergency-exit]="isEmergencyExit(row)">
+          <!-- Phần bên trái -->
+          <div class="section left">
+            <div *ngFor="let col of leftSection"
+                 class="seat seat-demo"
+                 [ngClass]="{
+                   'first': seatMap[col + row].type === 'First Class',
+                   'business': seatMap[col + row].type === 'Business Class',
+                   'economy': seatMap[col + row].type === 'Economy Class',
+                   'occupied': seatMap[col + row].status === 'occupied',
+                   'selected': selectedSeats.includes(col + row)
+                 }"
+                 (click)="onSeatSelect(col + row)">
+              {{col}}{{row}}
+            </div>
+          </div>
+      
+          <!-- Phần giữa -->
+          <div class="section middle">
+            <div *ngFor="let col of middleSection"
+                 class="seat seat-demo"
+                 [ngClass]="{
+                   'first': seatMap[col + row].type === 'First Class',
+                   'business': seatMap[col + row].type === 'Business Class',
+                   'economy': seatMap[col + row].type === 'Economy Class',
+                   'occupied': seatMap[col + row].status === 'occupied',
+                   'selected': selectedSeats.includes(col + row)
+                 }"
+                 (click)="onSeatSelect(col + row)">
+              {{col}}{{row}}
+            </div>
+          </div>
+      
+          <!-- Phần bên phải -->
+          <div class="section right">
+            <div *ngFor="let col of rightSection"
+                 class="seat seat-demo"
+                 [ngClass]="{
+                   'first': seatMap[col + row].type === 'First Class',
+                   'business': seatMap[col + row].type === 'Business Class',
+                   'economy': seatMap[col + row].type === 'Economy Class',
+                   'occupied': seatMap[col + row].status === 'occupied',
+                   'selected': selectedSeats.includes(col + row)
+                 }"
+                 (click)="onSeatSelect(col + row)">
+              {{col}}{{row}}
+            </div>
+          </div>
+        </div>
         </div>
       </div>
     </div>
   }
-
   @if (current == 3) {
     <div class="mt-10">
       <label for="" class="font-bold text-2xl">Kiểm tra thông tin và thanh toán</label>
@@ -250,18 +217,19 @@
         <div class="flex flex-col">
           <div class="flex flex-row mt-10 p-[20px] border border-solid border-[#dcdada] rounded-md justify-between items-center">
             <div class="">
-              <img class="h-[64px] w-[64px]" src="../../../../asset/VJ.png" alt="">
+              <!-- <img class="h-[64px] w-[64px]" src="../../../../asset/VJ.png" alt=""> -->
+              <img class="h-[48px] w-[48px] mr-4" [src]="'data:image/png;base64,'+ this.selectedFlight.airline.imageUrl"  alt="">
             </div>
     
             <div class="ml-5">
-                <label for="" class=" text-xl font-bold">Hanoi (HAN) đi Ho Chi Minh City (SGN)</label>
-                <p>T7, 26 tháng 4 · 22:40 - CN, 27 tháng 4 · 00:50</p>
-                <p>Bay thẳng · 2h 10' · Hạng phổ thông</p>
-                <p>VietJet Aviation · VJ1165</p>
+                <label for="" class=" text-xl font-bold">{{this.selectedFlight.departureLocation | labelValue:listOfLocation }} ({{this.selectedFlight.departureLocation | labelValue:listOfCodeLocation }}) đi {{this.selectedFlight.arrivalLocation | labelValue:listOfLocation}} ({{this.selectedFlight.arrivalLocation | labelValue:listOfCodeLocation}})</label>
+                <p>{{this.selectedFlight.departureTime | viDate}} - {{this.selectedFlight.arrivalTime | viDate}}</p>
+                <p>{{this.selectedFlight.typeFlight | labelValue: listType}} · 2h 10'</p>
+                <p>{{this.selectedFlight.airline.name}} · {{this.selectedFlight.aircraft.aircraftName}}</p>
             </div>
     
             <div>
-              <button nz-button nzType="primary" (click)="openHandelDialogFlight()">Xem Chi Tiết</button>
+              <button nz-button nzType="primary" (click)="openHandelDialogFlight()" >Xem Chi Tiết</button>
             </div>
           </div>
     
@@ -271,8 +239,8 @@
             </div>
     
             <div class="mt-5">
-                <p>+84395185726</p>
-                <p>tridung4323gmail.com </p>
+                <p>{{userInfo.sdt}}</p>
+                <p>{{userInfo.email}} </p>
             </div>
     
           </div>
@@ -285,8 +253,8 @@
             <div class="mt-5 flex flex-row">
               <nz-icon class="text-[32px]" nzType="user" nzTheme="outline" />
               <span class="flex flex-col ml-2">
-                <p>Nguyen Dung</p>
-                <p>Người lớn. Nam . 12 thang 1,2003</p>
+                <p>{{userInfo.name}}</p>
+                <p>{{userInfo.gender}} . 12 thang 1,2003</p>
               </span>
             </div>
           </div>
@@ -305,9 +273,12 @@
                 23 x 36 x 56 cm · Trọng lượng tối đa 7 kg
               </p>
     
-               <p>
-                Không bao gồm hành lý ký gửi
+               <p *ngIf="checked == true">
+                 Bao gồm hành lý ký gửi
                </p>
+               <p *ngIf="checked == false">
+                Không bao gồm hành lý ký gửi
+              </p>
             </div>
           </div>
     
@@ -318,14 +289,14 @@
     
             <div class="mt-5 flex flex-col">
               <p>Đã chọn 1 ghế</p>
-              <p>4B</p>
+              <p>{{this.seatData}}</p>
             </div>
           </div>
         </div>
         <div class="flex flex-col">
           <div class="mt-10">
             <label for="" class="font-bold text-2xl">Chuyến bay </label>
-            <p class="mt-2 text-[16px]"><nz-icon nzType="user" nzTheme="outline" class="mt-2 text-[16px]"/> Người lớn 1 VND 2.069.677</p>
+            <p class="mt-2 text-[16px]"><nz-icon nzType="user" nzTheme="outline" class="mt-2 text-[16px]"/> 1 người VND {{selectedFlight.price | number}}</p>
           </div>
 
           <div class="mt-10 border-y border-solid border-[#dcdada] p-[20px]">
@@ -334,7 +305,7 @@
             <p class="text-[16px] mt-2">Chỗ ngồi(1) VND 191.948</p>
           </div>
 
-          <p class="mt-10 font-bold text-2xl">Tổng   VND 2.530.683,01</p>
+          <p class="mt-10 font-bold text-2xl">Tổng VND {{this.totalPrice | number}}</p>
         </div>
       </div>
       
@@ -342,7 +313,7 @@
     </div>
   }
 <div class="steps-action">
-  @if (current > 0 || current == 0) {
+  @if (current > 0) {
     <button nz-button nzType="default" (click)="pre()">
       <span>Quay Lại</span>
     </button>
@@ -357,4 +328,4 @@
       <span>Thanh Toán Ngay</span>
     </button>
   }
-</div>
+  </div>

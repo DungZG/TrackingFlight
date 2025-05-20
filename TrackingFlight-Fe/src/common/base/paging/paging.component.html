@@ -41,7 +41,7 @@
         </ul>
         <div class="paging-size">
             <span>Số hàng mỗi trang: </span>
-            <app-input-select [items]="rowsPerPage" [(ngModel)]="itemsPerPage" (onChange)="changeSize($event)"></app-input-select>
+            <input-select [items]="rowsPerPage" [(ngModel)]="itemsPerPage" (onChange)="changeSize($event)"></input-select>
         </div>
     </div>
 </div>

@@ -15,8 +15,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -29,6 +31,14 @@ public class FlightService {
    private final TicketRepository ticketRepository;
 
    public Flight createFlight(FlightCreationRequest request) {
+      // Nếu chuyến này thuộc chuyến khứ hồi mà chưa có groupId thì tạo mới
+      if (Boolean.TRUE.equals(request.getIsReturnFlight()) || (request.getTypeFlight() != null && request.getTypeFlight() == 2L)) {
+         if (request.getGroupId() == null) {
+            request.setGroupId(Math.abs(UUID.randomUUID().getMostSignificantBits()));
+         }
+      }
+
+      // Tiếp tục tạo flight như bình thường
       Airline airline = airlineRepository.findById(request.getAirlineId())
               .orElseThrow(() -> new RuntimeException("Airline not found"));
 
@@ -46,9 +56,28 @@ public class FlightService {
       flight.setPrice(request.getPrice());
       flight.setStatus(1L);
       flight.setTypeFlight(request.getTypeFlight());
+      flight.setIsReturnFlight(request.getIsReturnFlight() != null ? request.getIsReturnFlight() : false);
+      flight.setGroupId(request.getGroupId());
 
       return flightRepository.save(flight);
    }
+
+   public List<Flight> createRoundTripFlight(FlightCreationRequest outboundRequest,
+                                             FlightCreationRequest returnRequest) {
+      Long groupId = Math.abs(UUID.randomUUID().getMostSignificantBits());
+      outboundRequest.setIsReturnFlight(false);
+      outboundRequest.setGroupId(groupId);
+
+      returnRequest.setIsReturnFlight(true);
+      returnRequest.setGroupId(groupId);
+
+      List<Flight> result = new ArrayList<>();
+      result.add(createFlight(outboundRequest));
+      result.add(createFlight(returnRequest));
+      return result;
+   }
+
+
 
    public Flight getFlight(Long id) {
       return flightRepository.findById(id)
@@ -89,6 +118,32 @@ public class FlightService {
       Flight flight = getFlight(id);
       ticketRepository.deleteAll(ticketRepository.findByFlight(flight));
       flightRepository.delete(flight);
+   }
+
+   public Page<Flight> searchFlights(Long departureLocation, Long arrivalLocation,
+                                     OffsetDateTime departureTime, OffsetDateTime returnTime, boolean isRoundTrip,
+                                     Pageable pageable) {
+      OffsetDateTime departureStart = departureTime.minusHours(3);
+      OffsetDateTime departureEnd = departureTime.plusHours(3);
+
+      if (isRoundTrip) {
+         OffsetDateTime returnStart = returnTime.minusHours(3);
+         OffsetDateTime returnEnd = returnTime.plusHours(3);
+
+         Page<Flight> outboundFlights = flightRepository
+                 .findByDepartureLocationAndArrivalLocationAndDepartureTimeBetweenAndIsReturnFlight(
+                         departureLocation, arrivalLocation, departureStart, departureEnd, false, pageable);
+
+         Page<Flight> returnFlights = flightRepository
+                 .findByDepartureLocationAndArrivalLocationAndDepartureTimeBetweenAndIsReturnFlight(
+                         arrivalLocation, departureLocation, returnStart, returnEnd, true, pageable);
+
+         return outboundFlights;
+      } else {
+         return flightRepository
+                 .findByDepartureLocationAndArrivalLocationAndDepartureTimeBetweenAndIsReturnFlight(
+                         departureLocation, arrivalLocation, departureStart, departureEnd, false, pageable);
+      }
    }
 
 }

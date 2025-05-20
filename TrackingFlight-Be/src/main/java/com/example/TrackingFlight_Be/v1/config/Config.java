@@ -1,19 +1,15 @@
 
-package com.example.TrackingFlight_Be.v1.common.qr;
+package com.example.TrackingFlight_Be.v1.config;
 
+import jakarta.servlet.http.HttpServletRequest;
+
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
-import jakarta.servlet.http.HttpServletRequest;
+import java.util.*;
 
 /**
  *
@@ -23,10 +19,12 @@ public class Config {
 
     public static String vnp_PayUrl = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
     public static String vnp_ReturnUrl = "http://localhost:8080/vnpay_jsp/vnpay_return.jsp";
-    public static String vnp_TmnCode = "";
-    public static String secretKey = "";
+    public static String vnp_TmnCode = "ZH15MJN5";
+    public static String secretKey = "DJ49ABJSOLMNXYPDY8I7BJ2GU04AN5DG";
     public static String vnp_ApiUrl = "https://sandbox.vnpayment.vn/merchant_webapi/api/transaction";
 
+    public static String vnp_Version = "2.1.0";
+    public static String vnp_Command = "pay";
     public static String md5(String message) {
         String digest = null;
         try {

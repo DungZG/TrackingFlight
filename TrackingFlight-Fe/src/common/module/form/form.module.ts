@@ -21,6 +21,8 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { RenderErrorsComponent } from '../render-errors/render-errors.component';
 import { FormControlComponent } from '../form-control/form-control.component';
 import { PagingComponent } from '../../base/paging/paging.component';
+import { InputNumberComponent } from '../../base/input-number/input-number.component';
+import { InputDatetimeBasicComponent } from '../../base/input-datetime-basic/input-datetime-basic.component';
 
 @NgModule({
   declarations: [
@@ -29,10 +31,12 @@ import { PagingComponent } from '../../base/paging/paging.component';
     InputTextComponent,
     InputImageComponent,
     InputDateRangeComponent,
+    InputNumberComponent,
     LoadingComponent,
     FormControlComponent,
     RenderErrorsComponent,
     PagingComponent,
+    InputDatetimeBasicComponent,
   ],
   imports: [
     CommonModule,
@@ -54,6 +58,7 @@ import { PagingComponent } from '../../base/paging/paging.component';
     InputTextSearchComponent,
     InputSelectComponent,
     InputDateRangeComponent,
+    InputNumberComponent,
     NzTabsModule,
     NzTableModule,
     NzToolTipModule,
@@ -69,7 +74,8 @@ import { PagingComponent } from '../../base/paging/paging.component';
     FormsModule,
     FormControlComponent,
     RenderErrorsComponent,
-    PagingComponent
+    PagingComponent,
+    InputDatetimeBasicComponent
   ]
 })
 export class FormModule { }

@@ -52,3 +52,25 @@
     transform: rotate(90deg);
   }
 }
+
+.relative {
+  padding: 0 10px; 
+}
+
+#slidesContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px; 
+}
+
+
+.relative .flex {
+  width: auto; 
+  margin: 0 auto; 
+}
+
+
+.relative .text-center {
+  font-size: 14px; 
+  text-align: center;
+}

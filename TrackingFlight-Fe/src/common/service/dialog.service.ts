@@ -52,6 +52,26 @@ export class DialogService {
             nzViewContainerRef: modalConfig.viewContainerRef,
             nzZIndex: modalConfig.zIndex,
         });
+
+        const outSide: any = modal;
+    const lstSub: any[] = [];
+    modal.afterOpen.subscribe(() => {
+      // subscribe Event
+      if (onEmitEvent) {
+        const ci: any = outSide.componentInstance;
+        for (const keyName in ci) {
+          if (ci[keyName] instanceof EventEmitter) {
+            lstSub.push(
+              ci[keyName].subscribe((value: any) => {
+                onEmitEvent(keyName, value);
+              })
+            );
+          }
+        }
+      }
+    });
+
+        
         // if (!modalConfig.bodyClass) modalConfig.bodyClass = '';
         // modalConfig.bodyClass += modalConfig.bodyClass
         //     ? ' '

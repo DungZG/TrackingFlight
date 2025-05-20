@@ -33,6 +33,7 @@ import { AircraftdetailComponent } from './aircraft/aircraftdetail/aircraftdetai
 import { AircraftcontainerComponent } from './aircraft/aircraftdetail/aircraftcontainer/aircraftcontainer.component';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzResultModule } from 'ng-zorro-antd/result';
+import { PipeModule } from '../../../common/pipe/pipe.module';
 @NgModule({
   declarations: [
     AdminComponent,
@@ -70,7 +71,8 @@ import { NzResultModule } from 'ng-zorro-antd/result';
     NzImageModule,
     NgTemplateOutlet,
     NzPaginationModule,
-    NzResultModule
+    NzResultModule,
+    PipeModule
   ]
 })
 export class AdminModule { }

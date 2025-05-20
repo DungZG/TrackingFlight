@@ -1,4 +1,7 @@
 package com.example.TrackingFlight_Be.v1.repositories;
 
-public class UserRepository {
+import com.example.TrackingFlight_Be.auth.common.entity.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface UserRepository extends JpaRepository<User, Long> {
 }

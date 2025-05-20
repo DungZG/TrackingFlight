@@ -186,3 +186,46 @@
   &.occupied { background: #f44336; }
   &.selected { background: #FFC107; }
 }
+
+/* CSS cho từng loại ghế */
+.first {
+  background-color: #4CAF50; /* Màu xanh lá cho First Class */
+  color: white;
+}
+
+.business {
+  background-color: #2196F3; /* Màu xanh dương cho Business Class */
+  color: white;
+}
+
+.economy {
+  background-color: #9E9E9E; /* Màu xám cho Economy Class */
+  color: white;
+}
+
+.occupied {
+  background-color: #f44336; /* Màu đỏ cho ghế đã chiếm */
+  color: white;
+  cursor: not-allowed; /* Không cho chọn ghế đã chiếm */
+}
+
+.selected {
+  background-color: #FFC107; /* Màu vàng cho ghế đã chọn */
+  color: black;
+}
+
+.seat {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.2s;
+}
+
+.seat:hover:not(.occupied) {
+  transform: scale(1.1);
+}

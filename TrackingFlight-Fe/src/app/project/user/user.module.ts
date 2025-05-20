@@ -29,6 +29,7 @@ import { NzStepsModule } from 'ng-zorro-antd/steps';
 import { PaymentComponent } from './payment/payment.component';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { PaymentDetailComponent } from './payment/payment-detail/payment-detail.component';
+import { PaymentFlightdetailComponent } from './payment/payment-flightdetail/payment-flightdetail.component';
 @NgModule({
   declarations: [
     UserComponent,
@@ -40,7 +41,8 @@ import { PaymentDetailComponent } from './payment/payment-detail/payment-detail.
     FlightdetailComponent,
     BookingdetailComponent,
     PaymentComponent,
-    PaymentDetailComponent
+    PaymentDetailComponent,
+    PaymentFlightdetailComponent
   ],
   imports: [
     CommonModule,

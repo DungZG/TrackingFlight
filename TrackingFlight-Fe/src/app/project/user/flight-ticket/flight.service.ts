@@ -2,6 +2,7 @@ import { ExtentionService } from '../../../../common/service/extention.service';
 import { EventEmitter, Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, NonNullableFormBuilder } from '@angular/forms';
 import { ValidatorExtension } from '../../../../common/validator-extension';
+
 import {
   DialogMode,
 } from '../../../../common/service/dialog.service';
@@ -9,7 +10,7 @@ import {
 @Injectable({
   providedIn: 'root',
 })
-export class FlightService {
+export class FlightTicketService {
   public id: any;
   mode: string = DialogMode.view;
   onClose = new EventEmitter<any | null>();

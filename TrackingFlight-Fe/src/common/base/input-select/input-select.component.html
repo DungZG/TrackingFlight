@@ -1,6 +1,6 @@
 <nz-select class="w-[250px]" [nzAllowClear]="allowClear" [nzShowSearch]="allowSearch" [hidden]="hidden" [nzDisabled]="disabled"
     [nzPlaceHolder]="!disabled ? placeholder : ''" [(ngModel)]="controlValue" [nzClearIcon]="selectIconClose"
-    (ngModelChange)="onChange($event)">
+    (ngModelChange)="onChange()">
     <nz-option [nzLabel]="item.label" [nzValue]="item.value" [nzDisabled]="item.disabled" *ngFor="let item of items">
     </nz-option>
 </nz-select>

@@ -13,5 +13,6 @@ public class LocationCreationRequest {
     Long locationId;
     String name;
     String country;
+    String locationCode;
     MultipartFile imageUrl;
 }

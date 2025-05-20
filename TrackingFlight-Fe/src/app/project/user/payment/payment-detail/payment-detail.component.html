@@ -3,36 +3,43 @@
     <i nz-icon nzType="close" nzTheme="outline" class="anticon ant-modal-close-icon anticon-close"></i>
   </span>
 </button>
-<form nz-form>
-  <nz-form-item>
-    <nz-form-label [nzSpan]="3" nzFor="name">Họ và Tên:</nz-form-label>
-    <nz-form-control [nzSpan]="12">
-      <app-input-text></app-input-text>
-    </nz-form-control>
-  </nz-form-item>
 
-  <nz-form-item>
-    <nz-form-label [nzSpan]="3" nzFor="gender">Giới tính:</nz-form-label>
-    <nz-form-control [nzSpan]="6">
-      <app-input-select></app-input-select>
-    </nz-form-control>
-  </nz-form-item>
 
-  <nz-form-item>
-    <nz-form-label [nzSpan]="3" nzFor="email">E-mail:</nz-form-label>
-    <nz-form-control [nzSpan]="12">
-      <app-input-text></app-input-text>
-    </nz-form-control>
-  </nz-form-item>
+<form nz-form [formGroup]="validateForm" class="ant-advanced-search-form w-full">
+  <ng-template #controlErrorTpl let-control>
+    <app-render-errors [control]="control"></app-render-errors>
+  </ng-template>
 
-  <nz-form-item>
-    <nz-form-label [nzSpan]="4" nzFor="email">Số Điện Thoại:</nz-form-label>
-    <nz-form-control [nzSpan]="12">
-      <app-input-text></app-input-text>
-    </nz-form-control>
-  </nz-form-item>
+  <div class="grid grid-cols-2 gap-x-6 gap-y-4">
+    <nz-form-item>
+      <nz-form-label [nzRequired]="true" class="w-1/3">Họ và Tên</nz-form-label>
+      <nz-form-control [nzErrorTip]="controlErrorTpl" class="w-2/3">
+        <app-input-text  placeholder="Nhập Họ và Tên" formControlName="name" class="w-full py-2 px-1" />
+      </nz-form-control>
+    </nz-form-item>
 
-  <button class="h-[50px] mt-3" nz-button nzType="primary">
-    <span>Submit</span>
-  </button>
+    <nz-form-item>
+      <nz-form-label [nzRequired]="true" class="w-1/3">Giới Tính</nz-form-label>
+      <nz-form-control [nzErrorTip]="controlErrorTpl" class="w-2/3">
+        <input-select placeholder="Chon giới tính" [items]="listGender" formControlName="gender" class="w-full py-2 px-1" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzRequired]="true" class="w-1/3">Email</nz-form-label>
+      <nz-form-control [nzErrorTip]="controlErrorTpl" class="w-2/3">
+        <app-input-text formControlName="email" placeholder="Nhập Email"  class="w-full py-2 px-1" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzRequired]="true" class="w-1/3">Số Điện Thoại</nz-form-label>
+      <nz-form-control [nzErrorTip]="controlErrorTpl" class="w-2/3">
+        <app-input-text formControlName="sdt" placeholder="Nhập số điện thoại"  class="w-full py-2 px-1" />
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+
+  <button (click)="onSubmit()" class="float-right" nz-button nzType="primary" type="submit">Xác nhận</button>
+  
 </form>

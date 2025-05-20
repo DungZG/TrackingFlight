@@ -1,0 +1,32 @@
+/* Đặt margin và padding cho form và các phần tử bên trong */
+form {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Thiết lập cho các item trong form */
+  .nz-form-item {
+    margin-bottom: 15px;
+  }
+  
+  /* Đặt chiều rộng nhãn và input */
+  .nz-form-label {
+    width: 100px; /* Giảm chiều rộng nhãn */
+    text-align: left;
+    font-weight: bold;
+  }
+  
+  /* Điều chỉnh chiều rộng input */
+  .nz-form-control {
+    width: 100%;
+    max-width: 350px; /* Giới hạn chiều rộng input */
+    padding: 8px;
+    font-size: 14px;
+  }
+  
+  
+  /* Các điều chỉnh cho các phần tử select */
+  input-select {
+    width: 100%;
+    max-width: 350px;
+  }

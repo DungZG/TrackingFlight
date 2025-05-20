@@ -4,16 +4,16 @@
   </span>
 </button>
 
-<div class="grid grid-cols-3 divide-x-4 divide-indigo-500 items-center w-[650px]">
-  <div class="flex flex-row ">
-    <span class="font-bold text-xl mr-3 text-[#252293]">
-      HAN 
-      <p class="text-base font-light">Hà Nội</p>
+<div class="grid grid-cols-4 divide-x-4 divide-indigo-500 items-center w-[650px]">
+  <div class="flex flex-row w-[100px]">
+    <span class="font-bold text-xl mr-2 text-[#252293]">
+      {{ formData?.form | labelValue: listOfCodeLocation}}
+      <p class="text-base font-light">{{ formData?.form | labelValue: listOfLocation}}</p>
     </span>
     <span class="text-[#252293]">.............</span>
-    <span class="font-bold text-xl ml-3 text-[#252293]">
-      HCM 
-      <p class="text-base font-light">Hồ Chí Minh</p>
+    <span class="font-bold text-xl ml-2 text-[#252293]">
+      {{ formData?.to | labelValue: listOfCodeLocation}}
+      <p class="text-base font-light">{{ formData?.to| labelValue: listOfLocation}}</p>
     </span>
   </div>
 
@@ -21,7 +21,16 @@
     <span class="font-bold text-xl mr-3 text-[#252293] ml-4">
       Khởi Hành
       <p class="text-base font-light">
-        9h ,Ngày 27 Tháng 3
+        {{ formData?.departureTime | viDateFormat }}
+      </p>
+    </span>
+  </div>
+
+  <div *ngIf="formData?.ticketType == 'Round_trip'" class="flex flex-row">
+    <span class="font-bold text-xl mr-3 text-[#252293] ml-4">
+      Thời Gian Về
+      <p class="text-base font-light">
+        {{ formData?.rtdepartureTime | viDateFormat }}
       </p>
     </span>
   </div>
@@ -30,7 +39,7 @@
     <span class="font-bold text-xl mr-3 text-[#252293] ml-4">
       Hành Khách
       <p class="text-base font-light">
-        2 <nz-icon nzType="user" nzTheme="outline" /> 
+        {{ formData?.Passenger}} <nz-icon nzType="user" nzTheme="outline" /> 
       </p>
     </span>
   </div>
@@ -38,8 +47,9 @@
 
 <div>
   <h4 class="font-bold text-base mt-4">Chuyến Bay Của Bạn</h4>
-  <div class="flex flex-col mt-5" style="border: 1px solid #dcdada;border-radius:15px;padding:20px;">
-    <div class="flex flex-row items-center justify-around">
+   <div *ngFor="let item of listOfFlights" > 
+      <div class="flex flex-col mt-5" style="border: 1px solid #dcdada;border-radius:15px;padding:20px;">
+        <div class="flex flex-row items-center justify-around">
         <div class="">
             <img class="h-[64px] w-[64px]" src="../../../asset/VJ.png" alt="">
         </div>
@@ -74,94 +84,13 @@
                     <p>Vật Dụng Cá Nhân,</p>
                     <p>Hành Lý Sách Tay</p>
                 </label>
-                <label for="" class="font-bold">VND 3.657.887</label>
+                <label for="" class="font-bold">VND {{item.price | number}}</label>
                 <button nz-button [nzType]="'default'" class="mt-3" (click)="openHandelDialog()">Xem Chi Tiết và Đặt</button>
             </div>
         </div>
-    </div>
-  </div>
-  <div class="flex flex-col mt-5" style="border: 1px solid #dcdada;border-radius:15px;padding:20px;">
-    <div class="flex flex-row items-center justify-around">
-        <div class="">
-            <img class="h-[64px] w-[64px]" src="../../../asset/VJ.png" alt="">
-        </div>
-        <div class="flex flex-row w-auto">
-            <div class="mr-5">
-                <h3 class="font-bold">1h 20'</h3>
-                <div class="flex flex-row w-[200px]">
-                    <p class="mr-2">HAN,</p>
-                    <p>Ngày 27 Tháng 3</p>
-                </div>
-            </div>
-            <div class="item-ke">
-                <div class="icon-before"></div>
-                <div class="line"></div>
-                <div class="icon-affter"></div>
-                <div class="content">
-                    <span class="fly">Bay Thẳng <br></span>
-                    <span class="time block">1h</span>
-                </div>
-            </div>
-            <div class="ml-5">
-                <h3 class="font-bold">2h 20' </h3>
-                <div class="flex flex-row w-[200px]">
-                    <p class="mr-2">HCM,</p>
-                    <p>Ngày 27 Tháng 3</p>
-                </div>
-            </div>
-        </div>
-        <div class="ml-6 border-s">
-            <div class="ml-6 flex flex-col w-[350px]">
-                <label for="" class="flex flex-row mb-4">
-                    <p>Vật Dụng Cá Nhân,</p>
-                    <p>Hành Lý Sách Tay</p>
-                </label>
-                <label for="" class="font-bold">VND 3.657.887</label>
-                <button nz-button [nzType]="'default'" class="mt-3" (click)="openHandelDialog()">Xem Chi Tiết và Đặt</button>
-            </div>
-        </div>
-    </div>
-  </div>
-  <div class="flex flex-col mt-5" style="border: 1px solid #dcdada;border-radius:15px;padding:20px;">
-    <div class="flex flex-row items-center justify-around">
-        <div class="">
-            <img class="h-[64px] w-[64px]" src="../../../asset/VJ.png" alt="">
-        </div>
-        <div class="flex flex-row w-auto">
-            <div class="mr-5">
-                <h3 class="font-bold">1h 20'</h3>
-                <div class="flex flex-row w-[200px]">
-                    <p class="mr-2">HAN,</p>
-                    <p>Ngày 27 Tháng 3</p>
-                </div>
-            </div>
-            <div class="item-ke">
-                <div class="icon-before"></div>
-                <div class="line"></div>
-                <div class="icon-affter"></div>
-                <div class="content">
-                    <span class="fly">Bay Thẳng <br></span>
-                    <span class="time block">1h</span>
-                </div>
-            </div>
-            <div class="ml-5">
-                <h3 class="font-bold">2h 20' </h3>
-                <div class="flex flex-row w-[200px]">
-                    <p class="mr-2">HCM,</p>
-                    <p>Ngày 27 Tháng 3</p>
-                </div>
-            </div>
-        </div>
-        <div class="ml-6 border-s">
-            <div class="ml-6 flex flex-col w-[350px]">
-                <label for="" class="flex flex-row mb-4">
-                    <p>Vật Dụng Cá Nhân,</p>
-                    <p>Hành Lý Sách Tay</p>
-                </label>
-                <label for="" class="font-bold">VND 3.657.887</label>
-                <button nz-button [nzType]="'default'" class="mt-3" (click)="openHandelDialog()">Xem Chi Tiết và Đặt</button>
-            </div>
-        </div>
-    </div>
-  </div>
+      </div>
+      </div>
+   </div>
+
+  
 </div>

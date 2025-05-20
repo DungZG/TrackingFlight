@@ -1,110 +1,99 @@
-<button aria-label="Close" class="ant-modal-close ng-star-inserted" (click)="closeDialog()">
-  <span class="ant-modal-close-x">
-    <i nz-icon nzType="close" nzTheme="outline" class="anticon ant-modal-close-icon anticon-close"></i>
-  </span>
-</button>
-
 <form nz-form [formGroup]="validateForm" class="ant-advanced-search-form w-full">
-  <ng-template #controlErrorTpl let-control>
-    <app-render-errors [control]="control"></app-render-errors>
-  </ng-template>
 
-  <!-- Grid 2 cột -->
+  <!-- Các trường chọn máy bay, trạng thái, điểm khởi hành, điểm đến, chi phí, loại chuyến bay -->
   <div class="grid grid-cols-2 gap-x-6 gap-y-4">
     <!-- Máy Bay -->
     <nz-form-item>
       <nz-form-label [nzRequired]="true" class="w-1/3">Máy Bay</nz-form-label>
-      <nz-form-control [nzErrorTip]="controlErrorTpl" class="w-2/3">
-        <app-input-select (ngModelChange)="onAircraftChange($event)" [items]="itemsAircraft" placeholder="Chọn Máy Bay" formControlName="aircraftId" class="w-full py-2 px-1" />
+      <nz-form-control class="w-2/3">
+        <input-select (ngModelChange)="onAircraftChange($event)" [items]="itemsAircraft" placeholder="Chọn Máy Bay" formControlName="aircraftId" class="w-full py-2 px-1" />
       </nz-form-control>
     </nz-form-item>
 
     <!-- Trạng Thái -->
     <nz-form-item>
       <nz-form-label [nzRequired]="true" class="w-1/3">Trạng Thái</nz-form-label>
-      <nz-form-control [nzErrorTip]="controlErrorTpl" class="w-2/3">
-        <app-input-select [items]="status" placeholder="Trạng Thái" formControlName="status" class="w-full py-2 px-1" />
+      <nz-form-control class="w-2/3">
+        <input-select [items]="status" placeholder="Trạng Thái" formControlName="status" class="w-full py-2 px-1" />
       </nz-form-control>
     </nz-form-item>
 
     <!-- Điểm Khởi Hành -->
     <nz-form-item>
       <nz-form-label [nzRequired]="true" class="w-1/3">Điểm Khởi Hành</nz-form-label>
-      <nz-form-control [nzErrorTip]="controlErrorTpl" class="w-2/3">
-        <app-input-select formControlName="arrivalLocation" placeholder="----Chọn Điểm Khởi Hành----" [items]="items" class="w-full py-2 px-1" />
+      <nz-form-control class="w-2/3">
+        <input-select formControlName="departureLocation" placeholder="----Chọn Điểm Khởi Hành----" [items]="items" class="w-full py-2 px-1" />
       </nz-form-control>
     </nz-form-item>
 
     <!-- Điểm Đến -->
     <nz-form-item>
       <nz-form-label [nzRequired]="true" class="w-1/3">Điểm Đến</nz-form-label>
-      <nz-form-control [nzErrorTip]="controlErrorTpl" class="w-2/3">
-        <app-input-select formControlName="departureLocation" placeholder="----Chọn Điểm Đến----" [items]="items" class="w-full py-2 px-1" />
+      <nz-form-control class="w-2/3">
+        <input-select formControlName="arrivalLocation" placeholder="----Chọn Điểm Đến----" [items]="items" class="w-full py-2 px-1" />
       </nz-form-control>
     </nz-form-item>
 
-     <!-- Chi phí chuyến bay -->
-     <nz-form-item>
-      <nz-form-label [nzRequired]="true" nzColon="true" class="w-1/3">Chi phí</nz-form-label>
-      <nz-form-control class="w-full">
-        <app-input-text type="number" formControlName="price" (ngModelChange)="onCostChange()" placeholder="Nhập chi phí chuyến bay" class="w-full py-2 px-1 mr-3" />
-      </nz-form-control>
-    </nz-form-item>
-
+    <!-- Chi phí chuyến bay -->
     <nz-form-item>
-      <nz-form-label [nzRequired]="true" nzColon="true" class="w-1/3">Loại chuyến Bay</nz-form-label>
-      <nz-form-control class="w-full">
-        <app-input-select [items]="listType" placeholder="Loại chuyến báy" formControlName="typeFlight" class="w-full py-2 px-1" />
+      <nz-form-label [nzRequired]="true" class="w-1/3">Chi phí</nz-form-label>
+      <nz-form-control class="w-2/3">
+        <app-input-text type="number" formControlName="price" placeholder="Nhập chi phí chuyến bay" class="w-full py-2 px-1 mr-3" (ngModelChange)="onCostChange()" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <!-- Loại chuyến bay -->
+    <nz-form-item>
+      <nz-form-label [nzRequired]="true" class="w-1/3">Loại chuyến Bay</nz-form-label>
+      <nz-form-control class="w-2/3">
+        <input-select [items]="listType" placeholder="Loại chuyến bay" formControlName="typeFlight" class="w-full py-2 px-1" />
       </nz-form-control>
     </nz-form-item>
   </div>
 
-  <!-- Thời Gian -->
+  <!-- Ngày đi & ngày về -->
   <div class="mt-4">
     <nz-form-item>
-      <nz-form-label [nzRequired]="true" class="w-1/3">Giờ Khởi Hành & Thời Gian Đến</nz-form-label>
-      <nz-form-control class="w-2/3">
-        <nz-range-picker formControlName="dateRange" [nzShowTime]="true" (ngModelChange)="onChange($event)" class="w-full" />
+      <nz-form-label [nzRequired]="true" class="w-1/3">Ngày Khởi Hành & Ngày Về</nz-form-label>
+      <nz-form-control class="w-2/3 flex space-x-4">
+        <nz-range-picker formControlName="dateRangeStart" [nzShowTime]="true" nzPlaceHolder="Ngày giờ đi"></nz-range-picker>
+        <nz-range-picker formControlName="dateRangeReturn" [nzShowTime]="true" nzPlaceHolder="Ngày giờ về" [nzDisabled]="!isRoundTrip"></nz-range-picker>
       </nz-form-control>
     </nz-form-item>
   </div>
 
-  <!-- Thời Gian -->
-  <div class="mt-4" *ngIf="isRoundTrip">
-    <nz-form-item>
-      <nz-form-label [nzRequired]="true" class="w-1/3">Giờ Khởi Hành & Thời Gian Về</nz-form-label>
-      <nz-form-control class="w-2/3">
-        <nz-range-picker formControlName="dateRangeEnd" [nzShowTime]="true" (ngModelChange)="onChange($event)" class="w-full" />
-      </nz-form-control>
-    </nz-form-item>
+  <div *ngIf="returnFlight" class="mt-8 p-4 border border-gray-300 rounded">
+    <h3 class="mb-4 font-semibold">Thông tin chuyến về</h3>
+    
+    <div>
+      <p><strong>Máy bay:</strong> {{ returnFlight.aircraft.aircraftName }} - {{ returnFlight.aircraft.aircraftCode }}</p>
+      <p><strong>Điểm khởi hành:</strong> {{ returnFlight.departureLocation }}</p>
+      <p><strong>Điểm đến:</strong> {{ returnFlight.arrivalLocation }}</p>
+      <p><strong>Ngày giờ đi:</strong> {{ returnFlight.departureTime | date: 'short' }}</p>
+      <p><strong>Ngày giờ đến:</strong> {{ returnFlight.arrivalTime | date: 'short' }}</p>
+      <p><strong>Giá:</strong> {{ returnFlight.price | number }}</p>
+      <!-- Thêm các trường khác bạn muốn hiển thị -->
+    </div>
   </div>
 
-  <!-- Bảng -->
-  <div class="mt-6">
-    <label class="text-lg font-semibold block mb-2">Thông tin / Cấu trúc máy bay</label>
-    <nz-table
-      [nzData]="selectedCavities"
-      [nzBordered]="true"
-      [nzShowPagination]="false"
-      [nzNoResult]="'Không có dữ liệu'">
-      <thead>
-        <tr>
-          <th>Số khoang</th>
-          <th>Số ghế</th>
-          <th>Hạng</th>
-          <th>Chi phí khi tính thêm</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let cavity of selectedCavities">
-          <td>{{ cavity.cavityNumber }}</td>
-          <td>{{ cavity.seatCount }}</td>
-          <td>{{ cavity.cavityClass }}</td>
-          <td>{{ cavity.calculatedPrice | number }}</td>
-        </tr>
-      </tbody>
-    </nz-table>
-  </div>
+  <nz-table [nzData]="selectedCavities" [nzBordered]="true" [nzShowPagination]="false" [nzNoResult]="'Không có dữ liệu'">
+    <thead>
+      <tr>
+        <th>Số khoang</th>
+        <th>Số ghế</th>
+        <th>Hạng</th>
+        <th>Chi phí khi tính thêm</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cavity of selectedCavities">
+        <td>{{ cavity.cavityNumber }}</td>
+        <td>{{ cavity.seatCount }}</td>
+        <td>{{ cavity.cavityClass }}</td>
+        <td>{{ cavity.calculatedPrice | number }}</td>
+      </tr>
+    </tbody>
+  </nz-table>
 
   <!-- Nút hành động -->
   <div class="flex justify-center mt-6">

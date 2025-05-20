@@ -6,6 +6,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { DialogService } from '../../../../../../common/service/dialog.service';
 import { DialogMode, DialogSize } from '../../../../../../common/service/dialog.service';
 import { FlightdetailComponent } from '../../flightdetail/flightdetail.component';
+import { LocationService } from '../../../../../services/location.service';
+import { AircraftService } from '../../../../../services/aircraft.service';
+import { AirlineService } from '../../../../../services/airline.service';
 @Component({
   selector: 'app-bookingdetail',
   standalone: false,
@@ -14,13 +17,36 @@ import { FlightdetailComponent } from '../../flightdetail/flightdetail.component
 })
 export class BookingdetailComponent implements OnInit {
   public listOfData:any;
+  public formData: any;
+  public listOfLocation: any[] = [];
+  public listOfCodeLocation:any [] =[];
+  public listOfFlights:any [] = [];
+  public listOfAircraft:any []=[];
+  public listOfAirline:any []=[];
   onClose = new EventEmitter<any | null>();
   constructor(
     public dialogService: DialogService,
+    public locationService:LocationService,
+    public aircraftService:AircraftService,
+    public airlineService:AirlineService,
     @Inject(NZ_MODAL_DATA) public data: any,
   ) { }
 
   ngOnInit() {
+     this.formData = this.data.formData;
+     this.listOfLocation = this.data.listOfLocation;
+     this.listOfCodeLocation = this.data.listOfCodeLocation;
+     console.log('Dữ liệu nhận được từ form:', this.formData);
+     console.log('Danh sách địa điểm:', this.listOfLocation);
+     console.log(this.data.listOfFlights.aircraftId);
+     this.getData();
+     
+  }
+
+  async getData(){
+    const rsAircraft = await this.aircraftService.getItem(this.data.listOfFlights.aircraftId).firstValueFrom();
+    console.log(rsAircraft)
+    debugger
   }
 
   async closeDialog(){

@@ -1,5 +1,5 @@
 
-package com.vnpay.common;
+package com.example.TrackingFlight_Be.v1.common.qr;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.Random;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  *

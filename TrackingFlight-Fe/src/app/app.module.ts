@@ -15,6 +15,9 @@ import { AdminComponent } from './project/admin/admin.component';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { RouterModule } from '@angular/router'; 
+import { ReactiveFormsModule } from '@angular/forms';
+
 registerLocaleData(en);
 
 @NgModule({
@@ -27,7 +30,9 @@ registerLocaleData(en);
     AppRoutingModule,
     FormsModule,
     NzIconModule,
-    NzLayoutModule
+    NzLayoutModule,
+    RouterModule,
+    ReactiveFormsModule
   ],
   providers: [
     NzModalService,

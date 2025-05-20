@@ -11,3 +11,12 @@
       input{
         width: 230px;
       }
+input-select {
+  
+  > nz-select {
+
+     > nz-select-top-control {
+      border: none !important;
+    }
+  }
+}

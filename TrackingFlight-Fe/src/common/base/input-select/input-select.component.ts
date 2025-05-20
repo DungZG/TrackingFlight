@@ -1,8 +1,8 @@
-import { Component, forwardRef, Input, OnInit } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, OnInit, ViewEncapsulation, forwardRef, OnChanges, Input, Output, EventEmitter, ElementRef, SimpleChanges } from '@angular/core';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 @Component({
-  selector: 'app-input-select',
+  selector: 'input-select',
   standalone: false,
   
   templateUrl: './input-select.component.html',
@@ -17,40 +17,68 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class InputSelectComponent implements OnInit, ControlValueAccessor {
 
-  @Input() allowClear: boolean = false;
-  @Input() allowSearch: boolean = false;
-  @Input() hidden: boolean = false;
-  @Input() disabled: boolean = false;
-  public controlValue: string | null = null;
-  @Input() placeholder: string = '';
+  @Input() class: any = '';
+  @Input() placeholder: any = '';
+  @Input() disabled = false;
+  @Input() hidden = false;
+  @Input() readonly = false;
+  @Input() allowClear = true;
+  @Input() allowSearch = true;
   @Input() items: any[] = [];
+  @Input() view: boolean | undefined;
+  // tslint:disable-next-line:no-output-rename
+  @Output('onChange') eventOnChange = new EventEmitter<any>();
+  // tslint:disable-next-line:no-output-rename
+  @Output('onBlur') eventOnBlur = new EventEmitter<void>();
+  // tslint:disable-next-line:no-output-rename
+  @Output('onUnBlur') eventOnUnBlur = new EventEmitter<void>();
+  public controlValue: Date | null = null;
 
   eventBaseChange = (_: any) => { };
   eventBaseTouched = () => { };
 
-  ngOnInit(): void {
-
+  ngOnInit() {
+    if(!this.placeholder){
+      this.placeholder = '-- Chọn --';
+    }
   }
 
-  onChange(value: any){
-    this.controlValue = value;
-    this.eventBaseChange(this.controlValue);
+  ngOnChanges(changes: SimpleChanges): void {
   }
 
-  onClear(){
-    this.controlValue = null;
-    this.eventBaseChange(this.controlValue);
-  }
-
-  writeValue(obj: any): void {
+  writeValue(obj: any) {
     this.controlValue = obj;
   }
-  registerOnChange(fn: any): void {
+
+  registerOnChange(fn: any) {
     this.eventBaseChange = fn;
   }
-  registerOnTouched(fn: any): void {
+
+  registerOnTouched(fn: any) {
     this.eventBaseTouched = fn;
   }
+
+  onBlur() {
+    this.eventBaseTouched();
+    this.eventOnBlur.emit();
+  }
+
+  onUnBlur() {
+    this.eventOnUnBlur.emit();
+  }
+
+  onChange() {
+    const valueData = this.items.find(x=>x.value === this.controlValue);
+    this.eventBaseChange(this.controlValue);
+    this.eventOnChange.emit(valueData);
+  }
+
+  onClear() {
+    this.controlValue = null;
+    this.eventBaseChange(this.controlValue);
+    this.eventOnChange.emit(this.controlValue);
+  }
+
   setDisabledState?(isDisabled: boolean): void {
     this.disabled = isDisabled;
   }

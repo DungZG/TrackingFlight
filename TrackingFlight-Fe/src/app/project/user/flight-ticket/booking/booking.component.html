@@ -3,85 +3,56 @@
     <div class="flex flex-row">
       <nz-form-item>
         <nz-form-control>
-          <nz-radio-group [(ngModel)]="radioValue" formControlName="ticketType" class="block font-bold">
-            <label nz-radio nzValue="One way">Một Chiều</label>
-            <label nz-radio nzValue="Round trip">Khứ Hồi</label>
+          <nz-radio-group [(ngModel)]="radioValue" formControlName="ticketType" class="block font-bold" (ngModelChange)="onTicketTypeChange($event)">
+            <label nz-radio nzValue="One_way">Một Chiều</label>
+            <label nz-radio nzValue="Round_trip">Khứ Hồi</label>
           </nz-radio-group>
         </nz-form-control>
       </nz-form-item>
-      <nz-form-item>
-        <nz-form-control>
-          <nz-select nzPlaceHolder="Chọn Loại Vé" formControlName="travelclass" ngModel="travelclass" style="width: 250px">
-            <nz-option nzValue=1 nzLabel="Economy Class"></nz-option>
-            <nz-option nzValue=2 nzLabel="Business Class"></nz-option>
-          </nz-select>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
+      <nz-form-item class="mt-[3px]">
         <nz-form-control>
           <label for="" class="font-bold mr-2">Hành khách</label>
-          <nz-input-number class="w-[150px]" formControlName="Passenger" nzPlaceHolder="Hành khách" [(ngModel)]="Passenger" nzMin="1" nzMax="10" />
+          <input-number class="w-[150px]" formControlName="Passenger" nzPlaceHolder="Hành khách" [(ngModel)]="Passenger" nzMin="1" nzMax="10" />
         </nz-form-control>
       </nz-form-item>
     </div>
     <div class="flex flex-row mt-4">
       <nz-form-item>
-        <nz-form-control nzErrorTip="Hãy Nhập Điểm Đi">
-        <div class="bg-[#fff] border-2 border-solid rounded-sm border-[#ADA598] h-[77.56px] focus:border-[#3B82F680] hover:border-[#3B82F680]">
-          <label for="" class="ml-2 block font-bold text-2xl">Từ</label>
-          <input class="border-none focus:border-none focus:shadow-none active:border-none focus-visible:broder-none" formControlName="form" placeholder="" nz-input />
-          <nz-autocomplete #auto [compareWith]="compareFun">
-          @for (option of options; track $index) {
-            <nz-auto-option [nzValue]="option" [nzLabel]="option.label">
-              {{ option.label }}
-            </nz-auto-option>
-          }
-          </nz-autocomplete>
-        </div>
-        
+        <nz-form-control nzErrorTip="Vui Lòng Chọn Điểm Đi">
+          <div class="bg-[#fff] border-2 border-solid rounded-sm border-[#ADA598] h-[77.56px] focus:border-[#3B82F680] hover:border-[#3B82F680]">
+            <label for="" class="ml-2 block font-bold text-2xl">Từ</label>
+            <input-select nzShowSearch nzAllowClear formControlName="form" placeholder="----Chọn Điểm Khởi Hành----" [items]="listOfLocation" class="border-none focus:border-none focus:shadow-none w-[200px] block py-2 px-1" />
+          </div>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-control nzErrorTip="Please input your Password!">
-          <div class="bg-[#fff] border-2 border-solid rounded-sm border-[#ADA598] h-[77.56px] focus:border-[#3B82F680]  hover:border-[#3B82F680]">
+        <nz-form-control nzErrorTip="Vui Lòng Chọn Điểm Đến">
+          <div class="bg-[#fff] border-2 border-solid rounded-sm border-[#ADA598] h-[77.56px] focus:border-[#3B82F680] hover:border-[#3B82F680]">
             <label for="" class="ml-2 block font-bold text-2xl">Đến</label>
-            <input class="border-none focus:shadow-none" formControlName="form" placeholder="" nz-input />
-            <nz-autocomplete #auto [compareWith]="compareFun">
-            @for (option of options; track $index) {
-              <nz-auto-option [nzValue]="option" [nzLabel]="option.label">
-                {{ option.label }}
-              </nz-auto-option>
-            }
-            </nz-autocomplete>
+            <input-select formControlName="to" placeholder="----Chọn Điểm Đến----" [items]="listOfLocation" class="border-none focus:border-none focus:shadow-none w-[200px] block py-2 px-1" />
           </div>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
         <nz-form-control>
-          <div class="bg-[#fff] border-2 border-solid rounded-sm border-[#ADA598] focus:border-[#3B82F680]  hover:border-[#3B82F680]">
+          <div class="bg-[#fff] border-2 border-solid rounded-sm border-[#ADA598] focus:border-[#3B82F680] hover:border-[#3B82F680]">
             <label for="" class="ml-2 block font-bold text-2xl">Khởi Hành</label>
-            <nz-date-picker class="border-none focus:border-none focus:shadow-none" formControlName="dateForm" [nzDateRender]="tplRender" nzPlaceHolder="Ngày Đi"></nz-date-picker>
-            <ng-template #tplRender let-current>
-              <div class="ant-picker-cell-inner" [class.border]="current.getDate() === 1"> {{ current.getDate() }} </div>
-            </ng-template>
+            <input-datetime-basic [disablePastDate]="true" nzShowTime class="border-none focus:border-none focus:shadow-none" formControlName="departureTime"  nzPlaceHolder="Ngày Đi"></input-datetime-basic>
           </div>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
         <nz-form-control>
-          <div class="bg-[#fff] border-2 border-solid rounded-sm border-[#ADA598]  hover:border-[#3B82F680]">
+          <div class="bg-[#fff] border-2 border-solid rounded-sm border-[#ADA598] hover:border-[#3B82F680]">
             <label for="" class="ml-2 block font-bold text-2xl">Trở Về</label>
-            <nz-date-picker class="border-none focus:border-none focus:shadow-none" formControlName="dateTo" [nzDateRender]="tplRender" nzPlaceHolder="Ngày về"></nz-date-picker>
-            <ng-template #tplRender let-current>
-              <div class="ant-picker-cell-inner" [class.border]="current.getDate() === 1"> {{ current.getDate() }} </div>
-            </ng-template>
+            <input-datetime-basic [disablePastDate]="true" nzShowTime class="border-none focus:border-none focus:shadow-none" formControlName="rtdepartureTime" nzPlaceHolder="Ngày về" [disabled]="radioValue === 'One_way'"></input-datetime-basic>
           </div>
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-control>
-          <button class="h-[77.56px] w-[150px] bg-[#DBA510] text-white text-sm font-bold" nz-button nzType="default" (click)="handlerOpenDialog()">Tìm kiếm</button>
+          <button class="h-[77.56px] w-[150px] bg-[#DBA510] text-white text-sm font-bold" nz-button nzType="default"  (click)="onSearch()">Tìm kiếm</button>
         </nz-form-control>
       </nz-form-item>
     </div>

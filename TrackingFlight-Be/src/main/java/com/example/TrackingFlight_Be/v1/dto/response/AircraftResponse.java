@@ -1,6 +1,5 @@
 package com.example.TrackingFlight_Be.v1.dto.response;
 
-import com.example.TrackingFlight_Be.v1.dto.request.CavityCreationRequest;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 

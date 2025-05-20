@@ -1,4 +1,7 @@
 package com.example.TrackingFlight_Be.v1.repositories;
 
-public class PaymentRepository {
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface PaymentRepository {
 }
