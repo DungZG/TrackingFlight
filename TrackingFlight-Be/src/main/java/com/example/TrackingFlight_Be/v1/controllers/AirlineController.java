@@ -1,7 +1,7 @@
 package com.example.TrackingFlight_Be.v1.controllers;
 
 import com.example.TrackingFlight_Be.v1.dto.request.AirlineCreationRequest;
-import com.example.TrackingFlight_Be.v1.dto.request.ApiResponse;
+import com.example.TrackingFlight_Be.v1.dto.response.ApiResponse;
 import com.example.TrackingFlight_Be.v1.entity.Airline;
 import com.example.TrackingFlight_Be.v1.services.AirlineService;
 import lombok.AccessLevel;

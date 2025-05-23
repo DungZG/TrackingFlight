@@ -1,64 +1,90 @@
 <div class="body">
-    <div class="container" id="container" #container>
-        <div class="form-container register-container">
-          <form action="#">
-            <h1>Đăng Ký.</h1>
-            <input type="text" placeholder="Name">
-            <input type="email" class="mt-2 mb-2" placeholder="Email">
-            <input type="password" placeholder="Password">
-            <button class="mt-2">Đăng Ký</button>
-            <span>hoặc sử dụng tài khoản của bạn</span>
-            <div class="social-container">
-              <a href="#" class="social"><nz-icon nzType="facebook" nzTheme="outline" ></nz-icon></a>
-              <a href="#" class="social"><nz-icon nzType="google" nzTheme="outline" /></a>
-              <a href="#" class="social"><nz-icon nzType="linkedin" nzTheme="outline" /></a>
-            </div>
-          </form>
+  <div class="container" id="container" #container>
+    
+    <!-- Register form -->
+    <div class="form-container register-container">
+      <form (ngSubmit)="onRegister()" #registerForm="ngForm">
+        <h1>Đăng Ký.</h1>
+        <input
+          type="text"
+          placeholder="Username"
+          [(ngModel)]="registerData.username"
+          name="registerUsername"
+          required
+        />
+        <input
+          type="email"
+          class="mt-2 mb-2"
+          placeholder="Email"
+          [(ngModel)]="registerData.email"
+          name="registerEmail"
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          [(ngModel)]="registerData.password"
+          name="registerPassword"
+          required
+        />
+        <button class="mt-2" [disabled]="registerForm.invalid">Đăng Ký</button>
+        <span>hoặc sử dụng tài khoản của bạn</span>
+        <div class="social-container">
+          <!-- social icons -->
         </div>
-      
-        <div class="form-container login-container">
-          <form action="#">
-            <h1>Đăng Nhập.</h1>
-            <input type="email" class="mb-3" placeholder="Email">
-            <input type="password" placeholder="Password">
-            <div class="content">
-              <div class="checkbox">
-                <input type="checkbox" name="checkbox" id="checkbox">
-                <label>Remember me</label>
-              </div>
-              <div class="pass-link">
-                <a href="#">Quên Mật Khẩu?</a>
-              </div>
-            </div>
-            <button>Đăng Nhập</button>
-            <span>or use your account</span>
-            <div class="social-container">
-              <a href="#" class="social"><nz-icon nzType="facebook" nzTheme="outline" ></nz-icon></a>
-              <a href="#" class="social"><nz-icon nzType="google" nzTheme="outline" /></a>
-              <a href="#" class="social"><nz-icon nzType="linkedin" nzTheme="outline" /></a>
-            </div>
-          </form>
-        </div>
-      
-        <div class="overlay-container">
-          <div class="overlay">
-            <div class="overlay-panel overlay-left">
-              <h1 class="title">Hello <br> friends</h1>
-              <p>if You have an account, login here and have fun</p>
-              <button class="ghost" id="login" #loginButton>Login
-                <i class="lni lni-arrow-left login"></i>
-              </button>
-            </div>
-            <div class="overlay-panel overlay-right">
-              <h1 class="title">Start your <br> journey now</h1>
-              <p>if you don't have an account yet, join us and start your journey.</p>
-              <button class="ghost" id="register" #registerButton>Register
-                <i class="lni lni-arrow-right register"></i>
-              </button>
-            </div>
+      </form>
+    </div>
+
+    <!-- Login form -->
+    <div class="form-container login-container">
+      <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+        <h1>Đăng Nhập.</h1>
+        <input
+          type="text"
+          class="mb-3"
+          placeholder="Username"
+          [(ngModel)]="loginData.username"
+          name="loginUsername"
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          [(ngModel)]="loginData.password"
+          name="loginPassword"
+          required
+        />
+        <div class="content">
+          <div class="checkbox">
+            <input type="checkbox" name="checkbox" id="checkbox" />
+            <label>Remember me</label>
+          </div>
+          <div class="pass-link">
+            <a href="#">Quên Mật Khẩu?</a>
           </div>
         </div>
+        <button [disabled]="loginForm.invalid">Đăng Nhập</button>
+        <span>or use your account</span>
+        <div class="social-container">
+          <!-- social icons -->
+        </div>
+      </form>
     </div>
-</div>
 
-  
+    <!-- Overlay panel (giữ nguyên) -->
+    <div class="overlay-container">
+      <div class="overlay">
+        <div class="overlay-panel overlay-left">
+          <h1 class="title">Hello <br /> friends</h1>
+          <p>if You have an account, login here and have fun</p>
+          <button class="ghost" id="login" #loginButton>Login</button>
+        </div>
+        <div class="overlay-panel overlay-right">
+          <h1 class="title">Start your <br /> journey now</h1>
+          <p>if you don't have an account yet, join us and start your journey.</p>
+          <button class="ghost" id="register" #registerButton>Register</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

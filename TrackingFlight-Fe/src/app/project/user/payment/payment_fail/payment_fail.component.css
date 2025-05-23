@@ -1,0 +1,45 @@
+.payment-fail-container {
+  max-width: 480px;
+  margin: 50px auto;
+  padding: 30px 40px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  border-radius: 12px;
+  background-color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+}
+
+.icon-container-fail {
+  width: 60px;
+  height: 60px;
+  background-color: #f44336; /* đỏ */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px auto;
+  box-shadow: 0 2px 8px rgba(244, 67, 54, 0.6);
+}
+
+.crossmark {
+  color: white;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.header-text h1 {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.action-buttons button {
+  width: 140px;
+  font-weight: 600;
+}

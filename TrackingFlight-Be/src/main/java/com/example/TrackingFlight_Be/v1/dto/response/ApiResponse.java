@@ -1,4 +1,4 @@
-package com.example.TrackingFlight_Be.v1.dto.request;
+package com.example.TrackingFlight_Be.v1.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;

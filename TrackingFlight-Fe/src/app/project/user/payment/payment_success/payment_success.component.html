@@ -1,0 +1,28 @@
+<div class="payment-success-container">
+  <div class="icon-container">
+    <!-- Icon tích xanh, bạn có thể thay bằng SVG hoặc font-icon -->
+    <span class="checkmark">&#10004;</span>
+  </div>
+  <div class="header-text">
+    <h1>Payment Success</h1>
+    <p class="subtitle">Your payment has been processed successfully</p>
+  </div>
+
+  <div class="payment-details">
+    <h2>Payment Details</h2>
+    <div class="detail-item">
+      <span class="label">Payment ID</span>
+      <span class="value">{{ paymentId }}</span>
+    </div>
+    <div class="detail-item">
+      <span class="label">Amount</span>
+      <span class="value">{{ amount | currency:'VND':'symbol' }}</span>
+    </div>
+    <div class="detail-item">
+      <span class="label">Payment Time</span>
+      <span class="value">{{ paymentTime | date:'dd/MM/yyyy HH:mm:ss' }}</span>
+    </div>
+  </div>
+
+  <button nz-button nzType="primary" (click)="backToHome()">Back to Home</button>
+</div>

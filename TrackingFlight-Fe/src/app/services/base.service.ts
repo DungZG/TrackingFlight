@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { env } from '../../common/environment/environment';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
+import { Payment } from '../project/user/payment/payment-response.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -52,6 +53,15 @@ export class BaseService {
 
   getReturnFlightByGroupId(groupId: number): Observable<any> {
     return this.http.get<any>(`${this.apiBaseUrl + this.prefix}/return-flight/${groupId}`);
+  }
+
+  createPayment(amount: number, bankCode?: string, language?: string): Observable<Payment> {
+    const params = new URLSearchParams();
+    params.set('amount', amount.toString());
+    if (bankCode) params.set('bankCode', bankCode);
+    if (language) params.set('language', language);
+
+    return this.http.get<Payment>(`${this.apiBaseUrl + this.prefix}/create_payment?${params.toString()}`);
   }
   
 }

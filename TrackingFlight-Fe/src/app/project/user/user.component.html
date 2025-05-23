@@ -6,21 +6,34 @@
         
         <div class="flex w-[550px] mb-5 justify-center text-white ">   
             <button class="text-white mx-6 p-1 text-base font-normal" [routerLink]="['/', 'user','flight-ticket','book']">Đăng ký chỗ nghỉ của Qúy Vị</button>
-            <div class="bg-white mr-[2%] rounded-lg border-solid border-2 border-sky-500">   
-              <button class="text-[#006ce4] mx-6 p-1 text-sm" style="padding:10px" [routerLink]="['/', 'auth','login']">Đăng Ký</button>
-            </div>
-            <div class="bg-white rounded-lg border-solid border-2 border-sky-500">
-              <button class="text-[#006ce4] mx-6 p-1 text-sm" style="padding:10px" [routerLink]="['/', 'auth','login']">Đăng Nhập</button>
-            </div>
+            <ng-container *ngIf="!isLoggedIn; else loggedInTpl">
+    <div class="bg-white mr-[2%] rounded-lg border-solid border-2 border-sky-500">   
+      <button class="text-[#006ce4] mx-6 p-1 text-sm" style="padding:10px" [routerLink]="['/', 'auth','login']">Đăng Ký</button>
+    </div>
+    <div class="bg-white rounded-lg border-solid border-2 border-sky-500">
+      <button class="text-[#006ce4] mx-6 p-1 text-sm" style="padding:10px" [routerLink]="['/', 'auth','login']">Đăng Nhập</button>
+    </div>
+  </ng-container>
+
+  <ng-template #loggedInTpl>
+    <div class="relative group cursor-pointer bg-white text-[#006ce4] rounded-lg border-solid border-2 border-sky-500 px-4 py-2">
+      {{ username }}
+      <ul class="absolute top-full left-0 mt-1 w-48 bg-white text-black rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity z-50">
+        <li class="px-4 py-2 hover:bg-gray-200 cursor-pointer" [routerLink]="['/user/profile']">Thông tin người dùng</li>
+        <li class="px-4 py-2 hover:bg-gray-200 cursor-pointer" [routerLink]="['/user/tickets']">Danh sách vé mua</li>
+        <li class="px-4 py-2 hover:bg-gray-200 cursor-pointer" (click)="logout()">Đăng xuất</li>
+      </ul>
+    </div>
+  </ng-template>
         </div>
   
       </div>
       <div class="Content-button text-center text-white ml-5 mr-5 h-[50px]">
         <ul class="flex justify-start items-center ml-[10rem]">
-          <li>
-            <span nz-icon nzType="compass" nzTheme="outline"></span> Địa Điểm
+          <li [routerLink]="['/', 'user','location']">
+            <span nz-icon nzType="compass" nzTheme="outline" ></span> Địa Điểm
           </li>
-          <li>
+          <li [routerLink]="['/', 'user','flight-ticket','book']">
             <span nz-icon nzType="cloud" nzTheme="outline"></span> Chuyến Bay
           </li>
         </ul>

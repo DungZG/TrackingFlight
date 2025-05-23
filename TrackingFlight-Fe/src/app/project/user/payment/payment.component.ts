@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,OnDestroy } from '@angular/core';
 import { NzModalService, NzModalRef } from 'ng-zorro-antd/modal';
 import { PaymentDetailComponent } from './payment-detail/payment-detail.component';
 import { FlightService } from '../../../services/flight.service';
@@ -6,6 +6,10 @@ import { LocationService } from '../../../services/location.service';
 import { DialogService, DialogMode, DialogSize } from '../../../../common/service/dialog.service';
 import { FlightdetailComponent } from '../flight-ticket/flightdetail/flightdetail.component';
 import { PaymentFlightdetailComponent } from './payment-flightdetail/payment-flightdetail.component';
+import { PaymentService } from '../../../services/payment.service';
+import { firstValueFrom } from 'rxjs';
+import { Payment } from './payment-response.model';
+import { SeatSelectionWebsocketService, SeatSelectionMessage } from './seat-selection-websocket.service';
 
 interface SeatInfo {
   id: string;
@@ -36,7 +40,9 @@ interface Cavity{
   templateUrl: './payment.component.html',
   styleUrls: ['./payment.component.scss']
 })
-export class PaymentComponent implements OnInit {
+export class PaymentComponent implements OnInit, OnDestroy {
+  private userId = 'user-123'; // lấy user id thật ở hệ thống của bạn
+  private flightId: number;
   public checked: any = false;
   public seatData: any;
   public selectedFlight: any;
@@ -60,7 +66,8 @@ export class PaymentComponent implements OnInit {
   public leftSection = ['A', 'B'];
   public middleSection = ['C', 'D', 'E'];
   public rightSection = ['F', 'G'];
-
+  private seatTimers: { [seatId: string]: any } = {};
+  private HOLD_DURATION = 2 * 60 * 1000; // 2 phút
   public seatMap: { [key: string]: SeatInfo } = {};
   public selectedSeats: string[] = [];
   constructor(
@@ -68,13 +75,31 @@ export class PaymentComponent implements OnInit {
     private modalService: NzModalService,
     private flightService: FlightService,
     private locationService: LocationService,
+    private paymentService: PaymentService,
+    private seatWSService: SeatSelectionWebsocketService,
   ) { 
-    this.initializeSeatMap();
+   
   }
 
   ngOnInit(): void {
-    this.getData();
+   const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+   this.userId = currentUser.userId || 'user-' + Date.now();
+    this.getData().then(() => {
+    this.flightId = this.selectedFlight.flightId;
+    this.initializeSeatMap(); // ✅ Đặt ở đây: sau khi đã có selectedFlight
+
+    this.seatWSService.connect(this.flightId);
+    this.seatWSService.getSeatUpdates().subscribe((msg: SeatSelectionMessage) => {
+      console.log("📩 Client nhận được:", msg);
+      this.handleSeatMessage(msg);
+    });
+  });
     this.totalPrice = this.selectedFlight.price; 
+  }
+
+  ngOnDestroy(): void {
+    this.seatWSService.disconnect();
+    
   }
 
   ngOnChanges(): void {
@@ -138,17 +163,63 @@ export class PaymentComponent implements OnInit {
   }
 
   onSeatSelect(seatId: string) {
-    if (this.seatMap[seatId].status === 'occupied') return; 
-    if (this.selectedSeats.includes(seatId)) {
-      this.selectedSeats = this.selectedSeats.filter(id => id !== seatId);
-      this.seatMap[seatId].status = 'available'; 
-    } else {
-      this.selectedSeats.push(seatId);
-      this.seatMap[seatId].status = 'selected';  
-    }
-    this.seatData = this.selectedSeats;
-  //console.log(this.seatData)
+  if (this.seatMap[seatId].status === 'occupied') return; 
+  if (this.selectedSeats.includes(seatId)) {
+    this.selectedSeats = this.selectedSeats.filter(id => id !== seatId);
+    this.seatMap[seatId].status = 'available';
+
+    // Gửi message release cho ghế này
+    this.seatWSService.sendSeatAction({
+      flightId: this.flightId,
+      seatNumber: seatId,
+      action: 'release',
+      userId: this.userId
+    });
+  } else {
+    this.selectedSeats.push(seatId);
+    this.seatMap[seatId].status = 'selected';
+
+    // Gửi message select cho ghế này
+    this.seatWSService.sendSeatAction({
+      flightId: this.flightId,
+      seatNumber: seatId,
+      action: 'select',
+      userId: this.userId
+    });
   }
+  this.seatData = this.selectedSeats;
+  }
+
+  handleSeatMessage(msg: SeatSelectionMessage) {
+  console.log('📥 Message từ server:', msg);
+  console.log('🧍 My userId:', this.userId);
+
+  const seatId = msg.seatNumber;
+  if (msg.userId === this.userId) {
+    console.log('⛔ Bỏ qua vì là message của chính mình');
+    return;
+  }
+
+  console.log('✅ Update UI cho seat:', seatId, '→', msg.action);
+
+  switch (msg.action) {
+    case 'select':
+      if (this.seatMap[seatId]?.status === 'available') {
+        this.seatMap[seatId].status = 'selected';
+      }
+      break;
+    case 'release':
+      if (this.seatMap[seatId]) {
+        this.seatMap[seatId].status = 'available';
+      }
+      break;
+    case 'book':
+      if (this.seatMap[seatId]) {
+        this.seatMap[seatId].status = 'occupied';
+      }
+      break;
+  }
+}
 
   // Hàm khi chọn "Vé linh hoạt"
   toggleFlexibleTicket(): void {
@@ -161,27 +232,61 @@ export class PaymentComponent implements OnInit {
   }
 
   updateTotalPrice(): void {
-    if (this.checked) {
-      this.totalPrice = this.selectedFlight.price + 244136.60;
-    } else {
-      this.totalPrice = this.selectedFlight.price;
+    const seatId = this.selectedSeats[0]; // chỉ chọn 1 ghế
+    if (seatId && this.seatMap[seatId]) {
+    const seatPrice = this.seatMap[seatId].price;
+    const flightBasePrice = this.selectedFlight.price;
+
+    // Cộng thêm hành lý nếu đã chọn
+    const baggagePrice = this.checked ? 244136.60 : 0;
+
+    // Vé linh hoạt thì nhân 1.1
+    const flexiblePrice = this.isFlexibleTicket ? flightBasePrice * 0.1 : 0;
+
+    this.totalPrice = flightBasePrice + seatPrice + baggagePrice + flexiblePrice;
     }
   }
+
+  updateTotalPriceBySeat(): void {
+  const seatId = this.selectedSeats[0]; // chọn 1 ghế
+  const seatPrice = seatId && this.seatMap[seatId]?.price || 0;
+  const basePrice = this.selectedFlight.price;
+  const baggage = this.checked ? 244000 : 0;
+  const flexible = this.isFlexibleTicket ? basePrice * 0.1 : 0;
+
+  this.totalPrice = basePrice + seatPrice + baggage + flexible;
+}
 
   current = 0;
   pre(): void {
     this.current -= 1;
+    this.updateTotalPriceBySeat();
   }
 
   next(): void {
     this.current += 1;
     this.toggleFlexibleTicket()
-    debugger
+    this.updateTotalPriceBySeat();
   }
 
-  done(): void {
-    console.log('done');
+  async done(): Promise<void> {
+  const res: Payment = await this.paymentService.createPayment(this.totalPrice, 'NCB', 'vn').firstValueFrom();
+  if (res.status === 'Ok' && res.url) {
+    // Gửi thông báo đặt ghế
+    this.selectedSeats.forEach(seatId => {
+      this.seatWSService.sendSeatAction({
+        flightId: this.flightId,
+        seatNumber: seatId,
+        action: 'book',
+        userId: this.userId
+      });
+    });
+
+    window.location.href = res.url;
+  } else {
+    alert('Lỗi tạo link thanh toán: ' + res.message);
   }
+}
 
   openHandelDialog(mode: string = DialogMode.add, item: any = null): void {
     const dialog: NzModalRef = this.modalService.create({

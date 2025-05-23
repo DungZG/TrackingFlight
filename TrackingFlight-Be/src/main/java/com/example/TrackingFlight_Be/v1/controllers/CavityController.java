@@ -1,6 +1,6 @@
 package com.example.TrackingFlight_Be.v1.controllers;
 
-import com.example.TrackingFlight_Be.v1.dto.request.ApiResponse;
+import com.example.TrackingFlight_Be.v1.dto.response.ApiResponse;
 import com.example.TrackingFlight_Be.v1.dto.request.CavityCreationRequest;
 import com.example.TrackingFlight_Be.v1.entity.Cavity;
 import com.example.TrackingFlight_Be.v1.repositories.CavityRepository;

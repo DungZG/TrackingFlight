@@ -17,7 +17,8 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { RouterModule } from '@angular/router'; 
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './project/auth/auth.interceptor';
 registerLocaleData(en);
 
 @NgModule({
@@ -38,7 +39,8 @@ registerLocaleData(en);
     NzModalService,
     provideNzI18n(en_US),
     provideAnimationsAsync(),
-    provideHttpClient()
+    provideHttpClient(),
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

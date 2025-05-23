@@ -1,6 +1,6 @@
 package com.example.TrackingFlight_Be.v1.entity;
 
-import com.example.TrackingFlight_Be.auth.common.entity.User;
+
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;

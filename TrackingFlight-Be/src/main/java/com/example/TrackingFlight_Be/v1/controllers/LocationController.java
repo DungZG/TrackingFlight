@@ -1,6 +1,6 @@
 package com.example.TrackingFlight_Be.v1.controllers;
 
-import com.example.TrackingFlight_Be.v1.dto.request.ApiResponse;
+import com.example.TrackingFlight_Be.v1.dto.response.ApiResponse;
 import com.example.TrackingFlight_Be.v1.dto.request.LocationCreationRequest;
 import com.example.TrackingFlight_Be.v1.entity.Location;
 import com.example.TrackingFlight_Be.v1.services.LocationService;

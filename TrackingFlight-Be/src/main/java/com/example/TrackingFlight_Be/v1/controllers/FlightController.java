@@ -1,14 +1,11 @@
 package com.example.TrackingFlight_Be.v1.controllers;
 
 
-import com.example.TrackingFlight_Be.v1.dto.request.ApiResponse;
 import com.example.TrackingFlight_Be.v1.dto.request.FlightCreationRequest;
 import com.example.TrackingFlight_Be.v1.dto.response.FlightResponse;
 import com.example.TrackingFlight_Be.v1.entity.Flight;
 import com.example.TrackingFlight_Be.v1.mapper.FlightMapper;
-import com.example.TrackingFlight_Be.v1.repositories.FlightRepository;
 import com.example.TrackingFlight_Be.v1.services.FlightService;
-import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;

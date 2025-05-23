@@ -229,3 +229,27 @@
 .seat:hover:not(.occupied) {
   transform: scale(1.1);
 }
+
+.seat-demo {
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
+  text-align: center;
+  line-height: 30px;
+  margin: 5px;
+  cursor: pointer;
+  border: 1px solid #999;
+}
+
+.seat-demo.available {
+  background-color: #a7d4a0; // xanh lá
+}
+
+.seat-demo.selected {
+  background-color: #f1c40f; // vàng (đang chọn tạm thời)
+}
+
+.seat-demo.occupied {
+  background-color: #e74c3c; // đỏ (đã thanh toán)
+  cursor: not-allowed;
+}

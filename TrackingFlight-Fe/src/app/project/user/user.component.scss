@@ -1,3 +1,38 @@
 li{
     margin: 0px 9px 0px 9px;
 }
+.relative {
+  position: relative;
+}
+
+.group:hover .group-hover\:opacity-100 {
+  opacity: 1 !important;
+}
+
+.opacity-0 {
+  opacity: 0;
+}
+
+.transition-opacity {
+  transition: opacity 0.3s ease;
+}
+
+.z-50 {
+  z-index: 50;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.bg-white {
+  background-color: white;
+}
+
+.text-black {
+  color: black;
+}
+
+.hover\:bg-gray-200:hover {
+  background-color: #e5e7eb;
+}

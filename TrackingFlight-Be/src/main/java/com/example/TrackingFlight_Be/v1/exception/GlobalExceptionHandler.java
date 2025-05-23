@@ -1,6 +1,6 @@
 package com.example.TrackingFlight_Be.v1.exception;
 
-import com.example.TrackingFlight_Be.v1.dto.request.ApiResponse;
+import com.example.TrackingFlight_Be.v1.dto.response.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;

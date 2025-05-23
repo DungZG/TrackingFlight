@@ -1,0 +1,52 @@
+<div class="userinfo-container p-6 max-w-md mx-auto bg-white rounded shadow-md">
+  <h2 class="text-2xl font-bold mb-6">Thông tin người dùng</h2>
+
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+
+    <!-- Thông tin không thể sửa -->
+    <div class="mb-4">
+      <label class="block font-semibold mb-1">Tên tài khoản</label>
+      <input type="text" [value]="username" readonly class="input-readonly" />
+    </div>
+
+    <div class="mb-4">
+      <label class="block font-semibold mb-1">Email</label>
+      <input type="email" [value]="email" readonly class="input-readonly" />
+    </div>
+
+    <div class="mb-4">
+      <label class="block font-semibold mb-1">Ngày đăng ký</label>
+      <input type="text" [value]="createdAt | date:'dd/MM/yyyy'" readonly class="input-readonly" />
+    </div>
+
+    <hr class="my-6" />
+
+    <!-- Các ô input để cập nhật -->
+    <div class="mb-4">
+      <label class="block font-semibold mb-1" for="phone">Số điện thoại</label>
+      <input id="phone" type="text" formControlName="phone" class="input-field" />
+    </div>
+
+    <div class="mb-4">
+      <label class="block font-semibold mb-1" for="firstName">Tên</label>
+      <input id="firstName" type="text" formControlName="firstName" class="input-field" />
+    </div>
+
+    <div class="mb-4">
+      <label class="block font-semibold mb-1" for="lastName">Họ</label>
+      <input id="lastName" type="text" formControlName="lastName" class="input-field" />
+    </div>
+
+    <div class="mb-4">
+      <label class="block font-semibold mb-1" for="cccd">CCCD</label>
+      <input id="cccd" type="text" formControlName="cccd" class="input-field" />
+    </div>
+
+    <div class="mb-4">
+      <label class="block font-semibold mb-1" for="dod">Ngày sinh</label>
+      <input id="dod" type="date" formControlName="dod" class="input-field" />
+    </div>
+
+    <button type="submit" class="btn-submit mt-4">Cập nhật thông tin</button>
+  </form>
+</div>

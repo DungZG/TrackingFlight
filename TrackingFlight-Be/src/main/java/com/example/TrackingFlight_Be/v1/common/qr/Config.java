@@ -22,11 +22,11 @@ import jakarta.servlet.http.HttpServletRequest;
 public class Config {
 
     public static String vnp_PayUrl = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-    public static String vnp_ReturnUrl = "http://localhost:8080/vnpay_jsp/vnpay_return.jsp";
+//    public static String vnp_ReturnUrl = "http://localhost:8080/vnpay_jsp/vnpay_return.jsp";
     public static String vnp_TmnCode = "";
     public static String secretKey = "";
     public static String vnp_ApiUrl = "https://sandbox.vnpayment.vn/merchant_webapi/api/transaction";
-
+    public static String vnp_ReturnUrl = "http://localhost:8080/api/payment/vnpay_return";
     public static String md5(String message) {
         String digest = null;
         try {

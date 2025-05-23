@@ -6,11 +6,13 @@ import { TicketComponent } from './ticket/ticket.component';
 import { FlightComponent } from './flight/flight.component';
 import { UserComponent } from './user/user.component';
 import { AircraftComponent } from './aircraft/aircraft.component';
+import { AuthGuard } from '../auth/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: AdminComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: 'charts', component: ChartDetailComponent },
       { path: 'ticket', component: TicketComponent },

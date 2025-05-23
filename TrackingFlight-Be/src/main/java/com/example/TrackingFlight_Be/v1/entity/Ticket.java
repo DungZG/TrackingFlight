@@ -1,6 +1,5 @@
 package com.example.TrackingFlight_Be.v1.entity;
 
-import com.example.TrackingFlight_Be.auth.common.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -45,5 +44,6 @@ public class Ticket {
     @JoinColumn(name = "discount_id")
     private Discount discount;
 
-
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
 }
