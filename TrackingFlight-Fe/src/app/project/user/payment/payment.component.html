@@ -160,7 +160,8 @@
          <div *ngFor="let row of rows" class="seat-row" [class.emergency-exit]="isEmergencyExit(row)">
           <!-- Phần bên trái -->
           <div class="section left">
-            <div *ngFor="let col of leftSection"
+            <ng-container *ngFor="let col of leftSection">
+              <div *ngIf="seatMap[col + row]"
                  class="seat seat-demo"
                  [ngClass]="{
                    'first': seatMap[col + row].type === 'First Class',
@@ -172,11 +173,14 @@
                  (click)="onSeatSelect(col + row)">
               {{col}}{{row}}
             </div>
+            </ng-container>
+            
           </div>
       
           <!-- Phần giữa -->
           <div class="section middle">
-            <div *ngFor="let col of middleSection"
+            <ng-container *ngFor="let col of middleSection">
+              <div 
                  class="seat seat-demo"
                  [ngClass]="{
                    'first': seatMap[col + row].type === 'First Class',
@@ -188,11 +192,14 @@
                  (click)="onSeatSelect(col + row)">
               {{col}}{{row}}
             </div>
+            </ng-container>
+            
           </div>
       
           <!-- Phần bên phải -->
           <div class="section right">
-            <div *ngFor="let col of rightSection"
+            <ng-container *ngFor="let col of rightSection">
+              <div 
                  class="seat seat-demo"
                  [ngClass]="{
                    'first': seatMap[col + row].type === 'First Class',
@@ -204,8 +211,11 @@
                  (click)="onSeatSelect(col + row)">
               {{col}}{{row}}
             </div>
+            </ng-container>
+            
           </div>
         </div>
+        <button (click)="testUpdate()">Test Update Seat A1</button>
         </div>
       </div>
     </div>

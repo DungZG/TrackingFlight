@@ -22,7 +22,7 @@ export class UserinfoComponent implements OnInit {
       firstName: [''],
       lastName: [''],
       cccd: [''],
-      dod: [''] 
+      dod: ['']
     });
   }
 

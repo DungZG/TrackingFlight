@@ -17,6 +17,10 @@ a:hover {
   color: #2d78d7;
 }
 
+.animate-fade-in-up-delayed {
+  opacity: 0; /* Bắt đầu ẩn */
+  animation: fadeInUp 0.6s ease-out forwards;
+}
 /* scroll bar */
 // .section::-webkit-scrollbar {
 //   width: 10px;
@@ -65,6 +69,7 @@ form {
 }
 
 body {
+  @apply bg-gray-50 text-gray-800;
   .dialog-ms {
     width: 414px !important;
   }

@@ -5,14 +5,29 @@ import { tap } from 'rxjs/operators';
 
 interface LoginResponse {
   token: string;
+  role: string;
 }
 
+interface UserPayload {
+  username: string;
+  email: string;
+  createdAt: string;
+  phone?: string;
+  firstName?: string;
+  lastName?: string;
+  cccd?: string;
+  gender?: string;
+  location?: string;
+  date?: string;
+  dob?: string;
+}
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
   private baseUrl = 'http://localhost:8080/auth';  // URL backend bạn cần chỉnh
   private tokenKey = 'jwt_token';
+  private role='role';
 
   private loggedIn = new BehaviorSubject<boolean>(this.hasToken());
 
@@ -49,17 +64,43 @@ export class LoginService {
     return localStorage.getItem(this.tokenKey);
   }
 
+  getRole(): string|null{
+    return localStorage.getItem(this.role)
+  }
+
   isLoggedIn(): Observable<boolean> {
     return this.loggedIn.asObservable();
   }
 
-  getCurrentUser() {
+  updateUser(data: any): Observable<any> {
+  const token = this.getToken();
+  let headers = new HttpHeaders();
+
+  if (token) {
+    headers = headers.set('Authorization', `Bearer ${token}`);
+  }
+
+  return this.http.put(`${this.baseUrl}/update`, data, { headers });
+}
+
+  getCurrentUser(): UserPayload | null {
   const token = this.getToken();
   if (!token) return null;
 
   try {
     const payload = JSON.parse(atob(token.split('.')[1]));
-    return { username: payload.sub || payload.username || null }; // tùy payload backend
+    return {
+      username: payload.sub || payload.username || '',
+      email: payload.email || '',
+      createdAt: payload.createdAt || '',
+      phone: payload.phone || '',
+      firstName: payload.firstName || '',
+      lastName: payload.lastName || '',
+      cccd: payload.cccd || '',
+      gender: payload.gender || '',
+      location: payload.location || '',
+      date: payload.date || ''
+    };
   } catch {
     return null;
   }

@@ -55,13 +55,16 @@ export class BaseService {
     return this.http.get<any>(`${this.apiBaseUrl + this.prefix}/return-flight/${groupId}`);
   }
 
-  createPayment(amount: number, bankCode?: string, language?: string): Observable<Payment> {
-    const params = new URLSearchParams();
-    params.set('amount', amount.toString());
-    if (bankCode) params.set('bankCode', bankCode);
-    if (language) params.set('language', language);
+  createPayment(amount: number, bankCode?: string, language?: string, userId?: number, flightId?: number, seat?: string): Observable<Payment> {
+  const params = new URLSearchParams();
+  params.set('amount', amount.toString());
+  if (bankCode) params.set('bankCode', bankCode);
+  if (language) params.set('language', language);
+  if (userId) params.set('userId', userId.toString());
+  if (flightId !== undefined) params.set('flightId', flightId.toString());
+  if (seat) params.set('seat', seat);
 
-    return this.http.get<Payment>(`${this.apiBaseUrl + this.prefix}/create_payment?${params.toString()}`);
-  }
+  return this.http.get<Payment>(`${this.apiBaseUrl + this.prefix}/create_payment?${params.toString()}`);
+}
   
 }

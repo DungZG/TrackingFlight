@@ -3,6 +3,7 @@ import { LoginServices } from './login.service';
 import {LoginService} from '../../../services/login.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import { MessageService } from '../../../../common/service/message.service';
 @Component({
   selector: 'app-login',
   standalone: false,
@@ -30,7 +31,8 @@ export class LoginComponent implements AfterViewInit {
     private shareData: LoginServices,
     private LoginService: LoginService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private messagerService: MessageService
   ) {
 
   }
@@ -54,34 +56,28 @@ export class LoginComponent implements AfterViewInit {
     const { username, password } = this.loginData;
     this.LoginService.login(username, password).subscribe({
       next: (res) => {
-        alert('Đăng nhập thành công!');
-        // Thao tác tiếp theo: chuyển trang, lưu token,...
+        this.messagerService.notiMessageSuccess('Đăng nhập thành công')
         localStorage.setItem('jwt_token', res.token);
         this.router.navigate(['/user/flight-ticket/book']);
       },
       error: (err) => {
-        alert('Đăng nhập thất bại!');
+        this.messagerService.notiMessageError('Đăng nhập thất bại')
       },
     });
   }
 
   onRegister() {
     const { username, email, password } = this.registerData;
-
-    // Backend bạn có thể cần username, password, firstName, lastName...
-    // Nếu backend cần, bạn nên điều chỉnh cho phù hợp.
     this.LoginService
-      .register(username, email, password) // giả sử register service nhận 3 param này
+      .register(username, email, password)
       .subscribe({
         next: () => {
-          alert('Đăng ký thành công!');
-          // Có thể tự động chuyển sang panel login hoặc làm gì đó
+          this.messagerService.notiMessageSuccess('Đăng ký thành công')
           this.renderer.removeClass(this.container.nativeElement, 'right-panel-active');
-          // Xóa form
           this.registerData = { username: '', email: '', password: '' };
         },
         error: () => {
-          alert('Đăng ký thất bại!');
+           this.messagerService.notiMessageError('Đăng ký thất bại!');
         },
       });
   }

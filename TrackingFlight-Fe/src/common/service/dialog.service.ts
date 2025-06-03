@@ -14,7 +14,7 @@ export class DialogService {
     public loadingChange = new BehaviorSubject<number | null>(null);
     constructor(
         private modalService: NzModalService,
-
+        
     ) { }
 
     

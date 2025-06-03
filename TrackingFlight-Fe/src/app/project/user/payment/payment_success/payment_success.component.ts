@@ -18,7 +18,7 @@ export class Payment_successComponent implements OnInit {
    ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.paymentId = params['vnp_TxnRef'] || null;
-      this.amount = params['vnp_Amount'] ? +params['vnp_Amount'] / 100 : null; // chia 100 vì VNPAY gửi amount * 100
+      this.amount = params['vnp_Amount'] ? +params['vnp_Amount'] : null; // chia 100 vì VNPAY gửi amount * 100
       const payDate = params['vnp_PayDate'];
       if (payDate) {
         // Format YYYYMMDDHHmmss thành Date

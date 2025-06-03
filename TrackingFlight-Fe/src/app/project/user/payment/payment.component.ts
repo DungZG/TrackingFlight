@@ -10,7 +10,8 @@ import { PaymentService } from '../../../services/payment.service';
 import { firstValueFrom } from 'rxjs';
 import { Payment } from './payment-response.model';
 import { SeatSelectionWebsocketService, SeatSelectionMessage } from './seat-selection-websocket.service';
-
+import { ChangeDetectorRef } from '@angular/core';
+import { NgZone } from '@angular/core';
 interface SeatInfo {
   id: string;
   type: 'First Class' | 'Economy Class' | 'Business Class';
@@ -38,10 +39,11 @@ interface Cavity{
   selector: 'app-payment',
   standalone: false,
   templateUrl: './payment.component.html',
-  styleUrls: ['./payment.component.scss']
+  styleUrls: ['./payment.component.scss'],
+  // changeDetection: ChangeDetectionStrategy.Default,
 })
 export class PaymentComponent implements OnInit, OnDestroy {
-  private userId = 'user-123'; // lấy user id thật ở hệ thống của bạn
+  private userId: any; // lấy user id thật ở hệ thống của bạn
   private flightId: number;
   public checked: any = false;
   public seatData: any;
@@ -77,6 +79,8 @@ export class PaymentComponent implements OnInit, OnDestroy {
     private locationService: LocationService,
     private paymentService: PaymentService,
     private seatWSService: SeatSelectionWebsocketService,
+    private cdRef: ChangeDetectorRef,
+    private ngZone: NgZone,
   ) { 
    
   }
@@ -86,7 +90,8 @@ export class PaymentComponent implements OnInit, OnDestroy {
    this.userId = currentUser.userId || 'user-' + Date.now();
     this.getData().then(() => {
     this.flightId = this.selectedFlight.flightId;
-    this.initializeSeatMap(); // ✅ Đặt ở đây: sau khi đã có selectedFlight
+    debugger
+    this.initializeSeatMap();
 
     this.seatWSService.connect(this.flightId);
     this.seatWSService.getSeatUpdates().subscribe((msg: SeatSelectionMessage) => {
@@ -163,62 +168,66 @@ export class PaymentComponent implements OnInit, OnDestroy {
   }
 
   onSeatSelect(seatId: string) {
-  if (this.seatMap[seatId].status === 'occupied') return; 
-  if (this.selectedSeats.includes(seatId)) {
-    this.selectedSeats = this.selectedSeats.filter(id => id !== seatId);
-    this.seatMap[seatId].status = 'available';
+  if (this.seatMap[seatId].status === 'occupied') return;
 
-    // Gửi message release cho ghế này
-    this.seatWSService.sendSeatAction({
-      flightId: this.flightId,
-      seatNumber: seatId,
-      action: 'release',
-      userId: this.userId
-    });
-  } else {
-    this.selectedSeats.push(seatId);
-    this.seatMap[seatId].status = 'selected';
+  this.ngZone.run(() => {
+    if (this.selectedSeats.includes(seatId)) {
+      this.selectedSeats = this.selectedSeats.filter(id => id !== seatId);
+      this.seatMap = {
+        ...this.seatMap,
+        [seatId]: { ...this.seatMap[seatId], status: 'available' }
+      };
 
-    // Gửi message select cho ghế này
-    this.seatWSService.sendSeatAction({
-      flightId: this.flightId,
-      seatNumber: seatId,
-      action: 'select',
-      userId: this.userId
-    });
-  }
-  this.seatData = this.selectedSeats;
-  }
+      this.seatWSService.sendSeatAction({ flightId: this.flightId, seatNumber: seatId, action: 'release', userId: this.userId });
+    } else {
+      if (this.selectedSeats.length > 0) {
+        const oldSeat = this.selectedSeats[0];
+        this.selectedSeats = [];
+        this.seatMap = {
+          ...this.seatMap,
+          [oldSeat]: { ...this.seatMap[oldSeat], status: 'available' }
+        };
+        this.seatWSService.sendSeatAction({ flightId: this.flightId, seatNumber: oldSeat, action: 'release', userId: this.userId });
+      }
+
+      this.selectedSeats = [seatId];
+      this.seatMap = {
+        ...this.seatMap,
+        [seatId]: { ...this.seatMap[seatId], status: 'selected' }
+      };
+      this.seatWSService.sendSeatAction({ flightId: this.flightId, seatNumber: seatId, action: 'select', userId: this.userId });
+    }
+
+    this.seatData = this.selectedSeats;
+    this.cdRef.markForCheck();
+  });
+}
+
 
   handleSeatMessage(msg: SeatSelectionMessage) {
-  console.log('📥 Message từ server:', msg);
-  console.log('🧍 My userId:', this.userId);
-
+  if (msg.userId === this.userId) return;
   const seatId = msg.seatNumber;
-  if (msg.userId === this.userId) {
-    console.log('⛔ Bỏ qua vì là message của chính mình');
-    return;
-  }
+  if (!this.seatMap[seatId]) return;
 
-  console.log('✅ Update UI cho seat:', seatId, '→', msg.action);
-
+  let newStatus: 'selected' | 'available' | 'occupied';
   switch (msg.action) {
-    case 'select':
-      if (this.seatMap[seatId]?.status === 'available') {
-        this.seatMap[seatId].status = 'selected';
-      }
-      break;
-    case 'release':
-      if (this.seatMap[seatId]) {
-        this.seatMap[seatId].status = 'available';
-      }
-      break;
-    case 'book':
-      if (this.seatMap[seatId]) {
-        this.seatMap[seatId].status = 'occupied';
-      }
-      break;
+    case 'select': newStatus = 'selected'; break;
+    case 'release': newStatus = 'available'; break;
+    case 'book': newStatus = 'occupied'; break;
+    default: return;
   }
+
+  this.ngZone.run(() => {
+    console.log('Updating seatMap for seat:', seatId, 'new status:', newStatus);
+    this.seatMap = {
+      ...this.seatMap,
+      [seatId]: {
+        ...this.seatMap[seatId],
+        status: newStatus
+      }
+    };
+    this.cdRef.markForCheck();
+  });
 }
 
   // Hàm khi chọn "Vé linh hoạt"
@@ -232,17 +241,12 @@ export class PaymentComponent implements OnInit, OnDestroy {
   }
 
   updateTotalPrice(): void {
-    const seatId = this.selectedSeats[0]; // chỉ chọn 1 ghế
+    const seatId = this.selectedSeats[0]; 
     if (seatId && this.seatMap[seatId]) {
     const seatPrice = this.seatMap[seatId].price;
     const flightBasePrice = this.selectedFlight.price;
-
-    // Cộng thêm hành lý nếu đã chọn
     const baggagePrice = this.checked ? 244136.60 : 0;
-
-    // Vé linh hoạt thì nhân 1.1
     const flexiblePrice = this.isFlexibleTicket ? flightBasePrice * 0.1 : 0;
-
     this.totalPrice = flightBasePrice + seatPrice + baggagePrice + flexiblePrice;
     }
   }
@@ -253,7 +257,6 @@ export class PaymentComponent implements OnInit, OnDestroy {
   const basePrice = this.selectedFlight.price;
   const baggage = this.checked ? 244000 : 0;
   const flexible = this.isFlexibleTicket ? basePrice * 0.1 : 0;
-
   this.totalPrice = basePrice + seatPrice + baggage + flexible;
 }
 
@@ -270,7 +273,7 @@ export class PaymentComponent implements OnInit, OnDestroy {
   }
 
   async done(): Promise<void> {
-  const res: Payment = await this.paymentService.createPayment(this.totalPrice, 'NCB', 'vn').firstValueFrom();
+  const res: Payment = await this.paymentService.createPayment(this.totalPrice, 'NCB', 'vn', this.userId, this.flightId,  this.selectedSeats[0]).firstValueFrom();
   if (res.status === 'Ok' && res.url) {
     // Gửi thông báo đặt ghế
     this.selectedSeats.forEach(seatId => {
@@ -354,4 +357,16 @@ export class PaymentComponent implements OnInit, OnDestroy {
       }
     console.log(this.userInfo)
   }
+
+  testUpdate() {
+  this.seatMap = {
+    ...this.seatMap,
+    'A1': {
+      ...this.seatMap['A1'],
+      status: 'selected'
+    }
+  };
+  console.log('Test update:', this.seatMap['A1']);
+  this.cdRef.detectChanges();
+}
 }

@@ -11,6 +11,9 @@ import { Payment_successComponent } from './payment/payment_success/payment_succ
 import { Payment_failComponent } from './payment/payment_fail/payment_fail.component';
 import { AuthGuard } from '../auth/auth.guard';
 import { UserinfoComponent } from './userinfo/userinfo.component';
+import { ProfileComponent } from './userinfo/profile/profile.component';
+import { HistoryticketComponent } from './userinfo/historyticket/historyticket.component';
+import { TicketuserComponent } from './userinfo/ticketuser/ticketuser.component';
 
 const routes: Routes = [
   {
@@ -18,8 +21,15 @@ const routes: Routes = [
     component: UserComponent,
     
     children: [
-      { path: 'location', component: LocationComponent,canActivate: [AuthGuard]},
-      { path: 'info-user', component: UserinfoComponent , canActivate: [AuthGuard]},
+      { path: 'location', component: LocationComponent},
+      { path: 'profile', component: UserinfoComponent , canActivate: [AuthGuard],
+        children: [
+          { path: 'info', component: ProfileComponent },
+          { path: 'history', component: HistoryticketComponent },
+          { path: 'ticket', component: TicketuserComponent },
+          { path: '', redirectTo: 'info', pathMatch: 'full' } 
+        ]
+      },
       { path: 'flight-ticket', component: FlightTicketComponent , canActivate: [AuthGuard],
       children: [
         { path: 'book', component: BookingComponent },

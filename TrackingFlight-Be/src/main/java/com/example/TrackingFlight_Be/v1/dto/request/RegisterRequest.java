@@ -16,4 +16,6 @@ public class RegisterRequest {
     @NotBlank(message = "Email không được để trống")
     @Email(message = "Email không đúng định dạng")
     private String email;
+
+    private Role role;
 }

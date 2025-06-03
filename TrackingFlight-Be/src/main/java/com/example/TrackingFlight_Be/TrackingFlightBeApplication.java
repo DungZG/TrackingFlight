@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @EnableScheduling
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.example.TrackingFlight_Be.v1"})
 public class TrackingFlightBeApplication {
 
 	public static void main(String[] args) {

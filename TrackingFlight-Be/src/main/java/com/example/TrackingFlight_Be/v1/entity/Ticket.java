@@ -44,6 +44,9 @@ public class Ticket {
     @JoinColumn(name = "discount_id")
     private Discount discount;
 
+    @Column
+    private String name;
+
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 }

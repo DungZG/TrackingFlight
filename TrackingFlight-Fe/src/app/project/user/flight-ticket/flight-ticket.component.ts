@@ -1,11 +1,14 @@
-import { Component, OnInit, ViewEncapsulation,ViewChild ,ElementRef} from '@angular/core';
+import { Component, OnInit, ViewEncapsulation,ViewChild ,ElementRef,ChangeDetectorRef} from '@angular/core';
+
 import { LocationService } from '../../../services/location.service';
 import { firstValueFrom } from 'rxjs';
 import { FlightService } from '../../../services/flight.service';
-import { DatePipe } from '@angular/common';
+import { DatePipe,CurrencyPipe,CommonModule } from '@angular/common';
 import { DialogMode, DialogService, DialogSize } from '../../../../common/service/dialog.service';
 import { FlightdetailComponent } from './flightdetail/flightdetail.component';
 import { BookingdetailComponent } from './booking/bookingdetail/bookingdetail.component';
+import { ArrowLeft, ArrowRight, Plane, MapPin, CalendarDays, Clock, Star, BookOpen, Smartphone, Loader2, Luggage, ChevronLeft, ChevronRight } from 'lucide-angular';
+import { LucideAngularModule } from 'lucide-angular';
 declare const FlyonUI: any;
 interface FlightItem {
   a_houns: any;
@@ -30,15 +33,149 @@ interface Loaction {
   locationId: number;
   name: string;
 }
+
+interface Airline {
+  name: string;
+  logoUrl: string;
+}
+
+interface Flight {
+  id: string;
+  airline: Airline;
+  departureTime: string;
+  departureDate: string;
+  departureLocation: string;
+  arrivalTime: string;
+  arrivalDate: string;
+  arrivalLocation: string;
+  duration: string;
+  price: number;
+  isDirectFlight: boolean;
+  type: "one-way" | "round-trip";
+  // Round trip details
+  returnDepartureTime?: string;
+  returnDepartureDate?: string;
+  returnDepartureLocation?: string;
+  returnArrivalTime?: string;
+  returnArrivalDate?: string;
+  returnArrivalLocation?: string;
+  returnDuration?: string;
+}
+
+interface Location {
+  id: string;
+  name: string;
+  imageUrl: string;
+}
 @Component({
   selector: 'app-flight-ticket',
   standalone: false,
   templateUrl: './flight-ticket.component.html',
   styleUrl: './flight-ticket.component.scss',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  providers: [CurrencyPipe, DatePipe]
 })
 
 export class FlightTicketComponent implements OnInit {
+  mockTopCarouselImages = [
+    { id: "1", src: "../../../asset/2600X1111_chao_he_vie.jpg", alt: "Promotion 1" },
+    { id: "2", src: "../../../asset/top_2x(1).jpg", alt: "Promotion 2" },
+    { id: "3", src: "../../../asset/top_2x.jpg", alt: "Promotion 3" },
+  ];
+
+  mockLocations: Location[] = [
+    { id: "loc1", name: "Hà Nội", imageUrl: "../../../asset/hanoi.jpg" },
+    { id: "loc2", name: "Đà Nẵng", imageUrl: "../../../asset/hanoi.jpg" },
+    { id: "loc3", name: "TP. Hồ Chí Minh", imageUrl: "../../../asset/hanoi.jpg" },
+    { id: "loc4", name: "Phú Quốc", imageUrl: "../../../asset/hanoi.jpg" },
+    { id: "loc5", name: "Nha Trang", imageUrl: "../../../asset/hanoi.jpg" },
+    { id: "loc6", name: "Đà Lạt", imageUrl: "../../../asset/hanoi.jpg" },
+  ];
+
+  initialMockFlights: Flight[] = [
+    {
+      id: "fl1",
+      airline: { name: "Vietnam Airlines", logoUrl: "../../../asset/VN.png" },
+      departureTime: "08:00",
+      departureDate: "15 tháng 7",
+      departureLocation: "Hà Nội (HAN)",
+      arrivalTime: "10:00",
+      arrivalDate: "15 tháng 7",
+      arrivalLocation: "Đà Nẵng (DAD)",
+      duration: "2h 00m",
+      price: 1500000,
+      isDirectFlight: true,
+      type: "one-way",
+    },
+    {
+      id: "fl2",
+      airline: { name: "VietJet Air", logoUrl: "../../../asset/VN.png" },
+      departureTime: "14:30",
+      departureDate: "18 tháng 7",
+      departureLocation: "TP. HCM (SGN)",
+      arrivalTime: "16:30",
+      arrivalDate: "18 tháng 7",
+      arrivalLocation: "Hà Nội (HAN)",
+      duration: "2h 00m",
+      price: 1200000,
+      isDirectFlight: true,
+      type: "one-way",
+    },
+    {
+      id: "fl3",
+      airline: { name: "Bamboo Airways", logoUrl: "../../../asset/VN.png" },
+      departureTime: "10:00",
+      departureDate: "20 tháng 7",
+      departureLocation: "Hà Nội (HAN)",
+      arrivalTime: "12:15",
+      arrivalDate: "20 tháng 7",
+      arrivalLocation: "TP. HCM (SGN)",
+      duration: "2h 15m",
+      price: 1800000,
+      isDirectFlight: true,
+      type: "round-trip",
+      returnDepartureTime: "18:00",
+      returnDepartureDate: "25 tháng 7",
+      returnDepartureLocation: "TP. HCM (SGN)",
+      returnArrivalTime: "20:15",
+      returnArrivalDate: "25 tháng 7",
+      returnArrivalLocation: "Hà Nội (HAN)",
+      returnDuration: "2h 15m",
+    },
+     {
+      id: "fl4",
+      airline: { name: "Pacific Airlines", logoUrl: "../../../asset/VN.png" },
+      departureTime: "09:15",
+      departureDate: "22 tháng 7",
+      departureLocation: "Đà Nẵng (DAD)",
+      arrivalTime: "10:30",
+      arrivalDate: "22 tháng 7",
+      arrivalLocation: "TP. HCM (SGN)",
+      duration: "1h 15m",
+      price: 950000,
+      isDirectFlight: true,
+      type: "one-way",
+    },
+    {
+      id: "fl5",
+      airline: { name: "Vietravel Airlines", logoUrl: "../../../asset/VN.png" },
+      departureTime: "17:00",
+      departureDate: "28 tháng 7",
+      departureLocation: "Hà Nội (HAN)",
+      arrivalTime: "19:05",
+      arrivalDate: "28 tháng 7",
+      arrivalLocation: "Phú Quốc (PQC)",
+      duration: "2h 05m",
+      price: 2100000,
+      isDirectFlight: true,
+      type: "one-way",
+    }
+  ];
+
+  flights: Flight[] = [];
+    // NG-ZORRO Carousel settings
+  dotPosition = 'bottom';
+  nzEffect = 'scrollx'; // or 'fade'
   public effect = 'scrollx';
   public isLoading = false;
   public listOfData: any;
@@ -48,7 +185,7 @@ export class FlightTicketComponent implements OnInit {
   public itemsPerPage = 5;
   public hasMoreData = true;  
   public currentIndex = 0;
-
+  public isLoadingMore = false;
   public list: any = [
     {
       locationPicture: '../../../asset/2600X1111_chao_he_vie.jpg'
@@ -66,6 +203,8 @@ export class FlightTicketComponent implements OnInit {
     public flightService: FlightService,
     private datePipe: DatePipe,
     public dialogService: DialogService,
+    private currencyPipe: CurrencyPipe, 
+    private cdr: ChangeDetectorRef,
   ) { }
 
   async getData() {
@@ -227,4 +366,33 @@ export class FlightTicketComponent implements OnInit {
     const month = date.getMonth() + 1;
     return `${day} tháng ${month}`;
   }
+    loadInitialFlights(): void {
+    this.flights = this.initialMockFlights.slice(0, this.itemsPerPage);
+    this.hasMoreData = this.initialMockFlights.length > this.itemsPerPage;
+    this.currentPage = 1;
+    this.cdr.markForCheck();
+  }
+
+  formatPrice(price: number): string {
+    return this.currencyPipe.transform(price, 'VND', 'symbol', '1.0-0', 'vi') || '';
+  }
+
+  loadMoreFlights(): void {
+    this.isLoadingMore = true;
+    // Simulate API call
+    setTimeout(() => {
+      const nextPage = this.currentPage + 1;
+      const newFlights = this.initialMockFlights.slice(0, nextPage * this.itemsPerPage);
+      this.flights = newFlights;
+      this.currentPage = nextPage;
+      this.hasMoreData = newFlights.length < this.initialMockFlights.length;
+      this.isLoadingMore = false;
+      this.cdr.markForCheck();
+    }, 1000);
+  }
+
+  collapseFlights(): void {
+    this.loadInitialFlights();
+  }
+  
 }

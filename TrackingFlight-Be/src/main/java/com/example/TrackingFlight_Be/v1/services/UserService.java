@@ -3,8 +3,12 @@ package com.example.TrackingFlight_Be.v1.services;
 
 import com.example.TrackingFlight_Be.v1.common.enums.Role;
 import com.example.TrackingFlight_Be.v1.dto.request.RegisterRequest;
+import com.example.TrackingFlight_Be.v1.dto.request.UpdateRequest;
+import com.example.TrackingFlight_Be.v1.entity.Flight;
 import com.example.TrackingFlight_Be.v1.entity.User;
 import com.example.TrackingFlight_Be.v1.repositories.UserRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -34,12 +38,31 @@ public class UserService {
 //        user.setFirstName(request.getFirstName());
 //        user.setLastName(request.getLastName());
 
-        // Nếu không gửi role, mặc định là USER
-//        if (request.getRole() == null) {
-//            user.setRole(Role.USER);
-//        } else {
-//            user.setRole(request.getRole());
-//        }
+//         Nếu không gửi role, mặc định là USER
+        if (request.getRole() == null) {
+            user.setRole(Role.USER);
+        } else {
+            user.setRole(request.getRole());
+        }
         return userRepository.save(user);
+    }
+
+    public void updateUser(UpdateRequest updateRequest) {
+        User user = userRepository.findByUsername(updateRequest.getUsername())
+                .orElseThrow(() -> new RuntimeException("User không tồn tại"));
+
+        if (updateRequest.getSdt() != null) user.setPhone(updateRequest.getSdt());
+        if (updateRequest.getFirstName() != null) user.setFirstName(updateRequest.getFirstName());
+        if (updateRequest.getLastName() != null) user.setLastName(updateRequest.getLastName());
+        if (updateRequest.getGender() != null) user.setGender(updateRequest.getGender()); // nếu bạn có trường này trong entity
+        if (updateRequest.getLocation() != null) user.setLocation(updateRequest.getLocation()); // thêm trường location nếu có
+        if (updateRequest.getCccd() != null) user.setCccd(updateRequest.getCccd()); // thêm trường cccd nếu có
+        if (updateRequest.getDob() != null) user.setDod(updateRequest.getDob());
+
+        userRepository.save(user);
+    }
+
+    public Page<User> getAllUser(Pageable pageable) {
+        return userRepository.findAll(pageable);
     }
 }

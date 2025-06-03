@@ -1,0 +1,91 @@
+<nz-card>
+  <nz-card-meta nzTitle="Thông Tin Người Dùng" nzDescription="Cập nhật thông tin cá nhân của bạn."></nz-card-meta>
+  <form nz-form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="mt-6">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-1 mb-6 p-4 bg-gray-50 rounded-md border">
+      <div>
+        <label class="block font-semibold mb-1 text-sm text-gray-600">Tên tài khoản</label>
+        <input nz-input [value]="username" readonly class="bg-gray-100 !cursor-not-allowed" />
+      </div>
+      <div>
+        <label class="block font-semibold mb-1 text-sm text-gray-600">Email</label>
+        <input nz-input type="email" [value]="email" readonly class="bg-gray-100 !cursor-not-allowed" />
+      </div>
+      <div>
+        <label class="block font-semibold mb-1 text-sm text-gray-600">Ngày đăng ký</label>
+        <input nz-input [value]="createdAt | date:'dd/MM/yyyy':'':'vi'" readonly class="bg-gray-100 !cursor-not-allowed" />
+      </div>
+    </div>
+
+    <div nz-row [nzGutter]="[16, 0]">
+      <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
+        <nz-form-item>
+          <nz-form-label [nzRequired]="true" nzFor="lastName">Họ</nz-form-label>
+          <nz-form-control nzErrorTip="Vui lòng nhập họ!">
+            <input nz-input formControlName="lastName" id="lastName" placeholder="Nhập họ" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
+        <nz-form-item>
+          <nz-form-label [nzRequired]="true" nzFor="firstName">Tên</nz-form-label>
+          <nz-form-control nzErrorTip="Vui lòng nhập tên!">
+            <input nz-input formControlName="firstName" id="firstName" placeholder="Nhập tên" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
+        <nz-form-item>
+          <nz-form-label [nzRequired]="true" nzFor="gender">Giới tính</nz-form-label>
+          <nz-form-control nzErrorTip="Vui lòng chọn giới tính!">
+            <nz-select formControlName="gender" id="gender" nzPlaceHolder="Chọn giới tính">
+              <nz-option nzValue="male" nzLabel="Nam"></nz-option>
+              <nz-option nzValue="female" nzLabel="Nữ"></nz-option>
+              <nz-option nzValue="other" nzLabel="Khác"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
+        <nz-form-item>
+          <nz-form-label [nzRequired]="true" nzFor="date">Ngày Sinh</nz-form-label>
+          <nz-form-control nzErrorTip="Vui lòng chọn ngày sinh!">
+            <nz-date-picker formControlName="date" id="date" nzPlaceHolder="Chọn ngày sinh" class="w-full" [nzFormat]="'dd/MM/yyyy'"></nz-date-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+       <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
+        <nz-form-item>
+          <nz-form-label [nzRequired]="true" nzFor="cccd">CCCD</nz-form-label>
+          <nz-form-control nzErrorTip="Vui lòng nhập số CCCD!">
+            <input nz-input formControlName="cccd" id="cccd" placeholder="Nhập số CCCD" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
+        <nz-form-item>
+          <nz-form-label [nzRequired]="true" nzFor="sdt">Số Điện Thoại</nz-form-label>
+          <nz-form-control nzErrorTip="Vui lòng nhập số điện thoại hợp lệ!">
+            <input nz-input formControlName="sdt" id="sdt" placeholder="Nhập số điện thoại" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="16">
+        <nz-form-item>
+          <nz-form-label [nzRequired]="true" nzFor="location">Địa chỉ</nz-form-label>
+          <nz-form-control nzErrorTip="Vui lòng nhập địa chỉ!">
+            <input nz-input formControlName="location" id="location" placeholder="Nhập địa chỉ" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+
+    <div class="mt-8 flex justify-end">
+      <button nz-button nzType="primary" type="submit" [disabled]="userForm.invalid">
+        <span nz-icon nzType="save"></span>
+        Cập Nhật Thông Tin
+      </button>
+    </div>
+  </form>
+</nz-card>

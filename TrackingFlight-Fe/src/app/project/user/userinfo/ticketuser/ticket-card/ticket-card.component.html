@@ -1,0 +1,114 @@
+<nz-card *ngIf="ticket" class="w-full overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+  <nz-card-meta
+  [nzTitle]="
+    titleTemplate
+  "
+  [nzDescription]="
+    descriptionTemplate
+  ">
+</nz-card-meta>
+
+<ng-template #titleTemplate>
+  <div class="flex justify-between items-start">
+    <span class="text-lg font-semibold text-blue-600">{{ ticket.title }}</span>
+    <nz-badge *ngIf="currentStatusDisplay"
+              [nzStatus]="currentStatusDisplay.type"
+              [nzText]="currentStatusDisplay.text">
+    </nz-badge>
+  </div>
+</ng-template>
+
+<ng-template #descriptionTemplate>
+  <ng-container *ngIf="ticket.category === 'flight' && ticket.flightDetails">
+    {{ ticket.flightDetails.fromCity }} ({{ ticket.flightDetails.departureAirportCode }}) →
+    {{ ticket.flightDetails.toCity }} ({{ ticket.flightDetails.arrivalAirportCode }})
+  </ng-container>
+  <ng-container *ngIf="ticket.category === 'event' && ticket.organizer">
+    Tổ chức bởi: {{ ticket.organizer }}
+  </ng-container>
+</ng-template>
+
+  <div class="mt-4 space-y-3">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <!-- Cột thông tin chi tiết -->
+      <div class="space-y-1 text-sm">
+        <!-- Flight Details -->
+        <ng-container *ngIf="ticket.category === 'flight' && ticket.flightDetails">
+          <p><span nz-icon nzType="plane" nzTheme="outline" class="mr-2 text-sky-600"></span>
+            {{ ticket.flightDetails.airline }} - {{ ticket.flightDetails.flightNumber }}</p>
+          <p><span nz-icon nzType="calendar" nzTheme="outline" class="mr-2 text-sky-600"></span>
+            Khởi hành: {{ formatDate(ticket.date) }} lúc {{ formatTime(ticket.flightDetails.departureTime) }}</p>
+          <p><span nz-icon nzType="clock-circle" nzTheme="outline" class="mr-2 text-sky-600"></span>
+            Đến: {{ formatDate(ticket.date) }} lúc {{ formatTime(ticket.flightDetails.arrivalTime) }} (Dự kiến)</p>
+          <p *ngIf="ticket.flightDetails.seat && ticket.flightDetails.class">
+            <span nz-icon nzType="solution" nzTheme="outline" class="mr-2 text-sky-600"></span>
+            Ghế: {{ ticket.flightDetails.seat }} (Hạng {{ ticket.flightDetails.class }})</p>
+          <p *ngIf="ticket.flightDetails.gate">
+            <span nz-icon nzType="info-circle" nzTheme="outline" class="mr-2 text-sky-600"></span>
+            Cổng: {{ ticket.flightDetails.gate }}</p>
+        </ng-container>
+
+        <!-- Event Details -->
+        <ng-container *ngIf="ticket.category === 'event'">
+          <p><span nz-icon nzType="calendar" nzTheme="outline" class="mr-2 text-purple-600"></span>
+            Ngày: {{ formatDate(ticket.date) }}</p>
+          <p *ngIf="ticket.time"><span nz-icon nzType="clock-circle" nzTheme="outline" class="mr-2 text-purple-600"></span>
+            Thời gian: {{ formatTime(ticket.time) }}</p>
+          <p *ngIf="ticket.location"><span nz-icon nzType="environment" nzTheme="outline" class="mr-2 text-purple-600"></span>
+            Địa điểm: {{ ticket.location }}</p>
+        </ng-container>
+
+        <!-- Hotel Details -->
+        <ng-container *ngIf="ticket.category === 'hotel' && ticket.hotelDetails">
+            <p><span nz-icon nzType="bank" nzTheme="outline" class="mr-2 text-orange-600"></span>
+                Khách sạn: {{ ticket.title }}</p>
+            <p><span nz-icon nzType="calendar" nzTheme="outline" class="mr-2 text-orange-600"></span>
+                Nhận phòng: {{ formatDate(ticket.hotelDetails.checkInDate) }}</p>
+            <p><span nz-icon nzType="calendar" nzTheme="outline" class="mr-2 text-orange-600"></span>
+                Trả phòng: {{ formatDate(ticket.hotelDetails.checkOutDate) }}</p>
+            <p *ngIf="ticket.hotelDetails.roomType"><span nz-icon nzType="home" nzTheme="outline" class="mr-2 text-orange-600"></span>
+                Loại phòng: {{ ticket.hotelDetails.roomType }}</p>
+            <p *ngIf="ticket.hotelDetails.numberOfGuests"><span nz-icon nzType="team" nzTheme="outline" class="mr-2 text-orange-600"></span>
+                Số khách: {{ ticket.hotelDetails.numberOfGuests }}</p>
+        </ng-container>
+
+        <!-- Tour Details -->
+        <ng-container *ngIf="ticket.category === 'tour' && ticket.tourDetails">
+            <p><span nz-icon nzType="flag" nzTheme="outline" class="mr-2 text-green-600"></span>
+                Tour: {{ ticket.title }}</p>
+            <p><span nz-icon nzType="calendar" nzTheme="outline" class="mr-2 text-green-600"></span>
+                Ngày bắt đầu: {{ formatDate(ticket.date) }}</p>
+            <p *ngIf="ticket.tourDetails.duration"><span nz-icon nzType="clock-circle" nzTheme="outline" class="mr-2 text-green-600"></span>
+                Thời lượng: {{ ticket.tourDetails.duration }}</p>
+            <p *ngIf="ticket.tourDetails.groupSize"><span nz-icon nzType="team" nzTheme="outline" class="mr-2 text-green-600"></span>
+                Số người: {{ ticket.tourDetails.groupSize }}</p>
+        </ng-container>
+
+        <nz-divider nzType="horizontal" class="my-2"></nz-divider>
+        <p><span nz-icon nzType="dollar-circle" nzTheme="outline" class="mr-2 text-green-500"></span>
+          Giá: {{ ticket.price | number:'1.0-0':'vi' }} {{ ticket.currency }}</p>
+        <p><span nz-icon nzType="barcode" nzTheme="outline" class="mr-2 text-gray-500"></span>
+          Mã đặt chỗ: {{ ticket.bookingReference }}</p>
+        <p *ngIf="ticket.purchaseDate" class="text-gray-500">
+          <span nz-icon nzType="shopping-cart" nzTheme="outline" class="mr-2"></span>
+          Ngày mua: {{ formatDate(ticket.purchaseDate) }}</p>
+      </div>
+
+      <!-- Cột mã QR -->
+      <div class="flex flex-col items-center justify-center p-2 border border-dashed rounded-md">
+        <img [src]="ticket.qrCodeUrl || 'https://via.placeholder.com/120?text=QR'"
+             alt="QR Code"
+             class="rounded-md" />
+      </div>
+    </div>
+  </div>
+
+  <ul nz-card-actions>
+    <li nz-tooltip nzTooltipTitle="Tải vé PDF">
+      <button nz-button nzType="link"><span nz-icon nzType="download"></span> Tải Vé</button>
+    </li>
+    <li nz-tooltip nzTooltipTitle="Xem chi tiết vé">
+      <button nz-button nzType="link"><span nz-icon nzType="eye"></span> Chi Tiết</button>
+    </li>
+  </ul>
+</nz-card>

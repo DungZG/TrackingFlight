@@ -74,3 +74,58 @@
   font-size: 14px; 
   text-align: center;
 }
+
+// Component-specific styles.
+// We aim to use Tailwind as much as possible, but some NG-ZORRO overrides might be needed.
+
+// Custom styling for NG-ZORRO Tabs to match the target design
+:host ::ng-deep .custom-tabs .ant-tabs-nav-wrap {
+  @apply bg-[#374b71] rounded-md p-1;
+}
+
+:host ::ng-deep .custom-tabs .ant-tabs-tab {
+  @apply text-white flex-1 text-center py-3; // Tailwind for flex, padding
+  border: none !important; // Override NG-ZORRO borders
+  margin: 0 !important; // Override NG-ZORRO margins
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    @apply text-sky-300; // Tailwind for hover text
+  }
+}
+
+:host ::ng-deep .custom-tabs .ant-tabs-tab-active {
+  @apply bg-sky-500 text-white rounded-sm; // Tailwind for active state
+  div {
+    @apply text-white; // Ensure icon and text in active tab are white
+  }
+}
+
+:host ::ng-deep .custom-tabs .ant-tabs-ink-bar {
+  @apply hidden; // Hide the default ink bar as we are styling the whole tab
+}
+
+// Style for the tab content area (the nz-tab element itself)
+:host ::ng-deep .custom-tabs .ant-tabs-tabpane {
+  @apply mt-0; // Remove default top margin if any
+}
+
+
+// Location Carousel specific styling if NG-ZORRO's default arrows are not ideal
+ :host ::ng-deep .location-carousel .slick-prev,
+ :host ::ng-deep .location-carousel .slick-next {
+  @apply bg-white rounded-full p-2 shadow-md hover:bg-gray-100 z-10 text-gray-700;
+  // Position them as needed
+}
+:host ::ng-deep .location-carousel .slick-prev {
+  left: -10px;
+}
+:host ::ng-deep .location-carousel .slick-next {
+  right: -10px;
+}
+
+// Ensure nz-card cover images don't have extra padding if nz-card adds it
+:host ::ng-deep nz-card[nzCover] .ant-card-cover {
+    margin-right: 0;
+    margin-left: 0;
+}

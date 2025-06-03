@@ -56,6 +56,15 @@ public class User {
     @Column(nullable = false)
     Role role;
 
+    @Column
+    private String location;
+
+    @Column
+    private String cccd;
+
+    @Column
+    private String Gender;
+
     @Override
     public final boolean equals(Object o) {
         if (this == o) return true;

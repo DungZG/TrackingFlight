@@ -3,10 +3,17 @@ package com.example.TrackingFlight_Be.v1.controllers;
 import com.example.TrackingFlight_Be.v1.common.utilities.JwtUtil;
 import com.example.TrackingFlight_Be.v1.dto.request.LoginRequest;
 import com.example.TrackingFlight_Be.v1.dto.request.RegisterRequest;
+import com.example.TrackingFlight_Be.v1.dto.request.UpdateRequest;
 import com.example.TrackingFlight_Be.v1.dto.response.AuthResponse;
+import com.example.TrackingFlight_Be.v1.entity.Flight;
+import com.example.TrackingFlight_Be.v1.entity.User;
 import com.example.TrackingFlight_Be.v1.services.CustomUserDetailsService;
 import com.example.TrackingFlight_Be.v1.services.UserService;
 import jakarta.validation.Valid;
+import lombok.Getter;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -56,4 +63,26 @@ public class AuthController {
 
         return new AuthResponse(token);
     }
+
+    @PutMapping("/update")
+    public ResponseEntity<?> update(@Valid @RequestBody UpdateRequest updateUserRequest) {
+        try {
+            userService.updateUser(updateUserRequest);
+            return ResponseEntity.ok("Cập nhật thông tin thành công");
+        } catch (RuntimeException ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Lỗi server");
+        }
+    }
+
+    @GetMapping("/items")
+    public ResponseEntity<Page<User>> getAllUsers(@RequestParam(defaultValue = "1") int page,
+                                                    @RequestParam(defaultValue = "5") int size) {
+        Pageable pageable = PageRequest.of(page-1, size);
+        return ResponseEntity.ok(userService.getAllUser(pageable));
+    }
+
+
+
 }

@@ -33,6 +33,17 @@ import { PaymentFlightdetailComponent } from './payment/payment-flightdetail/pay
 import { Payment_successComponent } from './payment/payment_success/payment_success.component';
 import { Payment_failComponent } from './payment/payment_fail/payment_fail.component';
 import { UserinfoComponent } from './userinfo/userinfo.component';
+import { ProfileComponent } from './userinfo/profile/profile.component';
+import { HistoryticketComponent } from './userinfo/historyticket/historyticket.component';
+import { TicketuserComponent } from './userinfo/ticketuser/ticketuser.component';
+import { TicketCardComponent } from './userinfo/ticketuser/ticket-card/ticket-card.component';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { LucideAngularModule } from 'lucide-angular';
+import { ArrowLeft, ArrowRight, Plane, MapPin, CalendarDays, Clock, Star, BookOpen, Smartphone, Loader2, Luggage, ChevronLeft, ChevronRight } from 'lucide-angular';
 @NgModule({
   declarations: [
     UserComponent,
@@ -48,7 +59,11 @@ import { UserinfoComponent } from './userinfo/userinfo.component';
     PaymentFlightdetailComponent,
     Payment_successComponent,
     Payment_failComponent,
-    UserinfoComponent
+    UserinfoComponent,
+    ProfileComponent,
+    HistoryticketComponent,
+    TicketuserComponent,
+    TicketCardComponent,
   ],
   imports: [
     CommonModule,
@@ -70,7 +85,13 @@ import { UserinfoComponent } from './userinfo/userinfo.component';
     NzCarouselModule,
     NzTimelineModule,
     NzStepsModule,
-    NzCheckboxModule
+    NzCheckboxModule,
+    NzCardModule,
+    NzDividerModule,
+    NzBadgeModule,
+    NzAvatarModule,
+    NzLayoutModule,
+    LucideAngularModule.pick({ ArrowLeft, ArrowRight, Plane, MapPin, CalendarDays, Clock, Star, BookOpen, Smartphone, Loader2, Luggage, ChevronLeft, ChevronRight })
   ],
   providers: [DatePipe],
 })

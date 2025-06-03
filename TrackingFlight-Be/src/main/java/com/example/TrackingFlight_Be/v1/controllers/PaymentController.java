@@ -1,8 +1,5 @@
 package com.example.TrackingFlight_Be.v1.controllers;
 
-
-
-
 import com.example.TrackingFlight_Be.v1.config.Config;
 import com.example.TrackingFlight_Be.v1.dto.request.PaymentResponse;
 import com.example.TrackingFlight_Be.v1.entity.Flight;
@@ -13,19 +10,14 @@ import com.example.TrackingFlight_Be.v1.repositories.FlightRepository;
 import com.example.TrackingFlight_Be.v1.repositories.PaymentRepository;
 import com.example.TrackingFlight_Be.v1.repositories.TicketRepository;
 import com.example.TrackingFlight_Be.v1.repositories.UserRepository;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -34,7 +26,6 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.*;
 
-import static com.example.TrackingFlight_Be.v1.config.Config.*;
 
 @RestController
 @RequestMapping("/api/payment")
@@ -75,10 +66,14 @@ public class PaymentController {
             vnp_Params.put("vnp_BankCode", bankCode);
         }
 
+        String userId = req.getParameter("userId");
+        String flightId = req.getParameter("flightId");
+        String seat = req.getParameter("seat");
+
         vnp_Params.put("vnp_TxnRef", vnp_TxnRef);
 
         // Bạn có thể đính kèm dữ liệu vào vnp_OrderInfo (vd: userId=xx;flightId=yy;seat=A1)
-        String orderInfo = "Thanh toan don hang: " + vnp_TxnRef + ";userId=123;flightId=456;seat=A1";
+        String orderInfo = "Thanh toan don hang: " + vnp_TxnRef + "userId=" + userId + ";flightId=" + flightId + ";seat=" + seat;
         vnp_Params.put("vnp_OrderInfo", orderInfo);
         vnp_Params.put("vnp_OrderType", orderType);
 
@@ -166,11 +161,9 @@ public class PaymentController {
             return;
         }
 
-        // Nếu tới đây nghĩa là thanh toán thành công
         String txnRef = vnp_Params.get("vnp_TxnRef");
         String amountStr = vnp_Params.get("vnp_Amount");
         Long amount = Long.parseLong(amountStr) / 100;
-
         String orderInfo = vnp_Params.get("vnp_OrderInfo");
         Map<String, String> orderData = new HashMap<>();
         if (orderInfo != null && orderInfo.contains(";")) {
@@ -192,7 +185,7 @@ public class PaymentController {
         User user = userRepository.findById(userId).orElse(null);
         Flight flight = flightRepository.findById(flightId).orElse(null);
 
-        if (user == null || flight == null) {
+        if (userId == null || flightId == null) {
             response.sendRedirect("http://localhost:4200/user/payment/fail");
             return;
         }
@@ -203,8 +196,10 @@ public class PaymentController {
         payment.setPaymentMethod("VNPay");
         payment.setCreatedAt(LocalDateTime.now());
         payment.setUpdatedAt(LocalDateTime.now());
+        payment.setUser(user);
 
         paymentRepository.save(payment);
+
 
         Ticket ticket = new Ticket();
         ticket.setUser(user);
@@ -216,10 +211,16 @@ public class PaymentController {
         ticket.setTicketClass(ticketClass);
         ticket.setPrice(amount.floatValue());
         ticket.setStatus("BOOKED");
+        ticket.setCreatedAt(LocalDateTime.now());
 
         ticketRepository.save(ticket);
+        Ticket ticket1 = ticketRepository.findByTicketId(ticket.getTicketId()).orElse(null);
+        payment.setTicket(ticket1);
 
-        // Redirect về trang thành công và gửi các tham số cần thiết
+        paymentRepository.save(payment);
+
+
+
         String redirectUrl = String.format(
                 "http://localhost:4200/user/payment/success?vnp_TxnRef=%s&vnp_Amount=%d&vnp_PayDate=%s",
                 txnRef, amount, vnp_Params.getOrDefault("vnp_PayDate", ""));
