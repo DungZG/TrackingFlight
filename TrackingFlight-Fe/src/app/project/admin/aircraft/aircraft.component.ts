@@ -26,7 +26,7 @@ export class AircraftComponent {
   controlArray: Array<{ index: number; show: boolean }> = [];
   isCollapse = true;
   public validateForm: FormGroup;
-  i = 0;
+  public i = 0;
   editId: string | null = null;
   totalItems: number = 0;
   currentPage: number = 0; 

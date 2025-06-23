@@ -18,10 +18,10 @@ export class TicketuserComponent implements OnInit {
       {
         id: "ticket001",
         category: "flight",
-        title: "Chuyến bay đến Đà Nẵng",
+        title: "Chuyến Bay Hà Nội -> Hồ Chí Minh",
         date: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000), // 3 days from now
         price: 1500000,
-        currency: "VND",
+        currency: "1.500.000 VND",
         qrCodeUrl: "../../../asset/hanoi.jpg",
         bookingReference: "VNFLIGHT001",
         status: "upcoming",
@@ -36,6 +36,7 @@ export class TicketuserComponent implements OnInit {
           departureAirportCode: "HAN",
           arrivalAirportCode: "DAD",
           gate: "A5",
+          price: 1500000,
           seat: "22A",
           class: "Phổ thông",
         },
@@ -43,12 +44,12 @@ export class TicketuserComponent implements OnInit {
       {
         id: "ticket002",
         category: "event",
-        title: "Đại nhạc hội Mùa Hè",
+        title: "Chuyến Bay Hà Nội -> Hồ Chí Minh",
         date: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days from now
         time: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000 + 19 * 60 * 60 * 1000).toISOString(), // 7 PM
         location: "Sân vận động Mỹ Đình, Hà Nội",
         price: 750000,
-        currency: "VND",
+        currency: "1.500.000 VND",
         qrCodeUrl: "../../../asset/hanoi.jpg",
         bookingReference: "EVENTXYZ789",
         status: "upcoming",

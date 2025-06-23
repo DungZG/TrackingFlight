@@ -94,38 +94,38 @@
   }
 }
 
-:host ::ng-deep .custom-tabs .ant-tabs-tab-active {
-  @apply bg-sky-500 text-white rounded-sm; // Tailwind for active state
-  div {
-    @apply text-white; // Ensure icon and text in active tab are white
-  }
-}
+// :host ::ng-deep .custom-tabs .ant-tabs-tab-active {
+//   @apply bg-sky-500 text-white rounded-sm; // Tailwind for active state
+//   div {
+//     @apply text-white; // Ensure icon and text in active tab are white
+//   }
+// }
 
-:host ::ng-deep .custom-tabs .ant-tabs-ink-bar {
-  @apply hidden; // Hide the default ink bar as we are styling the whole tab
-}
+// :host ::ng-deep .custom-tabs .ant-tabs-ink-bar {
+//   @apply hidden; // Hide the default ink bar as we are styling the whole tab
+// }
 
-// Style for the tab content area (the nz-tab element itself)
-:host ::ng-deep .custom-tabs .ant-tabs-tabpane {
-  @apply mt-0; // Remove default top margin if any
-}
+// // Style for the tab content area (the nz-tab element itself)
+// :host ::ng-deep .custom-tabs .ant-tabs-tabpane {
+//   @apply mt-0; // Remove default top margin if any
+// }
 
 
-// Location Carousel specific styling if NG-ZORRO's default arrows are not ideal
- :host ::ng-deep .location-carousel .slick-prev,
- :host ::ng-deep .location-carousel .slick-next {
-  @apply bg-white rounded-full p-2 shadow-md hover:bg-gray-100 z-10 text-gray-700;
-  // Position them as needed
-}
-:host ::ng-deep .location-carousel .slick-prev {
-  left: -10px;
-}
-:host ::ng-deep .location-carousel .slick-next {
-  right: -10px;
-}
+// // Location Carousel specific styling if NG-ZORRO's default arrows are not ideal
+//  :host ::ng-deep .location-carousel .slick-prev,
+//  :host ::ng-deep .location-carousel .slick-next {
+//   @apply bg-white rounded-full p-2 shadow-md hover:bg-gray-100 z-10 text-gray-700;
+//   // Position them as needed
+// }
+// :host ::ng-deep .location-carousel .slick-prev {
+//   left: -10px;
+// }
+// :host ::ng-deep .location-carousel .slick-next {
+//   right: -10px;
+// }
 
-// Ensure nz-card cover images don't have extra padding if nz-card adds it
-:host ::ng-deep nz-card[nzCover] .ant-card-cover {
-    margin-right: 0;
-    margin-left: 0;
-}
+// // Ensure nz-card cover images don't have extra padding if nz-card adds it
+// :host ::ng-deep nz-card[nzCover] .ant-card-cover {
+//     margin-right: 0;
+//     margin-left: 0;
+// }

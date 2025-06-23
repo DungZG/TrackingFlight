@@ -38,7 +38,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             try{
                 username = jwtUtil.extractUsername(jwtToken);
             } catch (Exception e){
-                // Token không hợp lệ hoặc lỗi parsing
+
             }
         }
 

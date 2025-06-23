@@ -11,6 +11,7 @@ export interface FlightDetails {
   departureAirportCode?: string;
   arrivalAirportCode?: string;
   gate?: string;
+  price?:number;
   seat?: string;
   class?: string;
 }
